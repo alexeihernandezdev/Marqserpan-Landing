@@ -1,0 +1,159 @@
+import type { BusinessSettingsInput } from "@/lib/validation/business";
+import type { Sections } from "@/lib/validation/content";
+
+// Contenido inicial de la landing. Sale de specs/001-landing-storybrand/brandscript.md y solo
+// usa datos confirmados por el negocio (constitución, Principio I). Se edita después desde el admin.
+
+export const DEFAULT_SECTIONS: Sections = {
+  hero: {
+    title: "Equipos y repuestos para que tu panadería nunca pare",
+    subtitle:
+      "Vendemos, fabricamos, importamos, reparamos e instalamos equipos para panaderías, cafeterías y charcuterías.",
+    primaryCta: "Solicita tu cotización",
+    secondaryCta: "Ver el catálogo",
+    trustLine: "22 años en Puerto Ordaz",
+  },
+  problem: {
+    title: "¿Tu equipo se paró?",
+    body: "Cuando una máquina se daña o un repuesto no se consigue, tu negocio deja de producir. Y cada día parado son ventas que no vuelven.",
+    points: [
+      "No encuentras el equipo o el repuesto que necesitas.",
+      "No sabes quién puede reparar tu máquina.",
+      "Un negocio no debería detenerse por un repuesto que no se consigue.",
+    ],
+  },
+  guide: {
+    empathy: "Sabemos lo que cuesta cada día con un equipo parado.",
+    title: "22 años equipando panaderías y cafeterías",
+    authorityPoints: [
+      "Vendemos, fabricamos, importamos, reparamos e instalamos: todo en un solo lugar.",
+      "Fabricamos los repuestos que no se consiguen.",
+      "Servicio técnico especializado en equipos de panadería.",
+      "Enviamos a toda Venezuela, Colombia, Brasil y Curaçao.",
+    ],
+  },
+  plan: {
+    title: "Tu equipo trabajando en 3 pasos",
+    steps: [
+      {
+        title: "Cuéntanos qué necesitas",
+        body: "Escríbenos por el equipo, el repuesto o la reparación que buscas.",
+      },
+      {
+        title: "Recibe tu cotización",
+        body: "Te enviamos el precio y el plazo de tu pedido.",
+      },
+      {
+        title: "Lo entregamos e instalamos",
+        body: "Llevamos el equipo y lo dejamos trabajando.",
+      },
+    ],
+    agreement: [
+      "Si no lo tenemos, lo fabricamos o lo traemos de otro país.",
+      "Equipos pequeños que solo se enchufan: te los llevamos sin costo dentro de la ciudad.",
+      "Con disponibilidad inmediata, instalamos al día siguiente.",
+    ],
+  },
+  services: {
+    title: "Todo lo que tu negocio necesita",
+    intro:
+      "Equipos y repuestos para panaderías, cafeterías y charcuterías, de la cotización a la instalación.",
+    items: [
+      {
+        title: "Venta y distribución",
+        body: "Equipos y repuestos para panadería, cafetería y charcutería.",
+      },
+      {
+        title: "Fabricación a la medida",
+        body: "Fabricamos equipos a la medida de tu negocio y los repuestos que no se consiguen.",
+      },
+      {
+        title: "Importación",
+        body: "Conseguimos el equipo que necesitas, aunque haya que traerlo de otro país.",
+      },
+      {
+        title: "Servicio técnico",
+        body: "Revisamos y reparamos tus equipos. Cada caso se evalúa contigo.",
+      },
+      {
+        title: "Traslado e instalación",
+        body: "Llevamos, buscamos e instalamos tus equipos para que empiecen a trabajar.",
+      },
+    ],
+  },
+  featured: {
+    title: "Rebanadoras de charcutería",
+    body: "Cuéntanos qué cortas y cuánto vendes, y te cotizamos la rebanadora que necesita tu charcutería.",
+  },
+  stakes: {
+    title: "Lo que cuesta esperar",
+    points: [
+      "Ventas perdidas cada día que el equipo está parado.",
+      "Clientes que se van a otro negocio porque no tienes lo que buscan.",
+      "Reparaciones improvisadas que vuelven a fallar.",
+    ],
+  },
+  success: {
+    title: "Tu negocio produciendo todos los días",
+    points: [
+      "El equipo correcto, instalado y trabajando.",
+      "Producción y ventas todos los días, sin paradas.",
+      "Repuestos cuando los necesitas, aunque no existan en el país.",
+      "La tranquilidad de tener a quién llamar.",
+    ],
+    identity:
+      "De apagar incendios con equipos dañados a un negocio que produce todos los días sin sorpresas.",
+  },
+  testimonials: {
+    title: "Lo que dicen nuestros clientes",
+  },
+  quote_form: {
+    title: "Solicita tu cotización",
+    intro: "Cuéntanos qué necesitas y te respondemos con el precio y el plazo.",
+    successTitle: "¡Recibimos tu solicitud!",
+    successBody:
+      "Te contactaremos pronto por WhatsApp o correo con tu cotización. Si es urgente, escríbenos por WhatsApp.",
+  },
+  contact: {
+    title: "Contáctanos",
+    body: "Estamos en Los Pinos, Puerto Ordaz, Venezuela.",
+  },
+};
+
+export const DEFAULT_BUSINESS_SETTINGS: BusinessSettingsInput = {
+  whatsapp: "+584166873369",
+  email: "distribuidoramaqserpan@hotmail.com",
+  address: "",
+  businessHours: "",
+  socialLinks: [
+    {
+      network: "instagram",
+      url: "https://www.instagram.com/distribuidora_maqserpan",
+      isTest: false,
+    },
+    // Enlaces de prueba: solo se ven fuera de producción hasta tener los reales.
+    { network: "facebook", url: "https://www.facebook.com/distribuidoramaqserpan", isTest: true },
+    { network: "tiktok", url: "https://www.tiktok.com/@distribuidoramaqserpan", isTest: true },
+  ],
+  paymentMethods: [
+    "Transferencia en moneda nacional",
+    "Efectivo en moneda internacional",
+    "Banesco Panamá",
+    "Binance",
+  ],
+  shippingCoverage: ["Venezuela", "Colombia", "Brasil", "Curaçao"],
+  deliveryTerms: [
+    "Equipos pequeños que solo se enchufan: entrega sin costo dentro de la ciudad.",
+    "Con disponibilidad inmediata, instalamos al día siguiente.",
+    "Fuera de la ciudad: traslado e instalación con costo adicional.",
+  ],
+  legalName: "Distribuidora Maqserpan C.A.",
+  rif: "J-31113230-9",
+};
+
+export const DEFAULT_CATEGORIES = [
+  { name: "Rebanadoras", slug: "rebanadoras" },
+  { name: "Equipos de panadería", slug: "equipos-de-panaderia" },
+  { name: "Equipos de cafetería", slug: "equipos-de-cafeteria" },
+  { name: "Repuestos", slug: "repuestos" },
+];

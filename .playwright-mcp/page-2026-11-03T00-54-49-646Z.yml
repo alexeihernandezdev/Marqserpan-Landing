@@ -1,0 +1,413 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation [ref=e4]:
+        - link "Alexei Hernández" [ref=e5] [cursor=pointer]:
+          - /url: "#top"
+          - generic [ref=e6]:
+            - generic [aria-hidden] [ref=e7]: AH
+            - generic [ref=e8]: Alexei Hernández
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - link "Servicios" [ref=e11] [cursor=pointer]:
+              - /url: "#servicios"
+          - listitem [ref=e12]:
+            - link "Proyectos" [ref=e13] [cursor=pointer]:
+              - /url: "#proyectos"
+          - listitem [ref=e14]:
+            - link "Sobre mí" [ref=e15] [cursor=pointer]:
+              - /url: "#sobre-mi"
+          - listitem [ref=e16]:
+            - link "Cómo trabajo" [ref=e17] [cursor=pointer]:
+              - /url: "#proceso"
+        - generic [ref=e18]:
+          - group "Cambiar idioma" [ref=e19]:
+            - button "Cambiar a Español" [ref=e20]: ES
+            - button "Cambiar a Inglés" [ref=e21]: EN
+          - link "Solicita tu propuesta" [ref=e22] [cursor=pointer]:
+            - /url: "#contacto"
+    - main [ref=e23]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: Landing pages desde $200
+            - generic [ref=e32]: Remoto · cualquier parte del mundo
+          - heading "Eres bueno en lo que haces. Tu web debería demostrarlo." [level=1] [ref=e36]
+          - paragraph [ref=e37]: Una web que muestra lo que vales, atrae clientes y trabaja por ti mientras tú atiendes tu negocio.
+          - link "Solicita tu propuesta" [ref=e39] [cursor=pointer]:
+            - /url: "#contacto"
+          - generic [ref=e40]:
+            - link "8 proyectos en línea" [ref=e41] [cursor=pointer]:
+              - /url: "#proyectos"
+              - generic [ref=e47]:
+                - generic [ref=e51]: "8"
+                - generic [ref=e52]: proyectos en línea
+            - generic [ref=e53]:
+              - generic [ref=e54]: "+6"
+              - generic [ref=e55]: años deexperiencia
+        - img "Alexei Hernández, desarrollador web" [ref=e59]
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]: ¿Te suena?
+          - heading "Haces un buen trabajo, pero tus clientes no lo ven" [level=2] [ref=e65]
+        - generic [ref=e66]:
+          - article [ref=e67]:
+            - generic [aria-hidden] [ref=e69]: "01"
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]: C
+                - generic [ref=e75]:
+                  - paragraph [ref=e76]: Cliente nuevo
+                  - paragraph [ref=e77]: en línea
+                - generic [ref=e78]: Venta perdida
+              - generic [ref=e81]:
+                - generic [ref=e82]: Hoy
+                - generic [ref=e83]:
+                  - text: Hola, ¿tienes disponible?
+                  - generic [ref=e84]: 10:02
+                - generic [ref=e85]:
+                  - text: ¿Hola? 👋
+                  - generic [ref=e86]: 11:30
+                - generic [ref=e87]: 5 h sin responder
+                - generic [ref=e93]:
+                  - text: ¡Hola! Sí, disculpa la demora
+                  - generic [ref=e94]: 15:10
+                - generic [ref=e98]:
+                  - text: Ya le compré a otro, gracias 🙁
+                  - generic [ref=e99]: 15:12
+            - heading "Llegas tarde" [level=3] [ref=e100]
+            - paragraph [ref=e101]: Te escriben por WhatsApp, tardas en responder y, cuando lo haces, ya le compraron a otro.
+            - 'link "Lo resuelvo con: Automatización" [ref=e102] [cursor=pointer]':
+              - /url: "#servicios"
+              - text: "Lo resuelvo con:"
+              - generic [ref=e103]: Automatización
+          - article [ref=e106]:
+            - generic [aria-hidden] [ref=e108]: "02"
+            - generic [ref=e111]:
+              - generic [ref=e113]:
+                - generic [ref=e114]: Tu web
+                - generic [ref=e119]: "404"
+              - generic [ref=e123]:
+                - generic [ref=e124]: La competencia
+                - generic [ref=e135]: Elegida
+            - heading "Tu web te resta" [level=3] [ref=e138]
+            - paragraph [ref=e139]: Tu trabajo es de primera, pero tu imagen en internet dice lo contrario. Y el cliente compara.
+            - 'link "Lo resuelvo con: Landing page o web" [ref=e140] [cursor=pointer]':
+              - /url: "#servicios"
+              - text: "Lo resuelvo con:"
+              - generic [ref=e141]: Landing page o web
+          - article [ref=e144]:
+            - generic [aria-hidden] [ref=e146]: "03"
+            - generic [ref=e149]:
+              - generic [ref=e150]: 12%
+              - paragraph [ref=e157]: Tu energía
+              - generic [ref=e158]:
+                - generic [ref=e159]: Responder
+                - generic [ref=e160]: Agendar
+                - generic [ref=e161]: Cobrar
+                - generic [ref=e162]: Anotar
+            - heading "Todo depende de ti" [level=3] [ref=e163]
+            - paragraph [ref=e164]: Tú respondes, agendas, cobras y anotas. Si un día paras, el negocio para contigo.
+            - 'link "Lo resuelvo con: Sistemas a medida" [ref=e165] [cursor=pointer]':
+              - /url: "#servicios"
+              - text: "Lo resuelvo con:"
+              - generic [ref=e166]: Sistemas a medida
+        - generic [ref=e169]:
+          - paragraph [ref=e170]: No tiene que ser así.
+          - link "Mira cómo lo resuelvo" [ref=e171] [cursor=pointer]:
+            - /url: "#servicios"
+      - generic [ref=e174]:
+        - generic [ref=e175]:
+          - generic [ref=e176]: Servicios
+          - heading "Elige por dónde quieres crecer" [level=2] [ref=e177]
+          - paragraph [ref=e178]: ¿No sabes cuál? Lo vemos juntos en una llamada de 15 minutos.
+        - generic [ref=e179]:
+          - generic [ref=e181]:
+            - generic [ref=e182]: Landing page o web
+            - heading "Que te encuentren y te elijan" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Una web clara que convierte visitas en clientes.
+            - generic [ref=e190]:
+              - generic [ref=e191]: Desde $200
+              - link "Solicita tu propuesta" [ref=e192] [cursor=pointer]:
+                - /url: "#contacto"
+          - generic [ref=e196]:
+            - generic [ref=e197]: Tienda online
+            - heading "Vende aunque estés cerrado" [level=3] [ref=e204]
+            - paragraph [ref=e205]: Catálogo, carrito y pagos, manejados desde tu celular.
+            - link "Solicita tu propuesta" [ref=e207] [cursor=pointer]:
+              - /url: "#contacto"
+          - generic [ref=e211]:
+            - generic [ref=e212]: Sistemas a medida
+            - heading "Tu negocio, en orden" [level=3] [ref=e225]
+            - paragraph [ref=e226]: Citas, inventario y clientes en un solo lugar.
+            - link "Solicita tu propuesta" [ref=e228] [cursor=pointer]:
+              - /url: "#contacto"
+          - generic [ref=e232]:
+            - generic [ref=e233]: Automatización
+            - heading "Deja de hacerlo todo tú" [level=3] [ref=e240]
+            - paragraph [ref=e241]: Respuestas, recordatorios y reportes en automático.
+            - link "Solicita tu propuesta" [ref=e243] [cursor=pointer]:
+              - /url: "#contacto"
+      - generic [ref=e246]:
+        - generic [ref=e247]:
+          - generic [ref=e248]: Trabajos reales
+          - heading "Proyectos que ya están funcionando" [level=2] [ref=e249]
+          - paragraph [ref=e250]: Algunos de los negocios y comunidades con los que he tenido el gusto de trabajar.
+        - generic [ref=e252]:
+          - generic [ref=e253]:
+            - link "https://www.yourquickmenu.com QuickMenu — menús digitales para restaurantes QuickMenu — menús digitales para restaurantes Sistema para que cualquier restaurante tenga su carta digital con código QR, sin depender de un diseñador cada vez que cambian un precio. Ver detalle" [ref=e255] [cursor=pointer]:
+              - /url: /es/proyectos/quickmenu
+              - generic [ref=e256]:
+                - generic [ref=e257]: https://www.yourquickmenu.com
+                - img "QuickMenu — menús digitales para restaurantes" [ref=e263]
+              - generic [ref=e264]:
+                - heading "QuickMenu — menús digitales para restaurantes" [level=3] [ref=e265]
+                - paragraph [ref=e266]: Sistema para que cualquier restaurante tenga su carta digital con código QR, sin depender de un diseñador cada vez que cambian un precio.
+                - generic [ref=e267]: Ver detalle
+            - 'link "https://unidos-por-la-guaira.vercel.app Unidos por la Guaira — plataforma de ayuda humanitaria Unidos por la Guaira — plataforma de ayuda humanitaria Plataforma para coordinar ayuda humanitaria en La Guaira: quién necesita, quién aporta y quién distribuye, todo con trazabilidad pública. Ver detalle" [ref=e272] [cursor=pointer]':
+              - /url: /es/proyectos/unidos-por-guayana
+              - generic [ref=e273]:
+                - generic [ref=e274]: https://unidos-por-la-guaira.vercel.app
+                - img "Unidos por la Guaira — plataforma de ayuda humanitaria" [ref=e280]
+              - generic [ref=e281]:
+                - heading "Unidos por la Guaira — plataforma de ayuda humanitaria" [level=3] [ref=e282]
+                - paragraph [ref=e283]: "Plataforma para coordinar ayuda humanitaria en La Guaira: quién necesita, quién aporta y quién distribuye, todo con trazabilidad pública."
+                - generic [ref=e284]: Ver detalle
+            - link "https://formula.verleinbeats.com Verlein — plataforma de La Fórmula Verlein — plataforma de La Fórmula Portafolio cinematográfico y embudo de calificación de leads para un productor de beats, con CRM propio y reservas por Cal.com. Ver detalle" [ref=e289] [cursor=pointer]:
+              - /url: /es/proyectos/verlein
+              - generic [ref=e290]:
+                - generic [ref=e291]: https://formula.verleinbeats.com
+                - img "Verlein — plataforma de La Fórmula" [ref=e297]
+              - generic [ref=e298]:
+                - heading "Verlein — plataforma de La Fórmula" [level=3] [ref=e299]
+                - paragraph [ref=e300]: Portafolio cinematográfico y embudo de calificación de leads para un productor de beats, con CRM propio y reservas por Cal.com.
+                - generic [ref=e301]: Ver detalle
+            - link "https://leberp.com Leberp — sistema para empresas Leberp — sistema para empresas Un sistema en la nube para manejar ventas, almacén, logística y caja, todo en un solo lugar. Ver detalle" [ref=e306] [cursor=pointer]:
+              - /url: /es/proyectos/leberp
+              - generic [ref=e307]:
+                - generic [ref=e308]: https://leberp.com
+                - img "Leberp — sistema para empresas" [ref=e314]
+              - generic [ref=e315]:
+                - heading "Leberp — sistema para empresas" [level=3] [ref=e316]
+                - paragraph [ref=e317]: Un sistema en la nube para manejar ventas, almacén, logística y caja, todo en un solo lugar.
+                - generic [ref=e318]: Ver detalle
+            - link "https://www.architexve.com Architex — agencia de marketing Architex — agencia de marketing Sitio profesional con servicios, portafolio y contacto, en dos idiomas. Ver detalle" [ref=e323] [cursor=pointer]:
+              - /url: /es/proyectos/architex
+              - generic [ref=e324]:
+                - generic [ref=e325]: https://www.architexve.com
+                - img "Architex — agencia de marketing" [ref=e331]
+              - generic [ref=e332]:
+                - heading "Architex — agencia de marketing" [level=3] [ref=e333]
+                - paragraph [ref=e334]: Sitio profesional con servicios, portafolio y contacto, en dos idiomas.
+                - generic [ref=e335]: Ver detalle
+            - link "https://mv-eyelashes.vercel.app MV Eyelashes — negocio de belleza MV Eyelashes — negocio de belleza Web con servicios, precios, ubicación en el mapa y contacto. En español e inglés. Ver detalle" [ref=e340] [cursor=pointer]:
+              - /url: /es/proyectos/mv-eyelashes
+              - generic [ref=e341]:
+                - generic [ref=e342]: https://mv-eyelashes.vercel.app
+                - img "MV Eyelashes — negocio de belleza" [ref=e348]
+              - generic [ref=e349]:
+                - heading "MV Eyelashes — negocio de belleza" [level=3] [ref=e350]
+                - paragraph [ref=e351]: Web con servicios, precios, ubicación en el mapa y contacto. En español e inglés.
+                - generic [ref=e352]: Ver detalle
+            - link "https://app.bod-service.cloud/recepcion/ Bodega Soft — recepción de facturas con OCR Bodega Soft — recepción de facturas con OCR Módulo para subir facturas físicas, revisar los datos extraídos y completar la recepción en el sistema administrativo. Ver detalle" [ref=e357] [cursor=pointer]:
+              - /url: /es/proyectos/bodega-soft-recepcion-ocr
+              - generic [ref=e358]:
+                - generic [ref=e359]: https://app.bod-service.cloud/recepcion/
+                - img "Bodega Soft — recepción de facturas con OCR" [ref=e365]
+              - generic [ref=e366]:
+                - heading "Bodega Soft — recepción de facturas con OCR" [level=3] [ref=e367]
+                - paragraph [ref=e368]: Módulo para subir facturas físicas, revisar los datos extraídos y completar la recepción en el sistema administrativo.
+                - generic [ref=e369]: Ver detalle
+          - generic [ref=e373]:
+            - button "Proyecto anterior" [disabled]
+            - button "Siguiente proyecto" [disabled]
+        - link "Solicita tu propuesta" [ref=e375] [cursor=pointer]:
+          - /url: "#contacto"
+      - generic [ref=e377]:
+        - img "Hola, soy Alexei Hernández" [ref=e381]
+        - generic [ref=e382]:
+          - generic [ref=e383]:
+            - generic [ref=e384]: Quién te acompaña
+            - heading "Hola, soy Alexei Hernández" [level=2] [ref=e385]
+          - generic [ref=e386]:
+            - paragraph [ref=e387]: Sé lo frustrante que es que la competencia se vea mejor en internet cuando sabes que tu servicio es superior. Llevo más de 6 años creando webs y sistemas para negocios como el tuyo, y mi trabajo es que tus clientes vean lo bueno que eres.
+            - paragraph [ref=e388]: Trabajas directamente conmigo, sin intermediarios. Eso significa decisiones rápidas, precios justos y un resultado del que vas a estar orgulloso.
+          - generic [ref=e389]:
+            - generic [ref=e390]:
+              - generic [ref=e391]: "+6"
+              - generic [ref=e392]: años de experiencia
+            - generic [ref=e393]:
+              - generic [ref=e394]: 100%
+              - generic [ref=e395]: trato directo
+      - generic [ref=e399]:
+        - generic [ref=e400]:
+          - generic [ref=e401]: Así de fácil
+          - heading "Tú me cuentas tu negocio. Yo me encargo del resto." [level=2] [ref=e402]
+        - list [ref=e404]:
+          - listitem [ref=e405]:
+            - generic [ref=e410]:
+              - generic [ref=e411]:
+                - generic [ref=e412]: "01"
+                - generic [ref=e413]: 2 min
+              - heading "Cuéntame de tu negocio" [level=3] [ref=e417]
+              - paragraph [ref=e418]: Un formulario de 2 minutos y una llamada corta. Sin compromiso.
+          - listitem [ref=e419]:
+            - generic [ref=e426]:
+              - generic [ref=e427]:
+                - generic [ref=e428]: "02"
+                - generic [ref=e429]: 24 h
+              - heading "Recibe tu propuesta en 24 h" [level=3] [ref=e433]
+              - paragraph [ref=e434]: Qué incluye, cuánto cuesta y cuándo estará lista. Por escrito y sin letra pequeña.
+          - listitem [ref=e435]:
+            - generic [ref=e442]:
+              - generic [ref=e443]:
+                - generic [ref=e444]: "03"
+                - generic [ref=e445]: Lista para usar
+              - heading "Lánzala y empieza a recibir clientes" [level=3] [ref=e449]
+              - paragraph [ref=e450]: Ves los avances, opinas, y te la entrego lista para usar.
+        - generic [ref=e451]:
+          - link "Solicita tu propuesta" [ref=e452] [cursor=pointer]:
+            - /url: "#contacto"
+          - paragraph [ref=e453]: Sin compromiso · Respuesta en 24 h
+        - generic [ref=e456]:
+          - paragraph [ref=e457]: Y además, siempre
+          - list [ref=e458]:
+            - listitem [ref=e459]:
+              - generic [ref=e464]: Precio cerrado
+            - listitem [ref=e465]:
+              - generic [ref=e472]: Trato directo
+            - listitem [ref=e473]:
+              - generic [ref=e482]: No te dejo solo
+            - listitem [ref=e483]:
+              - generic [ref=e488]: Es tuya
+      - generic [ref=e489]:
+        - generic [ref=e490]:
+          - generic [ref=e491]: Dudas frecuentes
+          - heading "Lo que la gente suele preguntar" [level=2] [ref=e492]
+        - generic [ref=e493]:
+          - group [ref=e495]:
+            - generic "¿Cuánto cuesta? +" [ref=e496] [cursor=pointer]:
+              - text: ¿Cuánto cuesta?
+              - generic [ref=e497]: +
+          - group [ref=e499]:
+            - generic "¿Cuánto tarda mi web? +" [ref=e500] [cursor=pointer]:
+              - text: ¿Cuánto tarda mi web?
+              - generic [ref=e501]: +
+          - group [ref=e503]:
+            - generic "¿Quién paga el dominio y el alojamiento? +" [ref=e504] [cursor=pointer]:
+              - text: ¿Quién paga el dominio y el alojamiento?
+              - generic [ref=e505]: +
+          - group [ref=e507]:
+            - generic "¿Podré hacer cambios después? +" [ref=e508] [cursor=pointer]:
+              - text: ¿Podré hacer cambios después?
+              - generic [ref=e509]: +
+          - group [ref=e511]:
+            - generic "¿Trabajas con negocios de otros países? +" [ref=e512] [cursor=pointer]:
+              - text: ¿Trabajas con negocios de otros países?
+              - generic [ref=e513]: +
+      - generic [ref=e518]:
+        - generic [ref=e519]:
+          - heading "¿Listo para que tu negocio se note?" [level=2] [ref=e520]
+          - paragraph [ref=e521]: Cuéntame de tu negocio. Te respondo en menos de 24 horas con una propuesta clara y sin compromiso.
+          - generic [ref=e522]:
+            - paragraph [ref=e523]: "¿Prefieres hablar directo? Escríbeme:"
+            - link "alexeihernandez.dev@gmail.com" [ref=e525] [cursor=pointer]:
+              - /url: mailto:alexeihernandez.dev@gmail.com?subject=Alexei%20Hern%C3%A1ndez
+            - generic [ref=e529]: Bolívar, Venezuela
+        - generic [ref=e534]:
+          - generic [ref=e535]:
+            - generic [ref=e536]: Tu nombre *
+            - textbox "Tu nombre *" [ref=e537]:
+              - /placeholder: "Ej.: María Pérez"
+          - generic [ref=e538]:
+            - generic [ref=e539]: Tu negocio y a qué se dedica *
+            - textbox "Tu negocio y a qué se dedica *" [ref=e540]:
+              - /placeholder: "Ej.: Panadería La Espiga, venta de pan y tortas"
+          - generic [ref=e541]:
+            - generic [ref=e542]: Tu WhatsApp *
+            - textbox "Tu WhatsApp *" [ref=e543]:
+              - /placeholder: +58 424 000 0000
+          - generic [ref=e544]:
+            - generic [ref=e545]: Tu correo (opcional)
+            - textbox "Tu correo (opcional)" [ref=e546]:
+              - /placeholder: tu@correo.com
+          - generic [ref=e547]:
+            - generic [ref=e548]: ¿Qué quieres lograr? *
+            - radiogroup "¿Qué quieres lograr? *" [ref=e549]:
+              - generic [ref=e550] [cursor=pointer]:
+                - radio "Conseguir más clientes" [ref=e551]
+                - generic [ref=e552]: Conseguir más clientes
+              - generic [ref=e553] [cursor=pointer]:
+                - radio "Vender en línea" [ref=e554]
+                - generic [ref=e555]: Vender en línea
+              - generic [ref=e556] [cursor=pointer]:
+                - radio "Automatizar tareas" [ref=e557]
+                - generic [ref=e558]: Automatizar tareas
+              - generic [ref=e559] [cursor=pointer]:
+                - radio "Verme más profesional" [ref=e560]
+                - generic [ref=e561]: Verme más profesional
+              - generic [ref=e562] [cursor=pointer]:
+                - radio "Otra cosa" [ref=e563]
+                - generic [ref=e564]: Otra cosa
+          - generic [ref=e565]:
+            - generic [ref=e566]: ¿Tienes web hoy?
+            - radiogroup "¿Tienes web hoy?" [ref=e567]:
+              - generic [ref=e568] [cursor=pointer]:
+                - radio "Sí" [ref=e569]
+                - generic [ref=e570]: Sí
+              - generic [ref=e571] [cursor=pointer]:
+                - radio "No" [ref=e572]
+                - generic [ref=e573]: "No"
+              - generic [ref=e574] [cursor=pointer]:
+                - radio "Solo redes sociales" [ref=e575]
+                - generic [ref=e576]: Solo redes sociales
+          - generic [ref=e577]:
+            - generic [ref=e578]: ¿Inviertes en anuncios?
+            - radiogroup "¿Inviertes en anuncios?" [ref=e579]:
+              - generic [ref=e580] [cursor=pointer]:
+                - radio "Sí" [ref=e581]
+                - generic [ref=e582]: Sí
+              - generic [ref=e583] [cursor=pointer]:
+                - radio "No" [ref=e584]
+                - generic [ref=e585]: "No"
+              - generic [ref=e586] [cursor=pointer]:
+                - radio "Quiero empezar" [ref=e587]
+                - generic [ref=e588]: Quiero empezar
+          - generic [ref=e589]:
+            - generic [ref=e590]: Presupuesto aproximado
+            - combobox "Presupuesto aproximado" [ref=e591]:
+              - option "Elige una opción" [selected]
+              - option "Menos de $300"
+              - option "$300 – $700"
+              - option "$700 – $1.500"
+              - option "Más de $1.500"
+              - option "Aún no lo sé"
+          - generic [ref=e592]:
+            - generic [ref=e593]: ¿Para cuándo lo necesitas?
+            - combobox "¿Para cuándo lo necesitas?" [ref=e594]:
+              - option "Elige una opción" [selected]
+              - option "Lo antes posible"
+              - option "En 1 mes"
+              - option "En 2–3 meses"
+              - option "Solo estoy explorando"
+          - generic [ref=e595]:
+            - generic [ref=e596]: ¿Qué tarea repetitiva te quita más tiempo?
+            - textbox "¿Qué tarea repetitiva te quita más tiempo?" [ref=e597]:
+              - /placeholder: "Ej.: responder precios por WhatsApp, anotar pedidos en Excel…"
+          - generic [ref=e598]:
+            - paragraph [ref=e599]: Tus datos solo se usan para responderte.
+            - button "Solicita tu propuesta" [ref=e600]
+    - contentinfo [ref=e604]:
+      - generic [ref=e605]:
+        - generic [ref=e606]:
+          - generic [ref=e607]:
+            - generic [aria-hidden] [ref=e608]: AH
+            - generic [ref=e609]: Alexei Hernández
+          - paragraph [ref=e610]: Desarrollo web para negocios pequeños y medianos
+        - generic [ref=e611]:
+          - link "github" [ref=e612] [cursor=pointer]:
+            - /url: https://github.com/alexei2000
+          - link "linkedin" [ref=e616] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/alexei-jesús-hernández-camejo-47a2a315a
+      - paragraph [ref=e622]: © 2026 Alexei Hernández · alexeihernandez.dev@gmail.com · Todos los derechos reservados.
+  - button "Open Next.js Dev Tools" [ref=e628] [cursor=pointer]

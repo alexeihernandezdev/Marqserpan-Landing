@@ -1,0 +1,34 @@
+# Base de datos local para desarrollo y pruebas e2e, sin cuenta de Neon.
+# Postgres + proxy HTTP que imita a Neon, para usar el mismo driver (@neondatabase/serverless).
+# Uso: docker compose up -d   y en .env.local / .env.test:
+#   DATABASE_URL=postgres://postgres:postgres@db.localtest.me:5432/maqserpan
+# (db.localtest.me apunta a 127.0.0.1; lib/db/client.ts lo detecta y usa el proxy del puerto 4444).
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: maqserpan
+    ports:
+      - "5434:5432"
+    volumes:
+      - maqserpan-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  neon-proxy:
+    image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+    environment:
+      PG_CONNECTION_STRING: postgres://postgres:postgres@postgres:5432/maqserpan
+    ports:
+      - "4444:4444"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  maqserpan-db:
