@@ -113,8 +113,10 @@ npm run lint && npm run typecheck && npm run test && npm run test:e2e && npm run
 1. Importa el repositorio en Vercel y activa la **integración de Neon** (crea `DATABASE_URL` y una
    rama de Neon por cada vista previa).
 2. Agrega las demás variables de entorno. No definas `SHOW_TEST_SOCIALS` en producción.
-3. Aplica las migraciones y el seed en la rama de producción: `npm run db:migrate` y
-   `npm run db:seed` con la `DATABASE_URL` de producción.
+3. Las migraciones se aplican solas en cada despliegue: `vercel.json` corre `npm run db:migrate`
+   antes de `npm run build`, contra la `DATABASE_URL` de ese entorno (producción o la rama de
+   Neon de la vista previa). Si la migración falla, el despliegue se detiene y no se publica.
+   El seed se corre una vez a mano: `npm run db:seed` con la `DATABASE_URL` de producción.
 4. Crea los usuarios del admin con `npm run admin:create`.
 5. Revisa cada cambio en la vista previa desde un teléfono antes de publicarlo.
 
