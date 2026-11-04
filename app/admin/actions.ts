@@ -3,14 +3,18 @@
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { z } from "zod";
 import { getDummyHash, hashPassword, MIN_PASSWORD_LENGTH, verifyPassword } from "@/lib/auth/password";
+import { createPasswordResetToken, resetPasswordWithToken } from "@/lib/auth/password-reset";
 import { createSession, deleteOtherSessions, deleteSession } from "@/lib/auth/session";
 import { safeAdminRedirect } from "@/lib/auth/session-logic";
 import { isLoginLocked, recordLoginAttempt } from "@/lib/auth/throttle";
 import { verifySession } from "@/lib/dal/session";
 import { db } from "@/lib/db/client";
 import { adminUsers } from "@/lib/db/schema";
+import { sendPasswordResetEmail } from "@/lib/email/password-reset";
+import { env, siteUrl } from "@/lib/env";
 import type { ActionState } from "@/lib/forms/action-state";
 import { hashIp } from "@/lib/leads/rate-limit";
 
@@ -99,4 +103,49 @@ export async function changePassword(_prev: ActionState, formData: FormData): Pr
     .where(eq(adminUsers.id, user.id));
   await deleteOtherSessions(user.id, session.sessionId);
   return { status: "success", message: "Contraseña actualizada. Se cerraron tus otras sesiones." };
+}
+
+const RESET_REQUESTED =
+  "Si el correo pertenece a una cuenta del panel, te enviamos un enlace para elegir una nueva contraseña. Revisa también la carpeta de spam.";
+
+/** Pide el enlace por correo. Responde lo mismo exista o no la cuenta, y envía después de responder. */
+export async function requestPasswordReset(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const email = typeof formData.get("email") === "string" ? String(formData.get("email")) : "";
+  const parsed = z.email().max(254).safeParse(email.trim().toLowerCase());
+  if (!parsed.success) {
+    return { status: "error", message: "Escribe un correo válido.", values: { email } };
+  }
+
+  const reset = await createPasswordResetToken(parsed.data);
+  if (reset) {
+    const config = env();
+    const resetUrl = `${siteUrl()}/admin/restablecer?token=${encodeURIComponent(reset.token)}`;
+    after(() => sendPasswordResetEmail(reset.user, resetUrl, { from: config.EMAIL_FROM, apiKey: config.RESEND_API_KEY }));
+  }
+  return { status: "success", message: RESET_REQUESTED };
+}
+
+const resetSchema = z
+  .object({
+    token: z.string().min(1).max(200),
+    next: z
+      .string()
+      .min(MIN_PASSWORD_LENGTH, `La nueva contraseña debe tener al menos ${MIN_PASSWORD_LENGTH} caracteres`)
+      .max(200),
+    confirm: z.string(),
+  })
+  .refine((data) => data.next === data.confirm, {
+    path: ["confirm"],
+    message: "Las contraseñas no coinciden",
+  });
+
+export async function resetPassword(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const parsed = resetSchema.safeParse(Object.fromEntries(formData));
+  if (!parsed.success) {
+    return { status: "error", message: "Revisa los campos marcados.", fieldErrors: z.flattenError(parsed.error).fieldErrors };
+  }
+  if (!(await resetPasswordWithToken(parsed.data.token, parsed.data.next))) {
+    return { status: "error", message: "El enlace venció o ya se usó. Pide uno nuevo." };
+  }
+  redirect("/admin/login?restablecida=1");
 }

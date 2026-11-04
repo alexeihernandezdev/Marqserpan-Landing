@@ -31,6 +31,7 @@ export async function listLeads(filters: LeadFilters) {
         status: leads.status,
         productName: leads.productName,
         notificationStatus: leads.notificationStatus,
+        completedAt: leads.completedAt,
         createdAt: leads.createdAt,
       })
       .from(leads)

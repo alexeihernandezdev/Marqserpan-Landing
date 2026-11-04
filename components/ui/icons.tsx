@@ -96,6 +96,26 @@ export const WalletIcon = (p: IconProps) => (
   </Svg>
 );
 
+export const TransferIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 8h15l-4-4M20 16H5l4 4" />
+  </Svg>
+);
+
+export const CashIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <rect x="2" y="6" width="20" height="12" rx="2" />
+    <circle cx="12" cy="12" r="2.5" />
+    <path d="M6 12h.01M18 12h.01" />
+  </Svg>
+);
+
+export const BankIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3 10 12 4l9 6H3ZM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18" />
+  </Svg>
+);
+
 export const GlobeIcon = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="12" cy="12" r="9" />
@@ -188,6 +208,12 @@ export const YouTubeIcon = (p: IconProps) => (
 export const XIcon = (p: IconProps) => (
   <Brand {...p}>
     <path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.3l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z" />
+  </Brand>
+);
+
+export const BinanceIcon = (p: IconProps) => (
+  <Brand {...p}>
+    <path d="m12 2.5 2.3 2.3L12 7.1 9.7 4.8 12 2.5Zm0 14.4 2.3 2.3-2.3 2.3-2.3-2.3 2.3-2.3ZM4.8 9.7 7.1 12l-2.3 2.3L2.5 12l2.3-2.3Zm14.4 0 2.3 2.3-2.3 2.3-2.3-2.3 2.3-2.3ZM12 9.2l2.8 2.8-2.8 2.8L9.2 12 12 9.2Z" />
   </Brand>
 );
 

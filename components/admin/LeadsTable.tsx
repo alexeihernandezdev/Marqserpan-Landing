@@ -11,7 +11,7 @@ import { StatusBadge } from "./StatusBadge";
 
 type Row = {
   id: string;
-  type: LeadType;
+  type: LeadType | null;
   name: string;
   city: string;
   country: Country;
@@ -19,6 +19,7 @@ type Row = {
   status: LeadStatus;
   productName: string | null;
   notificationStatus: "pendiente" | "enviado" | "fallido";
+  completedAt: Date | null;
   createdAt: Date;
 };
 
@@ -50,7 +51,12 @@ export function LeadsTable({ rows }: { rows: Row[] }) {
                 </Link>
                 {lead.productName && <span className="block text-xs text-gris">{lead.productName}</span>}
               </td>
-              <td className="px-4 py-3">{LEAD_TYPE_LABELS[lead.type]}</td>
+              <td className="px-4 py-3">
+                {lead.type ? LEAD_TYPE_LABELS[lead.type] : <span className="text-gris">—</span>}
+                {!lead.completedAt && (
+                  <span className="block text-xs font-bold text-amber-700">Solo contacto</span>
+                )}
+              </td>
               <td className="px-4 py-3">
                 {lead.city}
                 {lead.country !== "VE" && <span className="text-gris"> · {COUNTRY_LABELS[lead.country]}</span>}

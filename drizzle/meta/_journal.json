@@ -8,6 +8,20 @@
       "when": 1793591206559,
       "tag": "0000_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793673078889,
+      "tag": "0001_password_reset_tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793803926744,
+      "tag": "0002_lead_contact_step",
+      "breakpoints": true
     }
   ]
 }

@@ -44,7 +44,7 @@ Crea las tablas, carga el contenido inicial y un usuario del admin:
 
 ```bash
 npm run db:migrate        # con Neon. En la base local también puedes aplicar el SQL directo:
-                          # docker exec -i marqserpan-landing-postgres-1 psql -U postgres -d maqserpan < drizzle/0000_init.sql
+                          # docker exec -i marqserpan-landing-postgres-1 psql -U postgres -d maqserpan < drizzle/0000_init.sql  (y luego cada drizzle/00NN_*.sql en orden)
 npm run db:seed           # textos del guion, contacto confirmado, redes de prueba, categorías
 npm run admin:create -- --name "Rossibell" --email correo@ejemplo.com   # pide la contraseña
 npm run dev
@@ -64,7 +64,8 @@ npm run dev
 | `SESSION_SECRET` | Firma interna de sesiones y hash de IPs; 32+ caracteres |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Subir y borrar fotos de productos |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Mostrar las fotos |
-| `RESEND_API_KEY`, `EMAIL_FROM` | Aviso por correo de cada solicitud |
+| `RESEND_API_KEY`, `EMAIL_FROM` | Aviso por correo de cada solicitud y enlaces para restablecer la contraseña |
+| `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | Usuario predeterminado del admin (ver «Usuarios del admin») |
 | `NEXT_PUBLIC_SITE_URL` | URL pública (enlaces del correo, metadatos) |
 | `SHOW_TEST_SOCIALS` | `true` muestra las redes marcadas «de prueba» (nunca en producción) |
 | `E2E_TESTING`, `E2E_TESTING_SECRET` | Solo en `.env.test`, para las pruebas e2e |
@@ -89,6 +90,7 @@ marca con «Aviso fallido».
 | `npm run db:generate` / `db:migrate` | Generar y aplicar migraciones (`drizzle/`) |
 | `npm run db:seed` | Contenido inicial |
 | `npm run admin:create` | Crear un usuario del admin |
+| `npm run admin:default` | Crear el usuario predeterminado desde `ADMIN_EMAIL` y `ADMIN_PASSWORD` |
 | `npm run brand:build` | Regenerar logo, íconos y fuentes optimizados desde `brand/` |
 
 ### Pruebas e2e
@@ -114,11 +116,24 @@ npm run lint && npm run typecheck && npm run test && npm run test:e2e && npm run
    rama de Neon por cada vista previa).
 2. Agrega las demás variables de entorno. No definas `SHOW_TEST_SOCIALS` en producción.
 3. Las migraciones se aplican solas en cada despliegue: `vercel.json` corre `npm run db:migrate`
-   antes de `npm run build`, contra la `DATABASE_URL` de ese entorno (producción o la rama de
+   y `npm run admin:default` antes de `npm run build`, contra la `DATABASE_URL` de ese entorno (producción o la rama de
    Neon de la vista previa). Si la migración falla, el despliegue se detiene y no se publica.
    El seed se corre una vez a mano: `npm run db:seed` con la `DATABASE_URL` de producción.
-4. Crea los usuarios del admin con `npm run admin:create`.
+4. Define `ADMIN_EMAIL` y `ADMIN_PASSWORD` para que el despliegue cree el primer usuario del
+   admin. Para más usuarios: `npm run admin:create`.
 5. Revisa cada cambio en la vista previa desde un teléfono antes de publicarlo.
+
+## Usuarios del admin
+
+- **Usuario predeterminado**: con `ADMIN_EMAIL` y `ADMIN_PASSWORD` (mínimo 10 caracteres;
+  `ADMIN_NAME` es opcional), cada despliegue lo crea si ese correo no existe. Si ya existe no lo
+  toca, así que cambiar `ADMIN_PASSWORD` después **no** cambia la contraseña. En local:
+  `npm run admin:default`.
+- **Cambiar la contraseña**: en el admin, *Cuenta*; o desde el login con *¿Olvidaste tu
+  contraseña?*, que envía por Resend un enlace válido 1 hora y de un solo uso (máximo 3 por hora).
+  Al restablecerla se cierran todas las sesiones de ese usuario.
+- Con `EMAIL_FROM=onboarding@resend.dev`, Resend solo entrega a la dueña de la cuenta: el
+  usuario que recupera su contraseña debe usar ese correo hasta verificar un dominio propio.
 
 ## Marca
 

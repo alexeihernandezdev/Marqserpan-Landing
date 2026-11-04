@@ -48,3 +48,18 @@ export function safeAdminRedirect(next: string | null | undefined): string {
   if (next.startsWith("/admin/login")) return "/admin";
   return next;
 }
+
+export const RESET_TTL_MS = 60 * 60 * 1000;
+export const RESET_WINDOW_MS = 60 * 60 * 1000;
+export const RESET_MAX_PER_WINDOW = 3;
+
+/** Un enlace de restablecimiento sirve una sola vez y durante 1 hora. */
+export function isResetTokenUsable(token: { expiresAt: Date; usedAt: Date | null }, now = new Date()): boolean {
+  return token.usedAt === null && !isSessionExpired(token.expiresAt, now);
+}
+
+/** Como mucho 3 enlaces por usuario y hora, para no llenarle el correo. */
+export function isResetLimited(createdAts: Date[], now = new Date()): boolean {
+  const since = now.getTime() - RESET_WINDOW_MS;
+  return createdAts.filter((date) => date.getTime() > since).length >= RESET_MAX_PER_WINDOW;
+}

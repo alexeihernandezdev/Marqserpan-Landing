@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s · Distribuidora Maqserpan",
   },
   description:
-    "Vendemos, fabricamos, importamos, reparamos e instalamos equipos y repuestos para panaderías, cafeterías y charcuterías. 22 años en Puerto Ordaz. Envíos a Venezuela, Colombia, Brasil y Curaçao.",
+    "Vendemos, fabricamos, importamos, reparamos e instalamos equipos y repuestos para panaderías, cafeterías y charcuterías. 22 años en el mercado. Envíos a toda Venezuela.",
   applicationName: "Distribuidora Maqserpan",
   openGraph: {
     type: "website",

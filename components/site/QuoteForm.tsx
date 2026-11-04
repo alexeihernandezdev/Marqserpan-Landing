@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState, startTransition, type FormEvent } from "react";
-import { submitLead } from "@/app/(site)/actions";
+import { submitLead, submitLeadContact } from "@/app/(site)/actions";
 import { readAttribution } from "@/components/site/AttributionCapture";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
@@ -43,6 +43,8 @@ const EMPTY = {
 
 type Values = typeof EMPTY;
 
+const CONTACT_KEYS = ["name", "phone", "email", "city", "country"] as const satisfies readonly (keyof Values)[];
+
 // Un fallo de red hace que la Server Action lance: se convierte en un error visible y se conserva lo escrito.
 async function submitSafely(prev: ActionState, formData: FormData): Promise<ActionState> {
   try {
@@ -52,6 +54,15 @@ async function submitSafely(prev: ActionState, formData: FormData): Promise<Acti
       status: "error",
       message: "No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo.",
     };
+  }
+}
+
+// Si guardar el contacto falla por la red, se avanza igual: el envío final guarda todo.
+async function submitContactSafely(prev: ActionState, formData: FormData): Promise<ActionState> {
+  try {
+    return await submitLeadContact(prev, formData);
+  } catch {
+    return { status: "success" };
   }
 }
 
@@ -68,11 +79,16 @@ function newSubmissionId() {
 
 function QuoteFormInner({ content, whatsapp, product, onClearProduct, onReset }: QuoteFormProps & { onReset: () => void }) {
   const [state, formAction, pending] = useActionState(submitSafely, idleState);
+  const [contactState, contactAction, contactPending] = useActionState(submitContactSafely, idleState);
+  // Paso 1: contacto (se guarda al continuar). Paso 2: qué necesita.
+  const [step, setStep] = useState<1 | 2>(1);
   const [values, setValues] = useState<Values>(EMPTY);
   // Se fijan al montar en el navegador (no en el prerender): id contra duplicados y hora para el antispam.
   const meta = useRef({ submissionId: "", renderedAt: 0 });
   const submitting = useRef(false);
+  const stepChanged = useRef(false);
   const successHeading = useRef<HTMLHeadingElement>(null);
+  const stepHeading = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -88,21 +104,57 @@ function QuoteFormInner({ content, whatsapp, product, onClearProduct, onReset }:
     if (state.status === "error") errorRef.current?.focus();
   }, [state, pending]);
 
-  const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
+  // Contacto guardado → paso 2.
+  useEffect(() => {
+    if (!contactPending) submitting.current = false;
+    if (contactState.status === "success") goTo(2);
+    if (contactState.status === "error") errorRef.current?.focus();
+  }, [contactState, contactPending]);
+
+  // Al cambiar de paso (no al cargar la página) el foco va al título del paso.
+  useEffect(() => {
+    if (!stepChanged.current) return;
+    stepChanged.current = false;
+    stepHeading.current?.focus();
+  }, [step]);
+
+  function goTo(next: 1 | 2) {
+    stepChanged.current = true;
+    setStep(next);
+  }
+
+  const current = step === 1 ? contactState : state;
+  const errors = current.status === "error" ? (current.fieldErrors ?? {}) : {};
   const set = (key: keyof Values) => (value: string) => setValues((v) => ({ ...v, [key]: value }));
+  const busy = pending || contactPending;
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting.current || pending) return;
+    if (submitting.current || busy) return;
     submitting.current = true;
     if (!meta.current.submissionId) {
       meta.current = { submissionId: newSubmissionId(), renderedAt: Date.now() };
     }
-    const formData = new FormData(event.currentTarget);
+    // Se arma desde el estado: en el paso 2 los campos de contacto ya no están en pantalla.
+    const formData = new FormData();
+    const trap = new FormData(event.currentTarget).get("website");
+    if (typeof trap === "string" && trap) formData.set("website", trap);
     formData.set("submissionId", meta.current.submissionId);
     formData.set("renderedAt", String(meta.current.renderedAt));
     for (const [key, value] of Object.entries(readAttribution())) {
       if (value) formData.set(key, value);
+    }
+
+    if (step === 1) {
+      for (const key of CONTACT_KEYS) formData.set(key, values[key]);
+      startTransition(() => contactAction(formData));
+      return;
+    }
+
+    for (const [key, value] of Object.entries({ ...values, type })) formData.set(key, value);
+    if (product) {
+      formData.set("productSlug", product.slug);
+      formData.set("productName", product.name);
     }
     startTransition(() => formAction(formData));
   }
@@ -138,26 +190,32 @@ function QuoteFormInner({ content, whatsapp, product, onClearProduct, onReset }:
 
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5 rounded-3xl bg-white p-5 text-carbon shadow-2xl shadow-black/30 sm:p-8">
-      {product && (
-        <>
-          <input type="hidden" name="productSlug" value={product.slug} />
-          <input type="hidden" name="productName" value={product.name} />
-        </>
-      )}
       {/* Campo trampa: las personas no lo ven ni lo oyen; los bots lo rellenan. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="website">No escribas aquí</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
 
-      {state.status === "error" && (
+      <div>
+        <div aria-hidden="true" className="flex gap-2">
+          {[1, 2].map((n) => (
+            <span key={n} className={`h-1.5 flex-1 rounded-full ${n <= step ? "bg-verde-700" : "bg-neutral-200"}`} />
+          ))}
+        </div>
+        <p className="mt-3 text-xs font-bold uppercase tracking-wide text-gris">Paso {step} de 2</p>
+        <h3 ref={stepHeading} tabIndex={-1} className="mt-1 text-xl text-carbon outline-none">
+          {step === 1 ? "¿Cómo te contactamos?" : "¿Qué necesitas?"}
+        </h3>
+      </div>
+
+      {current.status === "error" && (
         <p
           ref={errorRef}
           tabIndex={-1}
           role="alert"
           className="rounded-md border-2 border-red-700 bg-red-50 px-4 py-3 font-bold text-red-800 outline-none"
         >
-          {state.message}
+          {current.message}
         </p>
       )}
 
@@ -175,134 +233,151 @@ function QuoteFormInner({ content, whatsapp, product, onClearProduct, onReset }:
         </div>
       )}
 
-      <RadioGroup
-        name="type"
-        legend="¿Qué necesitas?"
-        required
-        options={TYPE_OPTIONS}
-        value={type}
-        onChange={set("type")}
-        errors={errors.type}
-      />
+      {step === 1 ? (
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field id="name" label="Nombre" required errors={errors.name}>
+            {(describedBy) => (
+              <Input
+                id="name"
+                name="name"
+                autoComplete="name"
+                value={values.name}
+                onChange={(e) => set("name")(e.target.value)}
+                aria-invalid={invalid("name")}
+                aria-describedby={describedBy}
+                required
+              />
+            )}
+          </Field>
+          <Field id="phone" label="Teléfono o WhatsApp" required hint="Ej. 0416-1234567 o +57 300 1234567" errors={errors.phone}>
+            {(describedBy) => (
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                value={values.phone}
+                onChange={(e) => set("phone")(e.target.value)}
+                aria-invalid={invalid("phone")}
+                aria-describedby={describedBy}
+                required
+              />
+            )}
+          </Field>
+          <Field id="city" label="Ciudad" required errors={errors.city}>
+            {(describedBy) => (
+              <Input
+                id="city"
+                name="city"
+                autoComplete="address-level2"
+                value={values.city}
+                onChange={(e) => set("city")(e.target.value)}
+                aria-invalid={invalid("city")}
+                aria-describedby={describedBy}
+                required
+              />
+            )}
+          </Field>
+          <Field id="country" label="País" required errors={errors.country}>
+            {(describedBy) => (
+              <Select
+                id="country"
+                name="country"
+                value={values.country}
+                onChange={(e) => set("country")(e.target.value)}
+                aria-invalid={invalid("country")}
+                aria-describedby={describedBy}
+              >
+                {COUNTRIES.map((code) => (
+                  <option key={code} value={code}>
+                    {COUNTRY_LABELS[code]}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </Field>
+          <div className="sm:col-span-2">
+            <Field id="email" label="Correo" errors={errors.email}>
+              {(describedBy) => (
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={values.email}
+                  onChange={(e) => set("email")(e.target.value)}
+                  aria-invalid={invalid("email")}
+                  aria-describedby={describedBy}
+                />
+              )}
+            </Field>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex items-center justify-between gap-3 rounded-xl bg-hueso px-4 py-3 text-sm">
+            <p className="min-w-0">
+              <strong>{values.name}</strong>
+              <span className="text-gris">
+                {" "}
+                · {values.phone} · {values.city}
+              </span>
+            </p>
+            <button type="button" onClick={() => goTo(1)} className="shrink-0 font-bold underline underline-offset-4">
+              Editar
+            </button>
+          </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="name" label="Nombre" required errors={errors.name}>
-          {(describedBy) => (
-            <Input
-              id="name"
-              name="name"
-              autoComplete="name"
-              value={values.name}
-              onChange={(e) => set("name")(e.target.value)}
-              aria-invalid={invalid("name")}
-              aria-describedby={describedBy}
-              required
-            />
-          )}
-        </Field>
-        <Field id="phone" label="Teléfono o WhatsApp" required hint="Ej. 0416-1234567 o +57 300 1234567" errors={errors.phone}>
-          {(describedBy) => (
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              value={values.phone}
-              onChange={(e) => set("phone")(e.target.value)}
-              aria-invalid={invalid("phone")}
-              aria-describedby={describedBy}
-              required
-            />
-          )}
-        </Field>
-        <Field id="city" label="Ciudad" required errors={errors.city}>
-          {(describedBy) => (
-            <Input
-              id="city"
-              name="city"
-              autoComplete="address-level2"
-              value={values.city}
-              onChange={(e) => set("city")(e.target.value)}
-              aria-invalid={invalid("city")}
-              aria-describedby={describedBy}
-              required
-            />
-          )}
-        </Field>
-        <Field id="country" label="País" required errors={errors.country}>
-          {(describedBy) => (
-            <Select
-              id="country"
-              name="country"
-              value={values.country}
-              onChange={(e) => set("country")(e.target.value)}
-              aria-invalid={invalid("country")}
-              aria-describedby={describedBy}
-            >
-              {COUNTRIES.map((code) => (
-                <option key={code} value={code}>
-                  {COUNTRY_LABELS[code]}
-                </option>
-              ))}
-            </Select>
-          )}
-        </Field>
-      </div>
-
-      <Field
-        id="message"
-        label="Cuéntanos qué necesitas"
-        required
-        hint="Equipo, modelo o máquina, y cualquier detalle que nos ayude a cotizar."
-        errors={errors.message}
-      >
-        {(describedBy) => (
-          <Textarea
-            id="message"
-            name="message"
-            rows={4}
-            maxLength={2000}
-            value={values.message}
-            onChange={(e) => set("message")(e.target.value)}
-            aria-invalid={invalid("message")}
-            aria-describedby={describedBy}
+          <RadioGroup
+            name="type"
+            legend="Tipo de solicitud"
             required
+            options={TYPE_OPTIONS}
+            value={type}
+            onChange={set("type")}
+            errors={errors.type}
           />
-        )}
-      </Field>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="email" label="Correo" errors={errors.email}>
-          {(describedBy) => (
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={values.email}
-              onChange={(e) => set("email")(e.target.value)}
-              aria-invalid={invalid("email")}
-              aria-describedby={describedBy}
-            />
-          )}
-        </Field>
-        <Field id="businessName" label="Nombre de tu negocio" errors={errors.businessName}>
-          {(describedBy) => (
-            <Input
-              id="businessName"
-              name="businessName"
-              autoComplete="organization"
-              value={values.businessName}
-              onChange={(e) => set("businessName")(e.target.value)}
-              aria-describedby={describedBy}
-            />
-          )}
-        </Field>
-      </div>
+          <Field
+            id="message"
+            label="Cuéntanos qué necesitas"
+            required
+            hint="Equipo, modelo o máquina, y cualquier detalle que nos ayude a cotizar."
+            errors={errors.message}
+          >
+            {(describedBy) => (
+              <Textarea
+                id="message"
+                name="message"
+                rows={4}
+                maxLength={2000}
+                value={values.message}
+                onChange={(e) => set("message")(e.target.value)}
+                aria-invalid={invalid("message")}
+                aria-describedby={describedBy}
+                required
+              />
+            )}
+          </Field>
 
-      <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto sm:self-start">
-        {pending ? "Enviando…" : "Enviar solicitud"}
+          <Field id="businessName" label="Nombre de tu negocio" errors={errors.businessName}>
+            {(describedBy) => (
+              <Input
+                id="businessName"
+                name="businessName"
+                autoComplete="organization"
+                value={values.businessName}
+                onChange={(e) => set("businessName")(e.target.value)}
+                aria-describedby={describedBy}
+              />
+            )}
+          </Field>
+        </>
+      )}
+
+      <Button type="submit" size="lg" disabled={busy} className="w-full sm:w-auto sm:self-start">
+        {step === 1 ? (contactPending ? "Guardando…" : "Continuar") : pending ? "Enviando…" : "Enviar solicitud"}
       </Button>
       <p className="text-sm text-gris">
         Usamos tus datos solo para responder tu solicitud. Sin precios fijos: cotizamos cada pedido con su precio y su plazo.

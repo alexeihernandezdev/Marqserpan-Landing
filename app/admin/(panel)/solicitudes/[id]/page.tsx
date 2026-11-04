@@ -24,7 +24,7 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/solic
   const remove = deleteLead.bind(null, lead.id);
 
   const details: Array<[string, string | null]> = [
-    ["Tipo", LEAD_TYPE_LABELS[lead.type]],
+    ["Tipo", lead.type ? LEAD_TYPE_LABELS[lead.type] : null],
     ["Producto", lead.productName],
     ["Teléfono", lead.phone],
     ["Correo", lead.email],
@@ -84,10 +84,16 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/solic
         </form>
       </div>
 
-      <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-3 text-xl">Mensaje</h2>
-        <p className="whitespace-pre-line">{lead.message}</p>
-      </section>
+      {lead.completedAt ? (
+        <section className="rounded-lg bg-white p-6 shadow-sm">
+          <h2 className="mb-3 text-xl">Mensaje</h2>
+          <p className="whitespace-pre-line">{lead.message}</p>
+        </section>
+      ) : (
+        <p role="status" className="rounded-md border-2 border-amber-600 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
+          Esta persona dejó sus datos de contacto pero no terminó la solicitud. Escríbele para saber qué necesita.
+        </p>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section className="rounded-lg bg-white p-6 shadow-sm">

@@ -4,8 +4,8 @@
  * La contraseña se pide por consola sin mostrarla (mínimo 10 caracteres).
  */
 import { createInterface } from "node:readline";
-import { adminUsers } from "../lib/db/schema";
-import { hashPassword, MIN_PASSWORD_LENGTH } from "../lib/auth/password";
+import { MIN_PASSWORD_LENGTH } from "../lib/auth/password";
+import { createAdminUser, EMAIL_PATTERN } from "./lib/admin";
 import { connect } from "./lib/db";
 
 function arg(name: string): string | undefined {
@@ -33,7 +33,7 @@ function askHidden(question: string): Promise<string> {
 async function main() {
   const name = arg("name")?.trim();
   const email = arg("email")?.trim().toLowerCase();
-  if (!name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!name || !email || !EMAIL_PATTERN.test(email)) {
     throw new Error('Uso: npm run admin:create -- --name "Nombre" --email correo@ejemplo.com');
   }
 
@@ -45,14 +45,8 @@ async function main() {
     throw new Error("Las contraseñas no coinciden.");
   }
 
-  const db = connect();
-  const [user] = await db
-    .insert(adminUsers)
-    .values({ name, email, passwordHash: await hashPassword(password) })
-    .onConflictDoNothing({ target: adminUsers.email })
-    .returning({ id: adminUsers.id });
-
-  console.log(user ? `Usuario creado: ${email}` : `Ya existe un usuario con el correo ${email}.`);
+  const created = await createAdminUser(connect(), { name, email, password });
+  console.log(created ? `Usuario creado: ${email}` : `Ya existe un usuario con el correo ${email}.`);
 }
 
 main().catch((error) => {

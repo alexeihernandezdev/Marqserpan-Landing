@@ -11,7 +11,7 @@ export const DEFAULT_SECTIONS: Sections = {
       "Vendemos, fabricamos, importamos, reparamos e instalamos equipos para panaderías, cafeterías y charcuterías.",
     primaryCta: "Solicita tu cotización",
     secondaryCta: "Ver el catálogo",
-    trustLine: "22 años en Puerto Ordaz",
+    trustLine: "22 años en el mercado",
   },
   problem: {
     title: "¿Tu equipo se paró?",

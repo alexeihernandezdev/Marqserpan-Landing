@@ -70,6 +70,21 @@ export const adminSessions = pgTable(
   (t) => [index("admin_sessions_user_idx").on(t.userId)],
 );
 
+export const passwordResetTokens = pgTable(
+  "password_reset_tokens",
+  {
+    // SHA-256 del token del enlace; el token en claro solo viaja en el correo.
+    id: text("id").primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => adminUsers.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("password_reset_tokens_user_created_idx").on(t.userId, t.createdAt)],
+);
+
 export const loginAttempts = pgTable(
   "login_attempts",
   {
@@ -131,14 +146,15 @@ export const leads = pgTable(
   {
     id: uuid("id").primaryKey().defaultRandom(),
     submissionId: uuid("submission_id").notNull(),
-    type: leadType("type").notNull(),
+    // type y message quedan vacíos mientras la solicitud solo tiene los datos de contacto (paso 1).
+    type: leadType("type"),
     name: text("name").notNull(),
     phone: text("phone").notNull(),
     email: text("email"),
     businessName: text("business_name"),
     city: text("city").notNull(),
     country: country("country").notNull().default("VE"),
-    message: text("message").notNull(),
+    message: text("message"),
     productId: uuid("product_id").references(() => products.id, { onDelete: "set null" }),
     productName: text("product_name"),
     utmSource: text("utm_source"),
@@ -153,6 +169,8 @@ export const leads = pgTable(
     status: leadStatus("status").notNull().default("nueva"),
     attendedAt: timestamp("attended_at", { withTimezone: true }),
     notificationStatus: notificationStatus("notification_status").notNull().default("pendiente"),
+    /** Null mientras la persona solo envió el paso de contacto. */
+    completedAt: timestamp("completed_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [

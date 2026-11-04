@@ -4,7 +4,8 @@ import { connect, type ScriptDb } from "../../scripts/lib/db";
 import { seedDatabase } from "../../scripts/lib/seed-data";
 import type { Page } from "@playwright/test";
 import { hashPassword } from "../../lib/auth/password";
-import { adminUsers, categories, leads, productImages, products } from "../../lib/db/schema";
+import { generateSessionToken, hashSessionToken } from "../../lib/auth/session-logic";
+import { adminUsers, categories, leads, passwordResetTokens, productImages, products } from "../../lib/db/schema";
 
 // Las pruebas e2e usan una rama de Neon exclusiva (DATABASE_URL en .env.test).
 let db: ScriptDb | undefined;
@@ -124,4 +125,21 @@ export async function loginAsAdmin(page: Page) {
   await page.getByLabel("Contraseña").fill(ADMIN_PASSWORD);
   await page.getByRole("button", { name: "Entrar" }).click();
   await page.waitForURL(/\/admin$/);
+}
+
+/** Crea un enlace de restablecimiento para el usuario de prueba y devuelve su token en claro. */
+export async function createResetTokenFixture(expiresInMs = 60 * 60 * 1000) {
+  const database = testDb();
+  const [user] = await database.select().from(adminUsers).where(eq(adminUsers.email, ADMIN_EMAIL));
+  const token = generateSessionToken();
+  await database.insert(passwordResetTokens).values({
+    id: hashSessionToken(token),
+    userId: user.id,
+    expiresAt: new Date(Date.now() + expiresInMs),
+  });
+  return token;
+}
+
+export async function findResetTokens() {
+  return testDb().select().from(passwordResetTokens);
 }
