@@ -1,0 +1,516 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido" [ref=e2] [cursor=pointer]:
+    - /url: "#contenido"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Distribuidora Maqserpan" [ref=e6]
+      - link "Solicita tu cotización" [ref=e7] [cursor=pointer]:
+        - /url: /#cotizar
+  - main [ref=e8]:
+    - region [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - paragraph [ref=e12]: 22 años en Puerto Ordaz
+          - heading "Equipos y repuestos para que tu panadería nunca pare" [level=1] [ref=e14]
+          - paragraph [ref=e15]: Vendemos, fabricamos, importamos, reparamos e instalamos equipos para panaderías, cafeterías y charcuterías.
+          - generic [ref=e16]:
+            - link "Solicita tu cotización" [ref=e17] [cursor=pointer]:
+              - /url: /#cotizar
+            - link "Ver el catálogo" [ref=e20] [cursor=pointer]:
+              - /url: /#catalogo
+        - generic [ref=e21]:
+          - figure "Rebanadoras Rebanadora Swedlinghaus AF250 EGR Destacado" [ref=e23]:
+            - img "Rebanadora Swedlinghaus AF250 EGR de aluminio con cuchilla de 250 mm" [ref=e25]
+            - generic [ref=e26]:
+              - generic [ref=e27]:
+                - generic [ref=e28]: Rebanadoras
+                - generic [ref=e29]: Rebanadora Swedlinghaus AF250 EGR
+              - generic [ref=e30]: Destacado
+          - paragraph [ref=e31]: Si no lo tenemos, lo fabricamos o lo traemos de otro país.
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - term [ref=e38]: servicios en un solo lugar
+          - definition [ref=e39]: "5"
+        - generic [ref=e40]:
+          - term [ref=e41]: países con envíos
+          - definition [ref=e42]: "4"
+        - generic [ref=e43]:
+          - term [ref=e44]: equipos en catálogo
+          - definition [ref=e45]: "18"
+    - region [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e49]:
+          - paragraph [ref=e50]: El problema
+          - heading "¿Tu equipo se paró?" [level=2] [ref=e51]
+          - paragraph [ref=e52]: Cuando una máquina se daña o un repuesto no se consigue, tu negocio deja de producir. Y cada día parado son ventas que no vuelven.
+        - list [ref=e53]:
+          - listitem [ref=e54]:
+            - generic [aria-hidden] [ref=e55]: "01"
+            - generic [ref=e56]: No encuentras el equipo o el repuesto que necesitas.
+          - listitem [ref=e57]:
+            - generic [aria-hidden] [ref=e58]: "02"
+            - generic [ref=e59]: No sabes quién puede reparar tu máquina.
+          - listitem [ref=e60]:
+            - generic [aria-hidden] [ref=e61]: "03"
+            - generic [ref=e62]: Un negocio no debería detenerse por un repuesto que no se consigue.
+        - link "Solicita tu cotización" [ref=e65] [cursor=pointer]:
+          - /url: /#cotizar
+    - region [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - paragraph [ref=e71]: Quiénes somos
+          - blockquote [ref=e72]:
+            - generic [aria-hidden] [ref=e73]: “
+            - paragraph [ref=e74]: Sabemos lo que cuesta cada día con un equipo parado.
+        - generic [ref=e75]:
+          - heading "22 años equipando panaderías y cafeterías" [level=2] [ref=e76]:
+            - generic [ref=e77]: "22"
+            - generic [ref=e78]: años equipando panaderías y cafeterías
+          - list [ref=e79]:
+            - listitem [ref=e80]:
+              - generic [ref=e84]: "Vendemos, fabricamos, importamos, reparamos e instalamos: todo en un solo lugar."
+            - listitem [ref=e85]:
+              - generic [ref=e89]: Fabricamos los repuestos que no se consiguen.
+            - listitem [ref=e90]:
+              - generic [ref=e94]: Servicio técnico especializado en equipos de panadería.
+            - listitem [ref=e95]:
+              - generic [ref=e99]: Enviamos a toda Venezuela, Colombia, Brasil y Curaçao.
+        - link "Solicita tu cotización" [ref=e102] [cursor=pointer]:
+          - /url: /#cotizar
+    - region [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - paragraph [ref=e108]: Cómo trabajamos
+          - heading "Tu equipo trabajando en 3 pasos" [level=2] [ref=e109]
+        - list [ref=e112]:
+          - listitem [ref=e113]:
+            - generic [aria-hidden] [ref=e114]: "1"
+            - generic [ref=e115]:
+              - 'heading "Paso 1: Cuéntanos qué necesitas" [level=3] [ref=e116]':
+                - generic [ref=e117]: "Paso 1:"
+                - text: Cuéntanos qué necesitas
+              - paragraph [ref=e118]: Escríbenos por el equipo, el repuesto o la reparación que buscas.
+          - listitem [ref=e119]:
+            - generic [aria-hidden] [ref=e120]: "2"
+            - generic [ref=e121]:
+              - 'heading "Paso 2: Recibe tu cotización" [level=3] [ref=e122]':
+                - generic [ref=e123]: "Paso 2:"
+                - text: Recibe tu cotización
+              - paragraph [ref=e124]: Te enviamos el precio y el plazo de tu pedido.
+          - listitem [ref=e125]:
+            - generic [aria-hidden] [ref=e126]: "3"
+            - generic [ref=e127]:
+              - 'heading "Paso 3: Lo entregamos e instalamos" [level=3] [ref=e128]':
+                - generic [ref=e129]: "Paso 3:"
+                - text: Lo entregamos e instalamos
+              - paragraph [ref=e130]: Llevamos el equipo y lo dejamos trabajando.
+        - list [ref=e131]:
+          - listitem [ref=e132]:
+            - generic [ref=e135]: Si no lo tenemos, lo fabricamos o lo traemos de otro país.
+          - listitem [ref=e136]:
+            - generic [ref=e139]: "Equipos pequeños que solo se enchufan: te los llevamos sin costo dentro de la ciudad."
+          - listitem [ref=e140]:
+            - generic [ref=e143]: Con disponibilidad inmediata, instalamos al día siguiente.
+        - link "Solicita tu cotización" [ref=e145] [cursor=pointer]:
+          - /url: /#cotizar
+    - region [ref=e148]:
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - paragraph [ref=e151]: Servicios
+          - heading "Todo lo que tu negocio necesita" [level=2] [ref=e152]
+          - paragraph [ref=e153]: Equipos y repuestos para panaderías, cafeterías y charcuterías, de la cotización a la instalación.
+        - list [ref=e154]:
+          - listitem [ref=e155]:
+            - generic [aria-hidden] [ref=e161]: "01"
+            - heading "Venta y distribución" [level=3] [ref=e162]
+            - paragraph [ref=e163]: Equipos y repuestos para panadería, cafetería y charcutería.
+          - listitem [ref=e164]:
+            - generic [aria-hidden] [ref=e170]: "02"
+            - heading "Fabricación a la medida" [level=3] [ref=e171]
+            - paragraph [ref=e172]: Fabricamos equipos a la medida de tu negocio y los repuestos que no se consiguen.
+          - listitem [ref=e173]:
+            - generic [aria-hidden] [ref=e179]: "03"
+            - heading "Importación" [level=3] [ref=e180]
+            - paragraph [ref=e181]: Conseguimos el equipo que necesitas, aunque haya que traerlo de otro país.
+          - listitem [ref=e182]:
+            - generic [aria-hidden] [ref=e187]: "04"
+            - heading "Servicio técnico" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Revisamos y reparamos tus equipos. Cada caso se evalúa contigo.
+          - listitem [ref=e190]:
+            - generic [aria-hidden] [ref=e197]: "05"
+            - heading "Traslado e instalación" [level=3] [ref=e198]
+            - paragraph [ref=e199]: Llevamos, buscamos e instalamos tus equipos para que empiecen a trabajar.
+        - link "Solicita tu cotización" [ref=e201] [cursor=pointer]:
+          - /url: /#cotizar
+    - region [ref=e204]:
+      - generic [ref=e205]:
+        - generic [ref=e206]:
+          - generic [ref=e207]:
+            - paragraph [ref=e208]: Catálogo
+            - heading "Rebanadoras de charcutería" [level=2] [ref=e209]
+            - paragraph [ref=e210]: Cuéntanos qué cortas y cuánto vendes, y te cotizamos la rebanadora que necesita tu charcutería.
+          - navigation "Categorías del catálogo" [ref=e211]:
+            - list [ref=e212]:
+              - listitem [ref=e213]:
+                - link "Equipos de panadería 4" [ref=e214] [cursor=pointer]:
+                  - /url: "#cat-equipos-de-panaderia"
+                  - text: Equipos de panadería
+                  - generic [ref=e215]: "4"
+              - listitem [ref=e216]:
+                - link "Equipos de cafetería 9" [ref=e217] [cursor=pointer]:
+                  - /url: "#cat-equipos-de-cafeteria"
+                  - text: Equipos de cafetería
+                  - generic [ref=e218]: "9"
+              - listitem [ref=e219]:
+                - link "Envasado 1" [ref=e220] [cursor=pointer]:
+                  - /url: "#cat-envasado"
+                  - text: Envasado
+                  - generic [ref=e221]: "1"
+        - list [ref=e222]:
+          - listitem [ref=e223]:
+            - article [ref=e224]:
+              - generic [ref=e225]:
+                - img "Rebanadora Swedlinghaus AF250 EGR de aluminio con cuchilla de 250 mm" [ref=e226]
+                - generic [ref=e227]: Destacado
+              - generic [ref=e228]:
+                - paragraph [ref=e229]: Rebanadoras
+                - heading [level=3] [ref=e230]:
+                  - link "Rebanadora Swedlinghaus AF250 EGR" [ref=e231] [cursor=pointer]:
+                    - /url: /productos/rebanadora-swedlinghaus-af250-egr
+                - paragraph [ref=e232]: Rebanadora por gravedad compacta con cuchilla de 250 mm, ideal para charcuterías con poco espacio. Funciona a 110 V.
+                - paragraph [ref=e233]: Ver detalles y cotizar
+          - listitem [ref=e237]:
+            - article [ref=e238]:
+              - generic [ref=e239]:
+                - img "Rebanadora Swedlinghaus AF300 GR de la Serie Pro" [ref=e240]
+                - generic [ref=e241]: Destacado
+              - generic [ref=e242]:
+                - paragraph [ref=e243]: Rebanadoras
+                - heading [level=3] [ref=e244]:
+                  - link "Rebanadora Swedlinghaus AF300 GR Pro" [ref=e245] [cursor=pointer]:
+                    - /url: /productos/rebanadora-swedlinghaus-af300-gr-pro
+                - paragraph [ref=e246]: Rebanadora profesional por gravedad con cuchilla de 300 mm en acero 100Cr6 y cortes de 0 a 16 mm de grosor.
+                - paragraph [ref=e247]: Ver detalles y cotizar
+          - listitem [ref=e251]:
+            - article [ref=e252]:
+              - generic [ref=e253]:
+                - img "Rebanadora Swedlinghaus AF350 GR de la Serie Pro" [ref=e254]
+                - generic [ref=e255]: Destacado
+              - generic [ref=e256]:
+                - paragraph [ref=e257]: Rebanadoras
+                - heading [level=3] [ref=e258]:
+                  - link "Rebanadora Swedlinghaus AF350 GR Pro" [ref=e259] [cursor=pointer]:
+                    - /url: /productos/rebanadora-swedlinghaus-af350-gr-pro
+                - paragraph [ref=e260]: "Rebanadora por gravedad de 350 mm para charcuterías con alto volumen: cuerpo de aluminio anodizado y afilador incorporado."
+                - paragraph [ref=e261]: Ver detalles y cotizar
+          - listitem [ref=e265]:
+            - article [ref=e266]:
+              - generic [ref=e267]:
+                - img "Rebanadora Swedlinghaus AF350 GR Top con pomos azules" [ref=e268]
+                - generic [ref=e269]: Destacado
+              - generic [ref=e270]:
+                - paragraph [ref=e271]: Rebanadoras
+                - heading [level=3] [ref=e272]:
+                  - link "Rebanadora Swedlinghaus AF350 GR Top" [ref=e273] [cursor=pointer]:
+                    - /url: /productos/rebanadora-swedlinghaus-af350-gr-top
+                - paragraph [ref=e274]: Rebanadora de la Serie Top con cuchilla italiana RASSPE y cortes de hasta 24 mm. Funciona a 110 V.
+                - paragraph [ref=e275]: Ver detalles y cotizar
+        - generic [ref=e279]:
+          - heading "Equipos de panadería" [level=3] [ref=e281]
+          - list [ref=e283]:
+            - listitem [ref=e284]:
+              - article [ref=e285]:
+                - img "Horno rotativo Fiorini Small en acero inoxidable" [ref=e287]
+                - generic [ref=e288]:
+                  - paragraph [ref=e289]: Equipos de panadería
+                  - heading [level=3] [ref=e290]:
+                    - link "Horno rotativo Fiorini Small" [ref=e291] [cursor=pointer]:
+                      - /url: /productos/horno-rotativo-fiorini-small
+                  - paragraph [ref=e292]: Horno rotativo italiano compacto para bandejas de 40 × 60 cm, a gas, gasoil, eléctrico o pellet.
+                  - paragraph [ref=e293]: Ver detalles y cotizar
+            - listitem [ref=e297]:
+              - article [ref=e298]:
+                - img "Horno rotativo Fiorini Mini Rotor en acero inoxidable" [ref=e300]
+                - generic [ref=e301]:
+                  - paragraph [ref=e302]: Equipos de panadería
+                  - heading [level=3] [ref=e303]:
+                    - link "Horno rotativo Fiorini Mini Rotor" [ref=e304] [cursor=pointer]:
+                      - /url: /productos/horno-rotativo-fiorini-mini-rotor
+                  - paragraph [ref=e305]: "Horno rotativo para panaderías medianas: acepta bandejas de 40 × 60 hasta 50 × 70 cm, a gas, gasoil, eléctrico o pellet."
+                  - paragraph [ref=e306]: Ver detalles y cotizar
+            - listitem [ref=e310]:
+              - article [ref=e311]:
+                - img "Horno rotativo Fiorini Rotor de dos puertas en acero inoxidable" [ref=e313]
+                - generic [ref=e314]:
+                  - paragraph [ref=e315]: Equipos de panadería
+                  - heading [level=3] [ref=e316]:
+                    - link "Horno rotativo Fiorini Rotor" [ref=e317] [cursor=pointer]:
+                      - /url: /productos/horno-rotativo-fiorini-rotor
+                  - paragraph [ref=e318]: Horno rotativo de alta producción para bandejas de 60 × 80 cm, a gas, gasoil, eléctrico o pellet.
+                  - paragraph [ref=e319]: Ver detalles y cotizar
+            - listitem [ref=e323]:
+              - article [ref=e324]:
+                - img "Horno rotativo Fiorini Rotor FR en acero inoxidable" [ref=e326]
+                - generic [ref=e327]:
+                  - paragraph [ref=e328]: Equipos de panadería
+                  - heading [level=3] [ref=e329]:
+                    - link "Horno rotativo Fiorini Rotor FR" [ref=e330] [cursor=pointer]:
+                      - /url: /productos/horno-rotativo-fiorini-rotor-fr
+                  - paragraph [ref=e331]: "Horno rotativo para bandejas de 60 × 80 cm con el quemador al frente: queda libre por 3 lados, ideal para espacios estrechos."
+                  - paragraph [ref=e332]: Ver detalles y cotizar
+        - generic [ref=e336]:
+          - heading "Equipos de cafetería" [level=3] [ref=e338]
+          - list [ref=e340]:
+            - listitem [ref=e341]:
+              - article [ref=e342]:
+                - img "Máquina de café Magister Delta MS de 2 grupos" [ref=e344]
+                - generic [ref=e345]:
+                  - paragraph [ref=e346]: Equipos de cafetería
+                  - heading [level=3] [ref=e347]:
+                    - link "Máquina de café Magister Delta MS" [ref=e348] [cursor=pointer]:
+                      - /url: /productos/cafetera-magister-delta-ms
+                  - paragraph [ref=e349]: Máquina de espresso semiautomática italiana de 2 o 3 grupos, robusta y sencilla de usar para cafeterías con mucho movimiento.
+                  - paragraph [ref=e350]: Ver detalles y cotizar
+            - listitem [ref=e354]:
+              - article [ref=e355]:
+                - img "Máquina de café Magister Delta ES de 3 grupos con laterales rojos" [ref=e357]
+                - generic [ref=e358]:
+                  - paragraph [ref=e359]: Equipos de cafetería
+                  - heading [level=3] [ref=e360]:
+                    - link "Máquina de café Magister Delta ES (electrónica)" [ref=e361] [cursor=pointer]:
+                      - /url: /productos/cafetera-magister-delta-es
+                  - paragraph [ref=e362]: Espresso automática de 2 o 3 grupos con dosis programables, pantalla OLED y control electrónico de temperatura.
+                  - paragraph [ref=e363]: Ver detalles y cotizar
+            - listitem [ref=e367]:
+              - article [ref=e368]:
+                - img "Máquina de café Magister K-XX de 2 grupos" [ref=e370]
+                - generic [ref=e371]:
+                  - paragraph [ref=e372]: Equipos de cafetería
+                  - heading [level=3] [ref=e373]:
+                    - link "Máquina de café Magister K-XX" [ref=e374] [cursor=pointer]:
+                      - /url: /productos/cafetera-magister-k-xx
+                  - paragraph [ref=e375]: Espresso profesional de 2 o 3 grupos en acero inoxidable, con temporizador de extracción y preinfusión.
+                  - paragraph [ref=e376]: Ver detalles y cotizar
+            - listitem [ref=e380]:
+              - article [ref=e381]:
+                - img "Máquina de café Magister Stilo MS de 2 grupos" [ref=e383]
+                - generic [ref=e384]:
+                  - paragraph [ref=e385]: Equipos de cafetería
+                  - heading [level=3] [ref=e386]:
+                    - link "Máquina de café Magister Stilo MS" [ref=e387] [cursor=pointer]:
+                      - /url: /productos/cafetera-magister-stilo-ms
+                  - paragraph [ref=e388]: "Espresso semiautomática de 1 a 4 grupos para empezar o crecer: acero inoxidable o pintada en colores."
+                  - paragraph [ref=e389]: Ver detalles y cotizar
+            - listitem [ref=e393]:
+              - article [ref=e394]:
+                - img "Máquina de café Magister ES40 de 1 grupo" [ref=e396]
+                - generic [ref=e397]:
+                  - paragraph [ref=e398]: Equipos de cafetería
+                  - heading [level=3] [ref=e399]:
+                    - link "Máquina de café Magister ES40" [ref=e400] [cursor=pointer]:
+                      - /url: /productos/cafetera-magister-es40
+                  - paragraph [ref=e401]: "Espresso semiprofesional de 1 grupo, compacta y en colores: para panaderías, oficinas o cafeterías pequeñas."
+                  - paragraph [ref=e402]: Ver detalles y cotizar
+            - listitem [ref=e406]:
+              - article [ref=e407]:
+                - img "Cafetera superautomática Magister Relax R50 con pantalla táctil" [ref=e409]
+                - generic [ref=e410]:
+                  - paragraph [ref=e411]: Equipos de cafetería
+                  - heading [level=3] [ref=e412]:
+                    - link "Cafetera superautomática Magister Relax R50" [ref=e413] [cursor=pointer]:
+                      - /url: /productos/cafetera-superautomatica-magister-relax-r50
+                  - paragraph [ref=e414]: Superautomática con pantalla táctil que muele y prepara cada bebida con un toque. Hasta 200 tazas al día.
+                  - paragraph [ref=e415]: Ver detalles y cotizar
+            - listitem [ref=e419]:
+              - article [ref=e420]:
+                - img "Cafetera superautomática Magister Relax R150" [ref=e422]
+                - generic [ref=e423]:
+                  - paragraph [ref=e424]: Equipos de cafetería
+                  - heading [level=3] [ref=e425]:
+                    - link "Cafetera superautomática Magister Relax R150" [ref=e426] [cursor=pointer]:
+                      - /url: /productos/cafetera-superautomatica-magister-relax-r150
+                  - paragraph [ref=e427]: Superautomática para vasos altos, con salida de agua caliente y producción de 200 a 250 tazas diarias.
+                  - paragraph [ref=e428]: Ver detalles y cotizar
+            - listitem [ref=e432]:
+              - article [ref=e433]:
+                - img "Cafetera superautomática Magister Relax R200 en color negro" [ref=e435]
+                - generic [ref=e436]:
+                  - paragraph [ref=e437]: Equipos de cafetería
+                  - heading [level=3] [ref=e438]:
+                    - link "Cafetera superautomática Magister Relax R200" [ref=e439] [cursor=pointer]:
+                      - /url: /productos/cafetera-superautomatica-magister-relax-r200
+                  - paragraph [ref=e440]: Superautomática con sistema de leche fresca integrado para capuchinos y lattes con un solo toque.
+                  - paragraph [ref=e441]: Ver detalles y cotizar
+            - listitem [ref=e445]:
+              - article [ref=e446]:
+                - img "Molino de café Magister de la serie MD con tolva" [ref=e448]
+                - generic [ref=e449]:
+                  - paragraph [ref=e450]: Equipos de cafetería
+                  - heading [level=3] [ref=e451]:
+                    - link "Molinos de café Magister" [ref=e452] [cursor=pointer]:
+                      - /url: /productos/molinos-de-cafe-magister
+                  - paragraph [ref=e453]: "Molinos profesionales con fresas de 50 a 83 mm: manuales, con temporizador, automáticos o electrónicos."
+                  - paragraph [ref=e454]: Ver detalles y cotizar
+        - generic [ref=e458]:
+          - heading "Envasado" [level=3] [ref=e460]
+          - list [ref=e462]:
+            - listitem [ref=e463]:
+              - article [ref=e464]:
+                - img "Envolvedora Swedlinghaus DISP45 con bobina de film" [ref=e466]
+                - generic [ref=e467]:
+                  - paragraph [ref=e468]: Envasado
+                  - heading [level=3] [ref=e469]:
+                    - link "Envolvedora con film Swedlinghaus DISP45" [ref=e470] [cursor=pointer]:
+                      - /url: /productos/envolvedora-swedlinghaus-disp45
+                  - paragraph [ref=e471]: Dispensadora termoselladora para envolver bandejas con film de forma rápida e higiénica en charcuterías y carnicerías.
+                  - paragraph [ref=e472]: Ver detalles y cotizar
+        - link "Solicita tu cotización" [ref=e477] [cursor=pointer]:
+          - /url: /#cotizar
+    - region [ref=e480]:
+      - generic [ref=e483]:
+        - generic [ref=e484]:
+          - generic [ref=e485]:
+            - paragraph [ref=e486]: Lo que está en juego
+            - heading "Lo que cuesta esperar" [level=2] [ref=e487]
+          - link "Solicita tu cotización" [ref=e489] [cursor=pointer]:
+            - /url: /#cotizar
+        - list [ref=e492]:
+          - listitem [ref=e493]: Ventas perdidas cada día que el equipo está parado.
+          - listitem [ref=e497]: Clientes que se van a otro negocio porque no tienes lo que buscan.
+          - listitem [ref=e501]: Reparaciones improvisadas que vuelven a fallar.
+    - region [ref=e505]:
+      - generic [ref=e506]:
+        - generic [ref=e507]:
+          - generic [ref=e508]:
+            - paragraph [ref=e509]: El resultado
+            - heading "Tu negocio produciendo todos los días" [level=2] [ref=e510]
+          - list [ref=e511]:
+            - listitem [ref=e512]:
+              - generic [ref=e516]: El equipo correcto, instalado y trabajando.
+            - listitem [ref=e517]:
+              - generic [ref=e521]: Producción y ventas todos los días, sin paradas.
+            - listitem [ref=e522]:
+              - generic [ref=e526]: Repuestos cuando los necesitas, aunque no existan en el país.
+            - listitem [ref=e527]:
+              - generic [ref=e531]: La tranquilidad de tener a quién llamar.
+          - link "Solicita tu cotización" [ref=e533] [cursor=pointer]:
+            - /url: /#cotizar
+        - generic [ref=e537]:
+          - paragraph [ref=e538]:
+            - generic [ref=e539]: Antes
+            - generic [ref=e540]: Apagar incendios con equipos dañados
+          - paragraph [ref=e544]:
+            - generic [ref=e545]: Con Maqserpan
+            - generic [ref=e546]: Un negocio que produce todos los días sin sorpresas
+    - region [ref=e547]:
+      - generic [ref=e548]:
+        - generic [ref=e549]:
+          - paragraph [ref=e550]: Cotización sin compromiso
+          - heading "Solicita tu cotización" [level=2] [ref=e551]
+          - paragraph [ref=e552]: Cuéntanos qué necesitas y te respondemos con el precio y el plazo.
+        - generic [ref=e554]:
+          - generic [aria-hidden] [ref=e555]:
+            - text: No escribas aquí
+            - textbox [ref=e556]
+          - group [ref=e557]:
+            - generic [ref=e558]:
+              - text: ¿Qué necesitas?
+              - generic [aria-hidden] [ref=e559]: "*"
+            - generic [ref=e560]:
+              - generic [ref=e561] [cursor=pointer]:
+                - radio "Equipo Comprar o fabricar" [ref=e562]
+                - generic [ref=e563]:
+                  - generic [ref=e564]: Equipo
+                  - generic [ref=e565]: Comprar o fabricar
+              - generic [ref=e566] [cursor=pointer]:
+                - radio "Repuesto Para tu máquina" [ref=e567]
+                - generic [ref=e568]:
+                  - generic [ref=e569]: Repuesto
+                  - generic [ref=e570]: Para tu máquina
+              - generic [ref=e571] [cursor=pointer]:
+                - radio "Servicio técnico Reparación o revisión" [ref=e572]
+                - generic [ref=e573]:
+                  - generic [ref=e574]: Servicio técnico
+                  - generic [ref=e575]: Reparación o revisión
+          - generic [ref=e576]:
+            - generic [ref=e577]:
+              - generic [ref=e578]:
+                - text: Nombre
+                - generic [aria-hidden] [ref=e579]: "*"
+              - textbox "Nombre" [ref=e580]
+            - generic [ref=e581]:
+              - generic [ref=e582]:
+                - text: Teléfono o WhatsApp
+                - generic [aria-hidden] [ref=e583]: "*"
+              - textbox "Teléfono o WhatsApp" [ref=e584]
+              - paragraph [ref=e585]: Ej. 0416-1234567 o +57 300 1234567
+            - generic [ref=e586]:
+              - generic [ref=e587]:
+                - text: Ciudad
+                - generic [aria-hidden] [ref=e588]: "*"
+              - textbox "Ciudad" [ref=e589]
+            - generic [ref=e590]:
+              - generic [ref=e591]:
+                - text: País
+                - generic [aria-hidden] [ref=e592]: "*"
+              - combobox "País" [ref=e593]:
+                - option "Venezuela" [selected]
+                - option "Colombia"
+                - option "Brasil"
+                - option "Curaçao"
+                - option "Otro país"
+          - generic [ref=e594]:
+            - generic [ref=e595]:
+              - text: Cuéntanos qué necesitas
+              - generic [aria-hidden] [ref=e596]: "*"
+            - textbox "Cuéntanos qué necesitas" [ref=e597]
+            - paragraph [ref=e598]: Equipo, modelo o máquina, y cualquier detalle que nos ayude a cotizar.
+          - generic [ref=e599]:
+            - generic [ref=e600]:
+              - generic [ref=e601]: Correo (opcional)
+              - textbox "Correo (opcional)" [ref=e602]
+            - generic [ref=e603]:
+              - generic [ref=e604]: Nombre de tu negocio (opcional)
+              - textbox "Nombre de tu negocio (opcional)" [ref=e605]
+          - button "Enviar solicitud" [ref=e606]
+          - paragraph [ref=e607]: "Usamos tus datos solo para responder tu solicitud. Sin precios fijos: cotizamos cada pedido con su precio y su plazo."
+  - contentinfo [ref=e608]:
+    - generic [ref=e609]:
+      - generic [ref=e610]:
+        - img "Distribuidora Maqserpan" [ref=e611]
+        - heading "Contáctanos" [level=2] [ref=e612]
+        - paragraph [ref=e613]: Estamos en Los Pinos, Puerto Ordaz, Venezuela.
+      - list [ref=e614]:
+        - listitem [ref=e615]:
+          - link "WhatsApp +58 416-6873369" [ref=e616] [cursor=pointer]:
+            - /url: https://wa.me/584166873369
+        - listitem [ref=e619]:
+          - link "distribuidoramaqserpan@hotmail.com" [ref=e620] [cursor=pointer]:
+            - /url: mailto:distribuidoramaqserpan@hotmail.com
+        - listitem [ref=e624]:
+          - link "Instagram" [ref=e625] [cursor=pointer]:
+            - /url: https://www.instagram.com/distribuidora_maqserpan
+          - link "Facebook" [ref=e628] [cursor=pointer]:
+            - /url: https://www.facebook.com/distribuidoramaqserpan
+          - link "TikTok" [ref=e631] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@distribuidoramaqserpan
+      - generic [ref=e634]:
+        - heading "Envíos y entrega" [level=3] [ref=e635]
+        - paragraph [ref=e640]:
+          - generic [ref=e644]: Enviamos a Venezuela, Colombia, Brasil, Curaçao.
+        - list [ref=e645]:
+          - listitem [ref=e646]: "Equipos pequeños que solo se enchufan: entrega sin costo dentro de la ciudad."
+          - listitem [ref=e647]: Con disponibilidad inmediata, instalamos al día siguiente.
+          - listitem [ref=e648]: "Fuera de la ciudad: traslado e instalación con costo adicional."
+      - generic [ref=e649]:
+        - heading "Formas de pago" [level=3] [ref=e650]
+        - list [ref=e654]:
+          - listitem [ref=e655]: Transferencia en moneda nacional
+          - listitem [ref=e656]: Efectivo en moneda internacional
+          - listitem [ref=e657]: Banesco Panamá
+          - listitem [ref=e658]: Binance
+    - paragraph [ref=e660]: © Distribuidora Maqserpan C.A. · RIF J-31113230-9
+  - button "Open Next.js Dev Tools" [ref=e666] [cursor=pointer]
+  - alert [ref=e670]
