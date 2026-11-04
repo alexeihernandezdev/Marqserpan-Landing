@@ -1,29 +1,69 @@
-import { CheckIcon } from "@/components/ui/icons";
+import { ArrowRightIcon, CheckIcon } from "@/components/ui/icons";
 import type { Sections } from "@/lib/validation/content";
 import { SectionCta } from "../SectionCta";
 import { SectionHeading } from "./SectionHeading";
 
 type Props = { content: Sections["success"]; ctaLabel: string };
 
+// «De X a Y» → transformación de identidad en dos tarjetas. Si no sigue ese molde, un solo bloque.
+function splitIdentity(identity: string) {
+  const match = identity.match(/^de\s+(.+?)\s+a\s+(.+?)\.?$/i);
+  return match ? { before: match[1], after: match[2] } : null;
+}
+
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
 export function Success({ content, ctaLabel }: Props) {
+  const identity = content.identity ? splitIdentity(content.identity) : null;
+
   return (
     <section id="exito" aria-labelledby="exito-title" className="bg-white py-20 sm:py-28">
-      <div className="container-page">
-        <SectionHeading id="exito-title" eyebrow="El resultado" title={content.title} />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {content.points.map((point) => (
-            <li key={point} className="flex gap-4 rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_1px_2px_rgb(0_0_0/0.04)]">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-verde-700 text-white">
-                <CheckIcon className="size-5" />
-              </span>
-              <span className="text-lg font-bold">{point}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div>
+          <SectionHeading id="exito-title" eyebrow="El resultado" title={content.title} />
+          <ul className="mt-8 flex flex-col gap-4">
+            {content.points.map((point) => (
+              <li key={point} className="flex items-start gap-3">
+                <span className="mt-px flex size-6 shrink-0 items-center justify-center rounded-full bg-verde-700/10 text-verde-700 ring-1 ring-verde-700/25">
+                  <CheckIcon className="size-3.5" strokeWidth={3} />
+                </span>
+                <span className="text-lg font-semibold leading-[1.6rem]">{point}</span>
+              </li>
+            ))}
+          </ul>
+          <SectionCta label={ctaLabel} />
+        </div>
+
         {content.identity && (
-          <p className="mt-8 rounded-2xl bg-hueso p-6 text-xl text-carbon sm:p-8">{content.identity}</p>
+          <div className="reveal flex flex-col justify-center lg:pt-14">
+            {identity ? (
+              <div className="flex flex-col gap-3">
+                <p className="rounded-3xl border border-dashed border-neutral-300 p-6 sm:p-8">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-gris">Antes</span>
+                  <span className="mt-2 block text-xl text-gris line-through decoration-red-700/40 decoration-2">
+                    {capitalize(identity.before)}
+                  </span>
+                </p>
+                <span
+                  aria-hidden="true"
+                  className="mx-auto flex size-11 rotate-90 items-center justify-center rounded-full bg-hueso text-carbon"
+                >
+                  <ArrowRightIcon className="size-5" />
+                </span>
+                <p className="bg-brand-gradient rounded-3xl p-6 text-white shadow-[0_24px_48px_-24px_rgb(0_106_158/0.6)] sm:p-8">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-white">Con Maqserpan</span>
+                  <span className="mt-2 block font-display text-2xl leading-tight sm:text-3xl">
+                    {capitalize(identity.after)}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <p className="bg-brand-gradient rounded-3xl p-8 font-display text-2xl leading-tight text-white">
+                {content.identity}
+              </p>
+            )}
+          </div>
         )}
-        <SectionCta label={ctaLabel} />
       </div>
     </section>
   );

@@ -103,6 +103,40 @@ export const GlobeIcon = (p: IconProps) => (
   </Svg>
 );
 
+export const StoreIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 10v10h16V10M3 6l1.5-3h15L21 6v1.5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0Z" />
+    <path d="M10 20v-5h4v5" />
+  </Svg>
+);
+
+export const FactoryIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3 21V10l6 3.5V10l6 3.5V4h5v17Z" />
+    <path d="M7 17h2M12 17h2M17 8h1" />
+  </Svg>
+);
+
+export const ShipIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3 15l1.5 5h15l1.5-5-9-3Z" />
+    <path d="M6 13.5V7h12v6.5M12 3v4M9 10h.01M15 10h.01" />
+  </Svg>
+);
+
+export const WrenchIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9Z" />
+  </Svg>
+);
+
+export const XMarkIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="m15 9-6 6M9 9l6 6" />
+  </Svg>
+);
+
 // Íconos de marca: trazos rellenos simples.
 function Brand({ title, children, ...props }: IconProps) {
   return (

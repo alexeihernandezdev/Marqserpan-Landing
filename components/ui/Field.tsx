@@ -27,12 +27,13 @@ export function Field({ id, label, required, hint, errors, children }: FieldProp
           <span className="font-normal text-gris"> (opcional)</span>
         )}
       </label>
+      {children(describedBy)}
+      {/* Debajo del control: así los campos de una misma fila quedan alineados. */}
       {hint && (
         <p id={hintId} className="text-sm text-gris">
           {hint}
         </p>
       )}
-      {children(describedBy)}
       {errorId && (
         <p id={errorId} className="text-sm font-bold text-red-700">
           {errors![0]}

@@ -127,4 +127,56 @@
   .bg-brand-gradient {
     background-image: linear-gradient(135deg, var(--color-verde-700), var(--color-azul-700));
   }
+
+  /* Texto con el degradado de marca (sobre fondo oscuro: tonos 400, > 7:1). */
+  .text-brand-gradient {
+    background-image: linear-gradient(100deg, var(--color-verde-400), var(--color-azul-400));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /*
+   * Superficie para fotos de producto con fondo blanco o gris claro: con «darken» cualquier
+   * fondo más claro que la superficie desaparece y el equipo (más oscuro) queda intacto.
+   */
+  .photo-surface {
+    background-color: #e4e7e5;
+  }
+
+  .photo-surface img {
+    mix-blend-mode: darken;
+  }
+
+  /* Número grande de fondo para listas numeradas (01, 02…). */
+  .num-outline {
+    font-family: var(--font-display);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
+  }
 }
+
+/* Entrada suave al hacer scroll, solo con animaciones ligadas al scroll y sin «reducir movimiento». */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
