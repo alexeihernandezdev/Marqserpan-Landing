@@ -24,7 +24,7 @@ export function ProductDetail({ product, headingLevel = 1, headingId, priority =
         <p className="text-lg text-carbon">{product.shortDescription}</p>
         {product.description && <p className="whitespace-pre-line text-gris">{product.description}</p>}
         <p className="rounded-xl border border-verde-700/15 bg-verde-700/5 px-4 py-3 text-sm">
-          Cotizamos cada pedido con su precio y su plazo. Si no lo tenemos, lo fabricamos o lo traemos.
+          Cotizamos cada pedido con su precio y su plazo. Si no lo tenemos, lo importamos.
         </p>
         <ButtonLink href={`/?producto=${encodeURIComponent(product.slug)}#cotizar`} size="lg" className="sm:self-start">
           Solicitar cotización de este equipo

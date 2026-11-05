@@ -49,7 +49,7 @@ export const DEFAULT_SECTIONS: Sections = {
       },
     ],
     agreement: [
-      "Si no lo tenemos, lo fabricamos o lo traemos de otro país.",
+      "Si no lo tenemos, lo importamos.",
       "Equipos pequeños que solo se enchufan: te los llevamos sin costo dentro de la ciudad.",
       "Con disponibilidad inmediata, instalamos al día siguiente.",
     ],
@@ -86,23 +86,22 @@ export const DEFAULT_SECTIONS: Sections = {
     body: "Cuéntanos qué cortas y cuánto vendes, y te cotizamos la rebanadora que necesita tu charcutería.",
   },
   stakes: {
-    title: "Lo que cuesta esperar",
+    title: "Cada día parado te cuesta",
     points: [
-      "Ventas perdidas cada día que el equipo está parado.",
-      "Clientes que se van a otro negocio porque no tienes lo que buscan.",
-      "Reparaciones improvisadas que vuelven a fallar.",
+      "Pierdes ventas.",
+      "Tus clientes se van a la competencia.",
+      "Los arreglos improvisados vuelven a fallar.",
     ],
   },
   success: {
-    title: "Tu negocio produciendo todos los días",
+    title: "Tu negocio, sin paradas",
     points: [
       "El equipo correcto, instalado y trabajando.",
-      "Producción y ventas todos los días, sin paradas.",
-      "Repuestos cuando los necesitas, aunque no existan en el país.",
+      "Vendes todos los días.",
+      "Repuestos aunque no existan en el país.",
       "La tranquilidad de tener a quién llamar.",
     ],
-    identity:
-      "De apagar incendios con equipos dañados a un negocio que produce todos los días sin sorpresas.",
+    identity: "De equipos que fallan a un negocio que no para.",
   },
   testimonials: {
     title: "Lo que dicen nuestros clientes",
