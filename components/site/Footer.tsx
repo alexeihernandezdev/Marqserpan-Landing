@@ -46,7 +46,7 @@ const paymentIcon = (method: string) => {
 };
 
 const headingClass =
-  "flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.14em] text-white";
+  "flex items-center gap-2 text-lg text-white";
 
 /** Contacto, cobertura, entrega y pagos. WhatsApp solo aquí y en la confirmación (FR-010). */
 export function Footer({ contact, settings }: FooterProps) {

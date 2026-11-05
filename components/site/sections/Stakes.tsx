@@ -14,7 +14,7 @@ export function Stakes({ content, ctaLabel }: Props) {
         <div className="relative overflow-hidden rounded-[2rem] bg-carbon px-6 py-12 text-white sm:px-12 sm:py-16">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-red-500/15 blur-3xl"
+            className="parallax-layer pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-red-500/15 blur-3xl"
           />
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-16">
             <div>

@@ -1,10 +1,11 @@
 import { AttributionCapture } from "@/components/site/AttributionCapture";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { getCatalog } from "@/lib/content/products";
 import { getBusinessSettings, getSections } from "@/lib/content/queries";
 
 export default async function SiteLayout({ children, modal }: LayoutProps<"/">) {
-  const [sections, settings] = await Promise.all([getSections(), getBusinessSettings()]);
+  const [sections, settings, catalog] = await Promise.all([getSections(), getBusinessSettings(), getCatalog()]);
 
   return (
     <>
@@ -14,7 +15,10 @@ export default async function SiteLayout({ children, modal }: LayoutProps<"/">) 
       >
         Saltar al contenido
       </a>
-      <Header ctaLabel={sections.hero.primaryCta} />
+      <Header
+        ctaLabel={sections.hero.primaryCta}
+        catalogLabel={catalog.all.length > 0 ? sections.hero.secondaryCta : null}
+      />
       <main id="contenido" className="flex-1">
         {children}
       </main>

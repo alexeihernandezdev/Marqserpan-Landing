@@ -3,10 +3,15 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import type { CatalogProduct } from "@/lib/content/products";
 
-type Props = { product: CatalogProduct; featured?: boolean };
+type Props = {
+  product: CatalogProduct;
+  featured?: boolean;
+  /** Tarjeta reducida para la fila de destacados de la landing (4 por fila). */
+  compact?: boolean;
+};
 
 /** Tarjeta del catálogo. Nunca muestra precio (FR-007). */
-export function ProductCard({ product, featured = false }: Props) {
+export function ProductCard({ product, featured = false, compact = false }: Props) {
   const cover = product.images[0];
   // Las fotos apaisadas llenan el marco; las verticales se contienen y su fondo claro se funde.
   const landscape = cover && cover.height > 0 && cover.width / cover.height >= 1.2;
@@ -18,8 +23,14 @@ export function ProductCard({ product, featured = false }: Props) {
             src={cover.publicId}
             alt={cover.alt}
             fill
-            sizes={featured ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
-            className={`${landscape ? "object-cover" : "object-contain p-6"} transition-transform duration-500 group-hover:scale-[1.04]`}
+            sizes={
+              featured
+                ? "(min-width: 768px) 50vw, 100vw"
+                : compact
+                  ? "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            }
+            className={`${landscape ? "object-cover" : compact ? "object-contain p-4" : "object-contain p-6"} transition-transform duration-500 group-hover:scale-[1.04]`}
           />
         )}
         {featured && (
@@ -28,16 +39,16 @@ export function ProductCard({ product, featured = false }: Props) {
           </span>
         )}
       </div>
-      <div className="flex flex-1 flex-col gap-2 px-5 pb-5 pt-3 sm:px-6 sm:pb-6">
+      <div className={`flex flex-1 flex-col gap-2 ${compact ? "px-4 pb-4 pt-2" : "px-5 pb-5 pt-3 sm:px-6 sm:pb-6"}`}>
         <p className="text-xs font-bold uppercase tracking-wider text-verde-700">{product.category.name}</p>
-        <h3 className={featured ? "text-2xl" : "text-xl"}>
+        <h3 className={featured ? "text-2xl" : compact ? "text-lg leading-snug" : "text-xl"}>
           {/* El enlace cubre toda la tarjeta. */}
           <Link href={`/productos/${product.slug}`} scroll={false} className="after:absolute after:inset-0">
             {product.name}
           </Link>
         </h3>
-        <p className="text-gris">{product.shortDescription}</p>
-        <p className="mt-auto flex items-center justify-between gap-3 border-t border-neutral-100 pt-4 text-sm font-bold text-azul-700">
+        <p className={compact ? "line-clamp-2 text-sm text-gris" : "text-gris"}>{product.shortDescription}</p>
+        <p className={`mt-auto flex items-center justify-between gap-3 border-t border-neutral-100 text-sm font-bold text-azul-700 ${compact ? "pt-3" : "pt-4"}`}>
           Ver detalles y cotizar
           <span
             aria-hidden="true"

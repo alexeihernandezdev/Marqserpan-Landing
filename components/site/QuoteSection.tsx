@@ -25,7 +25,7 @@ function Shell({
       aria-labelledby="cotizar-title"
       className="bg-glow relative overflow-hidden py-20 text-white sm:py-28"
     >
-      <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="bg-grid parallax-layer pointer-events-none absolute inset-x-0 -inset-y-16" />
       <div className="container-page relative grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start lg:pt-6">
           <p className="eyebrow mb-4 text-verde-400">Cotización sin compromiso</p>

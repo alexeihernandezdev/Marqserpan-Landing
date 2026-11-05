@@ -168,6 +168,56 @@
   }
 }
 
+/*
+ * Parallax ligado al scroll (sin JS). La foto del hero baja más lento que la página y el texto
+ * se desvanece al salir; las capas decorativas (.parallax-layer) se desplazan más lento que su
+ * sección. Sin soporte o con «reducir movimiento» todo queda estático.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .parallax-hero-bg {
+      animation: parallax-hero-bg linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+      will-change: transform;
+    }
+
+    .parallax-hero-content {
+      animation: parallax-hero-content linear both;
+      animation-timeline: scroll(root);
+      animation-range: 15svh 100svh;
+    }
+
+    .parallax-layer {
+      animation: parallax-layer linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@keyframes parallax-hero-bg {
+  to {
+    transform: translateY(30%);
+  }
+}
+
+@keyframes parallax-hero-content {
+  to {
+    opacity: 0.1;
+    transform: translateY(-3rem);
+  }
+}
+
+@keyframes parallax-layer {
+  from {
+    transform: translateY(-4rem);
+  }
+  to {
+    transform: translateY(4rem);
+  }
+}
+
 @keyframes reveal-up {
   from {
     opacity: 0;
@@ -180,3 +230,145 @@
 }
 
 
+
+/* Cinta infinita de fotos del taller (las copias duplicadas hacen el bucle continuo). */
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/*
+ * Estela de brillo que recorre las tarjetas de marcas en ola (cada una con su --shine-delay).
+ * Sobre fondo blanco el blanco puro no se ve, así que la estela lleva un tinte verde suave y
+ * aclara el logo al pasar. Con «reducir movimiento» no se anima.
+ */
+.brand-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.brand-shine::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto -20% 0;
+  width: 45%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in oklab, var(--color-verde-400) 14%, transparent) 30%,
+    rgb(255 255 255 / 0.85) 50%,
+    color-mix(in oklab, var(--color-verde-400) 14%, transparent) 70%,
+    transparent 100%
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-shine::after {
+    animation: brand-shine 5s ease-in-out infinite;
+    animation-delay: var(--shine-delay, 0s);
+  }
+}
+
+@keyframes brand-shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 1;
+  }
+  22% {
+    transform: translateX(340%) skewX(-18deg);
+    opacity: 1;
+  }
+  22.01%,
+  100% {
+    transform: translateX(340%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/*
+ * Sello de garantía del hero («22 años»): el anillo punteado gira, el escudo se dibuja, el check
+ * aparece y un brillo recorre la píldora cada pocos segundos. Con «reducir movimiento» queda estático.
+ */
+.trust-seal {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.trust-seal::after {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% 0;
+  width: 35%;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  transform: translateX(-150%) skewX(-18deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trust-seal::after {
+    animation: trust-seal-shine 4.5s ease-in-out 1.6s infinite;
+  }
+
+  .trust-seal-ring {
+    animation: trust-seal-spin 14s linear infinite;
+  }
+
+  .trust-seal-shield,
+  .trust-seal-check {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  .trust-seal-shield {
+    animation: trust-seal-draw 0.9s ease-out 0.3s forwards;
+  }
+
+  .trust-seal-check {
+    animation:
+      trust-seal-draw 0.45s ease-out 1.1s forwards,
+      trust-seal-pulse 4.5s ease-in-out 1.6s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+}
+
+@keyframes trust-seal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes trust-seal-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes trust-seal-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  8% {
+    transform: scale(1.3);
+  }
+  16% {
+    transform: scale(1);
+  }
+}
+
+@keyframes trust-seal-shine {
+  0% {
+    transform: translateX(-150%) skewX(-18deg);
+  }
+  30%,
+  100% {
+    transform: translateX(420%) skewX(-18deg);
+  }
+}

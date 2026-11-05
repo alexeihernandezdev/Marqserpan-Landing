@@ -1,6 +1,7 @@
 import { CheckIcon } from "@/components/ui/icons";
 import type { Sections } from "@/lib/validation/content";
 import { SectionCta } from "../SectionCta";
+import { TeamCarousel } from "../TeamCarousel";
 
 type Props = { content: Sections["guide"]; ctaLabel: string };
 
@@ -58,6 +59,7 @@ export function Guide({ content, ctaLabel }: Props) {
           <SectionCta label={ctaLabel} className="mt-0!" />
         </div>
       </div>
+      <TeamCarousel className="mt-20 sm:mt-24" />
     </section>
   );
 }

@@ -49,9 +49,9 @@ export const DEFAULT_SECTIONS: Sections = {
       },
     ],
     agreement: [
-      "Si no lo tenemos, lo importamos.",
-      "Equipos pequeños que solo se enchufan: te los llevamos sin costo dentro de la ciudad.",
-      "Con disponibilidad inmediata, instalamos al día siguiente.",
+      "Si no lo tenemos, lo fabricamos o lo importamos.",
+      "Equipos pequeños: te los llevamos sin costo dentro de la ciudad.",
+      "Con disponibilidad inmediata.",
     ],
   },
   services: {
@@ -82,8 +82,8 @@ export const DEFAULT_SECTIONS: Sections = {
     ],
   },
   featured: {
-    title: "Rebanadoras de charcutería",
-    body: "Cuéntanos qué cortas y cuánto vendes, y te cotizamos la rebanadora que necesita tu charcutería.",
+    title: "Nuestros productos más destacados",
+    body: "Los equipos que más nos piden panaderías, cafeterías y charcuterías. Cuéntanos qué necesitas y te lo cotizamos.",
   },
   stakes: {
     title: "Cada día parado te cuesta",

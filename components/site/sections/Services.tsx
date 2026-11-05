@@ -25,7 +25,7 @@ const SPAN = ["lg:col-span-3", "lg:col-span-3"];
 export function Services({ content, ctaLabel }: Props) {
   return (
     <section id="servicios" aria-labelledby="servicios-title" className="bg-glow relative overflow-hidden py-20 text-white sm:py-28">
-      <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 opacity-50" />
+      <div aria-hidden="true" className="bg-grid parallax-layer pointer-events-none absolute inset-x-0 -inset-y-16 opacity-50" />
       <div className="container-page relative">
         <SectionHeading id="servicios-title" eyebrow="Servicios" title={content.title} intro={content.intro} tone="dark" />
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">

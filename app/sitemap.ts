@@ -7,6 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await getVisibleProductSlugs();
   return [
     { url: `${siteUrl}/`, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/catalogo`, changeFrequency: "weekly", priority: 0.9 },
     ...slugs.map((slug) => ({
       url: `${siteUrl}/productos/${slug}`,
       changeFrequency: "monthly" as const,

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/productos/[slug]"
 export default function ProductPage({ params }: PageProps<"/productos/[slug]">) {
   return (
     <section className="container-page py-10 sm:py-16">
-      <ButtonLink href="/#catalogo" variant="ghost" className="mb-6 px-0">
+      <ButtonLink href="/catalogo" variant="ghost" className="mb-6 px-0">
         ← Volver al catálogo
       </ButtonLink>
       <Suspense fallback={<ProductDetailSkeleton />}>
