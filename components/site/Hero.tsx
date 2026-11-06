@@ -18,15 +18,15 @@ export function Hero({ content, showCatalogCta, guarantees }: HeroProps) {
       aria-labelledby="hero-title"
       className="relative isolate min-h-[88svh] overflow-hidden bg-carbon text-white"
     >
-      {/* En escritorio la foto se corre a la derecha para que el texto no tape a la persona. */}
+      {/* En escritorio la foto se corre a la derecha para que el texto no tape el logo. */}
       <div className="parallax-hero-bg absolute inset-0 -z-10 lg:left-[45%]">
         <Image
-          src="/equipo/hero-oficina.webp"
-          alt="Integrante del equipo de Distribuidora Maqserpan frente al logo iluminado de la tienda"
+          src="/equipo/hero-logo.webp"
+          alt="Logo iluminado de Distribuidora Maqserpan en la pared de la tienda"
           fill
           priority
           sizes="(min-width: 1024px) 55vw, 100vw"
-          className="object-cover object-[30%_center] lg:object-[38%_center]"
+          className="object-cover object-[55%_center]"
         />
       </div>
       <div
