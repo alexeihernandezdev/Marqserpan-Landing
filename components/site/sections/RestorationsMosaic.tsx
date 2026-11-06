@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-// Fotos en public/restauraciones (900×1200, webp): «<slug>-antes» y «<slug>-despues».
+// Fotos en Cloudinary (maqserpan/restauraciones, 1200×1600): «<slug>-antes» y «<slug>-despues».
 // El primero va destacado en grande.
 const RESTORATIONS = [
   {
@@ -84,7 +84,7 @@ function Photo({
       className={`absolute overflow-hidden ${large ? "rounded-none" : "rounded-2xl shadow-2xl ring-2 ring-white"}`}
     >
       <Image
-        src={`/restauraciones/${item.slug}-${stage}.webp`}
+        src={`maqserpan/restauraciones/${item.slug}-${stage}`}
         alt={`${item.name} ${stage === "antes" ? "antes" : "después"} de la restauración`}
         fill
         sizes={big ? "(min-width: 1024px) 560px, 100vw" : "(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"}
