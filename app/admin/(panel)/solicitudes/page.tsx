@@ -1,6 +1,9 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { LeadFilters } from "@/components/admin/LeadFilters";
 import { LeadsTable } from "@/components/admin/LeadsTable";
+import { PageHeader } from "@/components/admin/PageHeader";
+import { Button } from "@/components/shadcn/button";
 import { listLeadSources, listLeads } from "@/lib/dal/leads";
 import { LEAD_STATUSES, LEAD_TYPES, type LeadStatus, type LeadType } from "@/lib/validation/lead-constants";
 
@@ -33,29 +36,30 @@ export default async function LeadsPage({ searchParams }: PageProps<"/admin/soli
 
   return (
     <div className="flex flex-col gap-6">
-      <header>
-        <h1 className="text-3xl">Solicitudes</h1>
-        <p className="mt-1 text-gris">
-          {total} {total === 1 ? "solicitud" : "solicitudes"}
-        </p>
-      </header>
+      <PageHeader title="Solicitudes" description={`${total} ${total === 1 ? "solicitud" : "solicitudes"}`} />
       <LeadFilters sources={sources} />
       <LeadsTable rows={rows} />
       {pages > 1 && (
-        <nav aria-label="Páginas" className="flex items-center gap-3">
-          {page > 1 && (
-            <Link href={pageHref(page - 1)} className="font-bold underline">
-              ← Anteriores
-            </Link>
-          )}
-          <span className="text-sm text-gris">
+        <nav aria-label="Páginas" className="flex items-center justify-between gap-3">
+          <span className="text-sm text-muted-foreground">
             Página {page} de {pages}
           </span>
-          {page < pages && (
-            <Link href={pageHref(page + 1)} className="font-bold underline">
-              Siguientes →
-            </Link>
-          )}
+          <div className="flex gap-2">
+            {page > 1 && (
+              <Button asChild variant="outline" size="sm">
+                <Link href={pageHref(page - 1)}>
+                  <ChevronLeft /> Anteriores
+                </Link>
+              </Button>
+            )}
+            {page < pages && (
+              <Button asChild variant="outline" size="sm">
+                <Link href={pageHref(page + 1)}>
+                  Siguientes <ChevronRight />
+                </Link>
+              </Button>
+            )}
+          </div>
         </nav>
       )}
     </div>

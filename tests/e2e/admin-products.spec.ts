@@ -18,7 +18,8 @@ test("crea un producto con foto y aparece en la landing", async ({ page }) => {
   test.setTimeout(90_000);
   await page.goto("/admin/productos/nuevo");
   await page.getByRole("textbox", { name: "Nombre", exact: true }).fill("Rebanadora e2e 330");
-  await page.getByLabel("Categoría").selectOption({ label: "Rebanadoras" });
+  await page.getByLabel("Categoría").click();
+  await page.getByRole("option", { name: "Rebanadoras" }).click();
   await page.getByLabel("Descripción corta").fill("Rebanadora de prueba para charcutería.");
   await page.getByLabel("Destacado").check();
   await page.getByRole("button", { name: "Guardar producto" }).click();
@@ -40,7 +41,8 @@ test("crea un producto con foto y aparece en la landing", async ({ page }) => {
 test("no deja publicar un producto sin fotos", async ({ page }) => {
   await page.goto("/admin/productos/nuevo");
   await page.getByRole("textbox", { name: "Nombre", exact: true }).fill("Producto sin foto");
-  await page.getByLabel("Categoría").selectOption({ label: "Repuestos" });
+  await page.getByLabel("Categoría").click();
+  await page.getByRole("option", { name: "Repuestos" }).click();
   await page.getByLabel("Descripción corta").fill("Sin foto.");
   await page.getByLabel("Visible en la landing").check();
   await page.getByRole("button", { name: "Guardar producto" }).click();

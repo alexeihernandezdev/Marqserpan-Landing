@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronLeft, ChevronRight, ImagePlus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useId, useRef, useState } from "react";
 import {
@@ -9,8 +10,10 @@ import {
   reorderProductImages,
   updateProductImage,
 } from "@/app/admin/(panel)/productos/actions";
-import { Button } from "@/components/ui/Button";
-import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "@/components/ui/icons";
+import { Badge } from "@/components/shadcn/badge";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
+import { Label } from "@/components/shadcn/label";
 
 export type UploaderImage = { id: string; publicId: string; width: number; height: number; alt: string };
 
@@ -110,69 +113,81 @@ export function ImageUploader({ productId, productName, initialImages }: Props) 
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
       {images.length > 0 ? (
         <ul aria-label="Fotos del producto" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image, index) => (
-            <li key={image.id} className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded bg-hueso">
+            <li key={image.id} className="flex flex-col gap-3 overflow-hidden rounded-lg border bg-card p-3 shadow-xs">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-muted">
                 <Image src={image.publicId} alt={image.alt} fill sizes="300px" className="object-contain" />
-                {index === 0 && (
-                  <span className="absolute left-2 top-2 rounded bg-amarillo px-2 py-0.5 text-xs font-bold">Portada</span>
-                )}
+                {index === 0 && <Badge className="absolute top-2 left-2 bg-amarillo font-semibold text-carbon">Portada</Badge>}
               </div>
-              <label className="flex flex-col gap-1 text-xs font-bold">
-                Descripción de la foto
-                <input
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor={`alt-${image.id}`} className="text-xs font-semibold">
+                  Descripción de la foto
+                </Label>
+                <Input
+                  id={`alt-${image.id}`}
                   defaultValue={image.alt}
                   maxLength={200}
                   onBlur={(e) => e.target.value !== image.alt && saveAlt(image.id, e.target.value)}
-                  className="rounded border-2 border-neutral-300 px-2 py-1.5 text-sm font-normal"
+                  className="h-8"
                 />
-              </label>
+              </div>
               <div className="flex items-center justify-between">
                 <div className="flex gap-1">
-                  <button
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon-sm"
                     onClick={() => move(index, -1)}
                     disabled={index === 0}
                     aria-label={`Mover foto ${index + 1} antes`}
-                    className="flex size-9 items-center justify-center rounded hover:bg-hueso disabled:opacity-30"
                   >
-                    <ChevronLeftIcon className="size-5" />
-                  </button>
-                  <button
+                    <ChevronLeft />
+                  </Button>
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon-sm"
                     onClick={() => move(index, 1)}
                     disabled={index === images.length - 1}
                     aria-label={`Mover foto ${index + 1} después`}
-                    className="flex size-9 items-center justify-center rounded hover:bg-hueso disabled:opacity-30"
                   >
-                    <ChevronRightIcon className="size-5" />
-                  </button>
+                    <ChevronRight />
+                  </Button>
                 </div>
-                <button
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="icon-sm"
                   onClick={() => remove(image.id)}
                   aria-label={`Borrar foto ${index + 1}`}
-                  className="flex size-9 items-center justify-center rounded text-red-700 hover:bg-red-50"
+                  className="text-destructive hover:bg-red-50 hover:text-destructive"
                 >
-                  <CloseIcon className="size-5" />
-                </button>
+                  <Trash2 />
+                </Button>
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="rounded-lg bg-white p-4 text-sm text-gris">
+        <p className="rounded-lg border border-dashed bg-muted/50 p-4 text-sm text-muted-foreground">
           Todavía no hay fotos. Agrega al menos una para poder publicar el producto.
         </p>
       )}
 
-      <div>
-        <label htmlFor={inputId} className="mb-1.5 block text-sm font-bold">
-          Agregar fotos
-        </label>
+      <label
+        htmlFor={inputId}
+        className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-input bg-background px-4 py-8 text-center transition-colors hover:border-primary/60 hover:bg-muted/40 has-[:focus-visible]:border-ring has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50"
+      >
+        <span className="flex size-10 items-center justify-center rounded-full bg-muted">
+          <ImagePlus className="size-5 text-muted-foreground" aria-hidden="true" />
+        </span>
+        <span className="text-sm font-semibold">Agregar fotos</span>
+        <span className="text-xs text-muted-foreground">
+          JPG, PNG, WEBP o HEIC, hasta 10 MB. Puedes tomarlas con el teléfono.
+        </span>
         <input
           ref={inputRef}
           id={inputId}
@@ -180,30 +195,34 @@ export function ImageUploader({ productId, productName, initialImages }: Props) 
           accept="image/jpeg,image/png,image/webp,image/avif,image/heic,image/heif"
           multiple
           onChange={(e) => handleFiles(e.target.files)}
-          className="block w-full text-sm file:mr-3 file:min-h-11 file:rounded-md file:border-0 file:bg-carbon file:px-4 file:font-bold file:text-white"
+          className="sr-only"
         />
-        <p className="mt-1 text-xs text-gris">JPG, PNG, WEBP o HEIC, hasta 10 MB. Puedes tomarlas con el teléfono.</p>
-      </div>
+      </label>
 
       {uploads.length > 0 && (
         <ul aria-live="polite" className="flex flex-col gap-2 text-sm">
           {uploads.map((upload) => (
-            <li key={upload.name}>
+            <li key={upload.name} className="flex flex-col gap-1">
               {upload.error ? (
-                <span className="font-bold text-red-700">
+                <span className="font-medium text-destructive">
                   {upload.name}: {upload.error}
                 </span>
               ) : (
-                <span>
-                  Subiendo {upload.name}… {upload.progress}%
-                </span>
+                <>
+                  <span>
+                    Subiendo {upload.name}… {upload.progress}%
+                  </span>
+                  <span className="h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+                    <span className="block h-full bg-primary transition-[width]" style={{ width: `${upload.progress}%` }} />
+                  </span>
+                </>
               )}
             </li>
           ))}
         </ul>
       )}
       {message && (
-        <p role="status" className="text-sm font-bold text-verde-800">
+        <p role="status" className="text-sm font-medium text-verde-800">
           {message}
         </p>
       )}

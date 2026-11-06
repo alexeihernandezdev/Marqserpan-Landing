@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Badge } from "@/components/shadcn/badge";
+import { Card } from "@/components/shadcn/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/shadcn/table";
 import { formatDateTime } from "@/lib/format";
 import {
   COUNTRY_LABELS,
@@ -25,53 +28,61 @@ type Row = {
 
 export function LeadsTable({ rows }: { rows: Row[] }) {
   if (rows.length === 0) {
-    return <p className="rounded-lg bg-white p-6 text-gris">No hay solicitudes con estos filtros.</p>;
+    return (
+      <Card className="items-center py-10 text-center text-sm text-muted-foreground">
+        No hay solicitudes con estos filtros.
+      </Card>
+    );
   }
   return (
-    <div className="overflow-x-auto rounded-lg bg-white shadow-sm">
-      <table className="w-full min-w-[640px] text-left text-sm">
-        <caption className="sr-only">Solicitudes recibidas</caption>
-        <thead className="border-b border-neutral-200 text-xs uppercase tracking-wide text-gris">
-          <tr>
-            <th scope="col" className="px-4 py-3">Fecha</th>
-            <th scope="col" className="px-4 py-3">Nombre</th>
-            <th scope="col" className="px-4 py-3">Tipo</th>
-            <th scope="col" className="px-4 py-3">Ciudad</th>
-            <th scope="col" className="px-4 py-3">Origen</th>
-            <th scope="col" className="px-4 py-3">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
+    <Card className="overflow-hidden py-0">
+      <Table className="min-w-[640px]">
+        <TableCaption className="sr-only">Solicitudes recibidas</TableCaption>
+        <TableHeader className="bg-muted/60">
+          <TableRow>
+            <TableHead className="px-4">Fecha</TableHead>
+            <TableHead className="px-4">Nombre</TableHead>
+            <TableHead className="px-4">Tipo</TableHead>
+            <TableHead className="px-4">Ciudad</TableHead>
+            <TableHead className="px-4">Origen</TableHead>
+            <TableHead className="px-4">Estado</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {rows.map((lead) => (
-            <tr key={lead.id} className="border-b border-neutral-100 last:border-0 hover:bg-hueso">
-              <td className="whitespace-nowrap px-4 py-3 text-gris">{formatDateTime(lead.createdAt)}</td>
-              <td className="px-4 py-3">
-                <Link href={`/admin/solicitudes/${lead.id}`} className="font-bold underline-offset-4 hover:underline">
+            <TableRow key={lead.id} className={lead.status === "nueva" ? "bg-amarillo-50/50" : undefined}>
+              <TableCell className="px-4 py-3 text-muted-foreground">{formatDateTime(lead.createdAt)}</TableCell>
+              <TableCell className="px-4 py-3">
+                <Link href={`/admin/solicitudes/${lead.id}`} className="font-semibold underline-offset-4 hover:underline">
                   {lead.name}
                 </Link>
-                {lead.productName && <span className="block text-xs text-gris">{lead.productName}</span>}
-              </td>
-              <td className="px-4 py-3">
-                {lead.type ? LEAD_TYPE_LABELS[lead.type] : <span className="text-gris">—</span>}
+                {lead.productName && <span className="block text-xs text-muted-foreground">{lead.productName}</span>}
+              </TableCell>
+              <TableCell className="px-4 py-3">
+                {lead.type ? LEAD_TYPE_LABELS[lead.type] : <span className="text-muted-foreground">—</span>}
                 {!lead.completedAt && (
-                  <span className="block text-xs font-bold text-amber-700">Solo contacto</span>
+                  <Badge variant="outline" className="mt-1 flex border-amber-500/50 bg-amber-50 text-amber-800">
+                    Solo contacto
+                  </Badge>
                 )}
-              </td>
-              <td className="px-4 py-3">
+              </TableCell>
+              <TableCell className="px-4 py-3">
                 {lead.city}
-                {lead.country !== "VE" && <span className="text-gris"> · {COUNTRY_LABELS[lead.country]}</span>}
-              </td>
-              <td className="px-4 py-3">{lead.source}</td>
-              <td className="px-4 py-3">
-                <StatusBadge status={lead.status} />
-                {lead.notificationStatus === "fallido" && (
-                  <span className="ml-2 text-xs font-bold text-red-700">Aviso fallido</span>
-                )}
-              </td>
-            </tr>
+                {lead.country !== "VE" && <span className="text-muted-foreground"> · {COUNTRY_LABELS[lead.country]}</span>}
+              </TableCell>
+              <TableCell className="px-4 py-3">
+                <Badge variant="outline">{lead.source}</Badge>
+              </TableCell>
+              <TableCell className="px-4 py-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <StatusBadge status={lead.status} />
+                  {lead.notificationStatus === "fallido" && <Badge variant="destructive">Aviso fallido</Badge>}
+                </div>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </Card>
   );
 }

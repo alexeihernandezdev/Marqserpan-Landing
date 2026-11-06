@@ -1,10 +1,13 @@
-import Link from "next/link";
+import { CheckCheck, Mail, RotateCcw } from "lucide-react";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
+import { Notice } from "@/components/admin/FormMessage";
+import { PageHeader } from "@/components/admin/PageHeader";
 import { StatusBadge } from "@/components/admin/StatusBadge";
-import { Button } from "@/components/ui/Button";
-import { MailIcon, WhatsAppIcon } from "@/components/ui/icons";
+import { Button } from "@/components/shadcn/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/card";
+import { WhatsAppIcon } from "@/components/ui/icons";
 import { getLead } from "@/lib/dal/leads";
 import { formatDateTime } from "@/lib/format";
 import { toWhatsAppLink } from "@/lib/leads/phone";
@@ -46,87 +49,87 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/solic
 
   return (
     <div className="flex flex-col gap-6">
-      <Link href="/admin/solicitudes" className="text-sm font-bold underline">
-        ← Volver a solicitudes
-      </Link>
-      <header className="flex flex-wrap items-center gap-3">
-        <h1 className="text-3xl">{lead.name}</h1>
-        <StatusBadge status={lead.status} />
-      </header>
+      <PageHeader
+        back={{ href: "/admin/solicitudes", label: "Volver a solicitudes" }}
+        title={lead.name}
+        badge={<StatusBadge status={lead.status} />}
+        description={`Recibida ${formatDateTime(lead.createdAt)}`}
+      />
 
       {lead.notificationStatus === "fallido" && (
-        <p role="status" className="rounded-md border-2 border-red-700 bg-red-50 px-4 py-3 text-sm font-bold text-red-800">
-          El aviso por correo falló para esta solicitud. Revísala aquí y responde al cliente.
-        </p>
+        <Notice tone="error">El aviso por correo falló para esta solicitud. Revísala aquí y responde al cliente.</Notice>
       )}
 
-      <div className="flex flex-wrap gap-3">
-        <a
-          href={toWhatsAppLink(lead.phone)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center gap-2 rounded-md bg-verde-700 px-4 font-bold text-white hover:bg-verde-800"
-        >
-          <WhatsAppIcon className="size-5" /> Escribir por WhatsApp
-        </a>
-        {lead.email && (
-          <a
-            href={`mailto:${lead.email}?subject=${encodeURIComponent("Tu cotización — Distribuidora Maqserpan")}`}
-            className="inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-carbon bg-white px-4 font-bold hover:bg-hueso"
-          >
-            <MailIcon className="size-5" /> Correo
+      <div className="flex flex-wrap gap-2">
+        <Button asChild>
+          <a href={toWhatsAppLink(lead.phone)} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon className="size-4" /> Escribir por WhatsApp
           </a>
+        </Button>
+        {lead.email && (
+          <Button asChild variant="outline">
+            <a href={`mailto:${lead.email}?subject=${encodeURIComponent("Tu cotización — Distribuidora Maqserpan")}`}>
+              <Mail /> Correo
+            </a>
+          </Button>
         )}
         <form action={toggleStatus}>
-          <Button type="submit" variant="secondary">
+          <Button type="submit" variant="outline">
+            {nextStatus === "atendida" ? <CheckCheck /> : <RotateCcw />}
             {nextStatus === "atendida" ? "Marcar como atendida" : "Marcar como nueva"}
           </Button>
         </form>
       </div>
 
       {lead.completedAt ? (
-        <section className="rounded-lg bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-xl">Mensaje</h2>
-          <p className="whitespace-pre-line">{lead.message}</p>
-        </section>
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <h2 className="text-xl">Mensaje</h2>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="whitespace-pre-line">{lead.message}</p>
+          </CardContent>
+        </Card>
       ) : (
-        <p role="status" className="rounded-md border-2 border-amber-600 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
+        <Notice tone="warning">
           Esta persona dejó sus datos de contacto pero no terminó la solicitud. Escríbele para saber qué necesita.
-        </p>
+        </Notice>
       )}
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <section className="rounded-lg bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-xl">Datos</h2>
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-            {details
-              .filter(([, value]) => value)
-              .map(([label, value]) => (
-                <div key={label} className="contents">
-                  <dt className="text-gris">{label}</dt>
-                  <dd className="break-words font-bold">{value}</dd>
-                </div>
-              ))}
-          </dl>
-        </section>
-        <section className="rounded-lg bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-xl">Origen</h2>
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-            {origin
-              .filter(([, value]) => value)
-              .map(([label, value]) => (
-                <div key={label} className="contents">
-                  <dt className="text-gris">{label}</dt>
-                  <dd className="break-all">{value}</dd>
-                </div>
-              ))}
-          </dl>
-        </section>
+        <DetailsCard title="Datos" rows={details} />
+        <DetailsCard title="Origen" rows={origin} breakAll />
       </div>
 
       <div>
         <ConfirmButton label="Borrar solicitud" question="¿Borrar esta solicitud para siempre?" onConfirm={remove} />
       </div>
     </div>
+  );
+}
+
+function DetailsCard({ title, rows, breakAll }: { title: string; rows: Array<[string, string | null]>; breakAll?: boolean }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          <h2 className="text-xl">{title}</h2>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <dl className="divide-y text-sm">
+          {rows
+            .filter(([, value]) => value)
+            .map(([label, value]) => (
+              <div key={label} className="grid grid-cols-[8rem_1fr] gap-3 py-2 first:pt-0 last:pb-0">
+                <dt className="text-muted-foreground">{label}</dt>
+                <dd className={breakAll ? "break-all" : "font-medium break-words"}>{value}</dd>
+              </div>
+            ))}
+        </dl>
+      </CardContent>
+    </Card>
   );
 }

@@ -1,10 +1,15 @@
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
 import { ImageUploader } from "@/components/admin/ImageUploader";
+import { PageHeader } from "@/components/admin/PageHeader";
 import { ProductForm } from "@/components/admin/ProductForm";
-import { getProductForAdmin, listCategoriesForAdmin } from "@/lib/dal/products";
+import { Badge } from "@/components/shadcn/badge";
+import { Button } from "@/components/shadcn/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn/card";
+import { getProductForAdmin, listBrandsForAdmin, listCategoriesForAdmin } from "@/lib/dal/products";
 import { deleteProduct } from "../actions";
 
 export const metadata = { title: "Editar producto" };
@@ -12,37 +17,63 @@ export const metadata = { title: "Editar producto" };
 export default async function EditProductPage({ params, searchParams }: PageProps<"/admin/productos/[id]">) {
   const [{ id }, query] = await Promise.all([params, searchParams]);
   if (!z.uuid().safeParse(id).success) notFound();
-  const [product, categories] = await Promise.all([getProductForAdmin(id), listCategoriesForAdmin()]);
+  const [product, categories, brands] = await Promise.all([
+    getProductForAdmin(id),
+    listCategoriesForAdmin(),
+    listBrandsForAdmin(),
+  ]);
   if (!product) notFound();
 
   const remove = deleteProduct.bind(null, product.id);
 
   return (
     <div className="flex flex-col gap-6">
-      <Link href="/admin/productos" className="text-sm font-bold underline">
-        ← Volver a productos
-      </Link>
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl">{product.name}</h1>
-        {product.isVisible && (
-          <Link href={`/productos/${product.slug}`} target="_blank" className="text-sm font-bold underline">
-            Ver en la landing ↗
-          </Link>
-        )}
-      </header>
+      <PageHeader
+        back={{ href: "/admin/productos", label: "Volver a productos" }}
+        title={product.name}
+        badge={
+          product.isVisible ? (
+            <Badge className="bg-green-50 text-verde-800 border-verde-700/30">Publicado</Badge>
+          ) : (
+            <Badge variant="secondary" className="border-border">Oculto</Badge>
+          )
+        }
+        actions={
+          product.isVisible && (
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/productos/${product.slug}`} target="_blank">
+                Ver en la landing <ExternalLink />
+              </Link>
+            </Button>
+          )
+        }
+      />
 
-      <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-xl">Datos</h2>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <h2 className="text-xl">Datos</h2>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
         <ProductForm
           key={product.id}
           categories={categories}
+          brands={brands}
           product={product}
           initialMessage={query.guardado === "1" ? "Producto guardado. Ahora agrega las fotos." : undefined}
         />
-      </section>
+        </CardContent>
+      </Card>
 
-      <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-xl">Fotos</h2>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <h2 className="text-xl">Fotos</h2>
+          </CardTitle>
+          <CardDescription>La primera foto es la portada del catálogo.</CardDescription>
+        </CardHeader>
+        <CardContent>
         <ImageUploader
           productId={product.id}
           productName={product.name}
@@ -54,7 +85,8 @@ export default async function EditProductPage({ params, searchParams }: PageProp
             alt: img.alt,
           }))}
         />
-      </section>
+        </CardContent>
+      </Card>
 
       <div>
         <ConfirmButton

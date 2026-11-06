@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Sin tema oscuro: los dark: de shadcn solo se activarían con una clase .dark explícita. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * Identidad visual (constitución): colores tomados del logo.
  * Contraste sobre blanco: verde #00942B 3,98:1 y azul #0093D3 3,44:1 no alcanzan AA (4,5:1)
@@ -28,7 +31,64 @@
   --font-sans: var(--font-body);
 }
 
+/*
+ * Tokens de shadcn/ui (components/shadcn), usados solo en el panel. Toman los colores de la
+ * marca. Sin reglas base globales: la landing conserva sus estilos.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-carbon);
+  --card: #ffffff;
+  --card-foreground: var(--color-carbon);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-carbon);
+  --primary: var(--color-verde-700);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-hueso);
+  --secondary-foreground: var(--color-carbon);
+  --muted: var(--color-hueso);
+  --muted-foreground: var(--color-gris);
+  --accent: #e9ecea;
+  --accent-foreground: var(--color-carbon);
+  --destructive: #b91c1c;
+  --border: #e2e5e3;
+  --input: #d4d8d5;
+  --ring: var(--color-azul-700);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
 @layer base {
+  /*
+   * Borde por defecto de shadcn, solo en el panel (y en sus menús, que Radix monta fuera, en
+   * un portal): la landing conserva currentColor.
+   */
+  .admin-ui *,
+  .admin-ui ::before,
+  .admin-ui ::after,
+  [data-radix-popper-content-wrapper] * {
+    border-color: var(--border);
+  }
+
   html {
     scroll-behavior: smooth;
     /* Deja ver los títulos bajo la cabecera fija al saltar a un ancla. */

@@ -38,6 +38,7 @@ function validateCatalog() {
     const parsed = productSchema.safeParse({
       name: product.name,
       slug: product.slug,
+      brand: product.brand,
       categoryId: crypto.randomUUID(),
       shortDescription: product.shortDescription,
       description: product.description,
@@ -79,6 +80,7 @@ async function main() {
     const values = {
       slug: product.slug,
       name: product.name,
+      brand: product.brand,
       categoryId: categoryIds.get(product.categorySlug)!,
       shortDescription: product.shortDescription,
       description: product.description,

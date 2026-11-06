@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, count, eq, max, ne } from "drizzle-orm";
+import { and, asc, count, eq, isNotNull, max, ne } from "drizzle-orm";
 import { destroyImage } from "@/lib/cloudinary/server";
 import { db } from "@/lib/db/client";
 import { categories, productImages, products } from "@/lib/db/schema";
@@ -15,6 +15,7 @@ export async function listProductsForAdmin() {
       id: products.id,
       name: products.name,
       slug: products.slug,
+      brand: products.brand,
       isFeatured: products.isFeatured,
       isVisible: products.isVisible,
       sortOrder: products.sortOrder,
@@ -48,6 +49,17 @@ export async function getProductForAdmin(id: string) {
   return { ...product, images };
 }
 
+/** Marcas ya usadas, para sugerirlas al escribir y no repetirlas con otra grafía. */
+export async function listBrandsForAdmin(): Promise<string[]> {
+  await verifySession();
+  const rows = await db
+    .selectDistinct({ brand: products.brand })
+    .from(products)
+    .where(isNotNull(products.brand))
+    .orderBy(asc(products.brand));
+  return rows.map((r) => r.brand!);
+}
+
 /** Devuelve un slug libre: si ya existe, añade -2, -3… */
 async function uniqueSlug(base: string, excludeId?: string): Promise<string> {
   let candidate = base;
@@ -74,6 +86,7 @@ export async function saveProductRecord(input: ProductInput) {
   const values = {
     name: input.name,
     slug,
+    brand: input.brand,
     categoryId: input.categoryId,
     shortDescription: input.shortDescription,
     description: input.description,

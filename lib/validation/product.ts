@@ -24,6 +24,12 @@ export const productSchema = z
     id: z.uuid().optional(),
     name: z.string().trim().min(2, "Escribe el nombre del producto").max(120, "Máximo 120 caracteres"),
     slug: z.string().trim().max(160).optional(),
+    brand: z
+      .string()
+      .trim()
+      .max(60, "La marca admite hasta 60 caracteres")
+      .optional()
+      .transform((value) => value || null),
     categoryId: z.uuid("Elige una categoría"),
     shortDescription: z
       .string()

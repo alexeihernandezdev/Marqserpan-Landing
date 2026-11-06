@@ -1,15 +1,22 @@
 "use client";
 
+import { ImageOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { reorderProducts, setProductFlag } from "@/app/admin/(panel)/productos/actions";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/ui/icons";
+import { Badge } from "@/components/shadcn/badge";
+import { Card } from "@/components/shadcn/card";
+import { Label } from "@/components/shadcn/label";
+import { Switch } from "@/components/shadcn/switch";
+import { Notice } from "./FormMessage";
+import { MoveButtons } from "./MoveButtons";
 
 type Item = {
   id: string;
   name: string;
   categoryName: string;
+  brand: string | null;
   isFeatured: boolean;
   isVisible: boolean;
   cover: string | null;
@@ -41,71 +48,66 @@ export function ProductList({ initialItems }: { initialItems: Item[] }) {
   }
 
   if (items.length === 0) {
-    return <p className="rounded-lg bg-white p-6 text-gris">Aún no hay productos. Crea el primero.</p>;
+    return (
+      <Card className="items-center py-10 text-center text-sm text-muted-foreground">
+        Aún no hay productos. Crea el primero.
+      </Card>
+    );
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {error && (
-        <p role="alert" className="rounded-md border-2 border-red-700 bg-red-50 px-4 py-3 font-bold text-red-800">
-          {error}
-        </p>
-      )}
-      <ul className="flex flex-col gap-2">
-        {items.map((product, index) => (
-          <li key={product.id} className="flex flex-wrap items-center gap-3 rounded-lg bg-white p-3 shadow-sm">
-            <div className="flex flex-col">
-              <button
-                type="button"
-                onClick={() => move(index, -1)}
-                disabled={index === 0}
-                aria-label={`Subir ${product.name}`}
-                className="flex size-8 rotate-90 items-center justify-center rounded hover:bg-hueso disabled:opacity-30"
-              >
-                <ChevronLeftIcon className="size-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => move(index, 1)}
-                disabled={index === items.length - 1}
-                aria-label={`Bajar ${product.name}`}
-                className="flex size-8 rotate-90 items-center justify-center rounded hover:bg-hueso disabled:opacity-30"
-              >
-                <ChevronRightIcon className="size-4" />
-              </button>
-            </div>
-            <div className="relative size-16 shrink-0 overflow-hidden rounded bg-hueso">
-              {product.cover && <Image src={product.cover} alt="" fill sizes="64px" className="object-cover" />}
-            </div>
-            <div className="min-w-0 flex-1">
-              <Link href={`/admin/productos/${product.id}`} className="font-bold underline-offset-4 hover:underline">
-                {product.name}
-              </Link>
-              <p className="text-sm text-gris">
-                {product.categoryName} · {product.imageCount} {product.imageCount === 1 ? "foto" : "fotos"}
-              </p>
-            </div>
-            <label className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={product.isVisible}
-                onChange={(e) => toggle(product.id, "isVisible", e.target.checked)}
-                className="size-5 accent-verde-700"
-              />
-              Visible
-            </label>
-            <label className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={product.isFeatured}
-                onChange={(e) => toggle(product.id, "isFeatured", e.target.checked)}
-                className="size-5 accent-verde-700"
-              />
-              Destacado
-            </label>
-          </li>
-        ))}
-      </ul>
+      {error && <Notice tone="error">{error}</Notice>}
+      <Card className="py-0">
+        <ul className="divide-y">
+          {items.map((product, index) => (
+            <li key={product.id} className="flex flex-wrap items-center gap-3 px-3 py-3 sm:px-4">
+              <MoveButtons name={product.name} first={index === 0} last={index === items.length - 1} onMove={(delta) => move(index, delta)} />
+              <div className="relative flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md border bg-muted">
+                {product.cover ? (
+                  <Image src={product.cover} alt="" fill sizes="64px" className="object-cover" />
+                ) : (
+                  <ImageOff className="size-5 text-muted-foreground" aria-hidden="true" />
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <Link href={`/admin/productos/${product.id}`} className="font-semibold underline-offset-4 hover:underline">
+                  {product.name}
+                </Link>
+                <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                  <Badge variant="outline">{product.categoryName}</Badge>
+                  {product.brand && <Badge variant="secondary">{product.brand}</Badge>}
+                  <span>
+                    {product.imageCount} {product.imageCount === 1 ? "foto" : "fotos"}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-5">
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id={`visible-${product.id}`}
+                    checked={product.isVisible}
+                    onCheckedChange={(checked) => toggle(product.id, "isVisible", checked)}
+                  />
+                  <Label htmlFor={`visible-${product.id}`} className="font-normal">
+                    Visible
+                  </Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Switch
+                    id={`featured-${product.id}`}
+                    checked={product.isFeatured}
+                    onCheckedChange={(checked) => toggle(product.id, "isFeatured", checked)}
+                  />
+                  <Label htmlFor={`featured-${product.id}`} className="font-normal">
+                    Destacado
+                  </Label>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Card>
     </div>
   );
 }

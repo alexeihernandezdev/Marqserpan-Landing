@@ -1,9 +1,12 @@
+import { Badge } from "@/components/shadcn/badge";
 import type { LeadStatus } from "@/lib/validation/lead-constants";
 
 export function StatusBadge({ status }: { status: LeadStatus }) {
   return status === "nueva" ? (
-    <span className="inline-block rounded bg-amarillo px-2 py-0.5 text-xs font-bold text-carbon">Nueva</span>
+    <Badge className="bg-amarillo font-semibold text-carbon">Nueva</Badge>
   ) : (
-    <span className="inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-bold text-carbon">Atendida</span>
+    <Badge variant="secondary" className="border-border font-semibold">
+      Atendida
+    </Badge>
   );
 }

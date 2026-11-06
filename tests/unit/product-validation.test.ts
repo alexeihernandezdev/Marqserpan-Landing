@@ -43,6 +43,13 @@ describe("productSchema", () => {
     expect(productSchema.safeParse({ ...valid, categoryId: "no-uuid" }).success).toBe(false);
   });
 
+  it("la marca es opcional: vacía queda en null y se recortan los espacios", () => {
+    expect(productSchema.parse(valid).brand).toBeNull();
+    expect(productSchema.parse({ ...valid, brand: "   " }).brand).toBeNull();
+    expect(productSchema.parse({ ...valid, brand: " Magister " }).brand).toBe("Magister");
+    expect(productSchema.safeParse({ ...valid, brand: "x".repeat(61) }).success).toBe(false);
+  });
+
   it("no tiene campo de precio: se descarta si llega", () => {
     const result = productSchema.parse({ ...valid, price: "100" });
     expect(result).not.toHaveProperty("price");

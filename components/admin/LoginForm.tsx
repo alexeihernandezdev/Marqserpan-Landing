@@ -3,10 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { login } from "@/app/admin/actions";
-import { Button } from "@/components/ui/Button";
-import { Field } from "@/components/ui/Field";
-import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
 import { idleState } from "@/lib/forms/action-state";
+import { FormField } from "./FormField";
+import { Notice } from "./FormMessage";
 
 export function LoginForm() {
   const [state, formAction, pending] = useActionState(login, idleState);
@@ -19,16 +20,10 @@ export function LoginForm() {
     <form action={formAction} className="flex flex-col gap-5">
       <input type="hidden" name="next" value={next} />
       {passwordReset && state.status === "idle" && (
-        <p role="status" className="rounded-md border-2 border-verde-700 bg-green-50 px-4 py-3 font-bold text-verde-800">
-          Contraseña actualizada. Entra con la nueva.
-        </p>
+        <Notice tone="success">Contraseña actualizada. Entra con la nueva.</Notice>
       )}
-      {state.status === "error" && (
-        <p role="alert" className="rounded-md border-2 border-red-700 bg-red-50 px-4 py-3 font-bold text-red-800">
-          {state.message}
-        </p>
-      )}
-      <Field id="email" label="Correo" required>
+      {state.status === "error" && <Notice tone="error">{state.message}</Notice>}
+      <FormField id="email" label="Correo" required>
         {(describedBy) => (
           <Input
             id="email"
@@ -38,11 +33,12 @@ export function LoginForm() {
             defaultValue={email}
             key={email}
             aria-describedby={describedBy}
+            className="h-10"
             required
           />
         )}
-      </Field>
-      <Field id="password" label="Contraseña" required>
+      </FormField>
+      <FormField id="password" label="Contraseña" required>
         {(describedBy) => (
           <Input
             id="password"
@@ -50,10 +46,11 @@ export function LoginForm() {
             type="password"
             autoComplete="current-password"
             aria-describedby={describedBy}
+            className="h-10"
             required
           />
         )}
-      </Field>
+      </FormField>
       <Button type="submit" size="lg" disabled={pending}>
         {pending ? "Entrando…" : "Entrar"}
       </Button>

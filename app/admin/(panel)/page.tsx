@@ -1,4 +1,8 @@
+import { ArrowRight, Inbox } from "lucide-react";
 import Link from "next/link";
+import { PageHeader } from "@/components/admin/PageHeader";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/shadcn/table";
 import { countNewLeads, getLeadStats } from "@/lib/dal/leads";
 import { formatWeek } from "@/lib/format";
 
@@ -12,55 +16,75 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl">Resumen</h1>
+      <PageHeader title="Resumen" />
 
-      <Link
-        href="/admin/solicitudes?estado=nueva"
-        className="flex items-center justify-between rounded-lg bg-amarillo p-6 shadow-sm hover:brightness-95"
-      >
-        <span className="text-xl font-bold">
-          {newLeads} {newLeads === 1 ? "solicitud nueva" : "solicitudes nuevas"}
-        </span>
-        <span className="font-bold">Ver →</span>
-      </Link>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/admin/solicitudes?estado=nueva"
+          className="group flex items-center justify-between gap-4 rounded-xl bg-amarillo p-6 shadow-sm transition-[filter] hover:brightness-95"
+        >
+          <span className="flex items-center gap-4">
+            <span className="flex size-11 items-center justify-center rounded-full bg-carbon/10">
+              <Inbox className="size-5" aria-hidden="true" />
+            </span>
+            <span className="flex flex-col">
+              <span className="font-display text-3xl leading-none">{newLeads}</span>{" "}
+              <span className="mt-1 text-sm font-semibold">
+                {newLeads === 1 ? "solicitud nueva" : "solicitudes nuevas"}
+              </span>
+            </span>
+          </span>
+          <span className="flex items-center gap-1 text-sm font-semibold">
+            Ver <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </span>
+        </Link>
+        <Card className="justify-center gap-1 px-6">
+          <span className="font-display text-3xl leading-none">{total}</span>
+          <span className="text-sm text-muted-foreground">
+            {total === 1 ? "solicitud" : "solicitudes"} en las últimas 12 semanas
+          </span>
+        </Card>
+      </div>
 
-      <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="text-xl">Últimas 12 semanas</h2>
-        <p className="mt-1 text-sm text-gris">
-          {total} {total === 1 ? "solicitud" : "solicitudes"} en total. Semanas de lunes a domingo, hora de Venezuela.
-        </p>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[480px] text-left text-sm">
-            <caption className="sr-only">Solicitudes por semana y origen</caption>
-            <thead className="border-b border-neutral-200 text-xs uppercase tracking-wide text-gris">
-              <tr>
-                <th scope="col" className="px-3 py-2">Semana del</th>
-                <th scope="col" className="px-3 py-2 text-right">Total</th>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <h2 className="text-xl">Últimas 12 semanas</h2>
+          </CardTitle>
+          <CardDescription>Semanas de lunes a domingo, hora de Venezuela.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table className="min-w-[480px]">
+            <TableCaption className="sr-only">Solicitudes por semana y origen</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Semana del</TableHead>
+                <TableHead className="text-right">Total</TableHead>
                 {sources.map((source) => (
-                  <th key={source} scope="col" className="px-3 py-2 text-right">
+                  <TableHead key={source} className="text-right">
                     {source}
-                  </th>
+                  </TableHead>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {stats.map((week) => (
-                <tr key={week.week} className="border-b border-neutral-100 last:border-0">
-                  <th scope="row" className="whitespace-nowrap px-3 py-2 font-normal">
+                <TableRow key={week.week}>
+                  <TableHead scope="row" className="font-normal text-foreground">
                     {formatWeek(week.week)}
-                  </th>
-                  <td className="px-3 py-2 text-right font-bold">{week.total}</td>
+                  </TableHead>
+                  <TableCell className="text-right font-semibold tabular-nums">{week.total}</TableCell>
                   {sources.map((source) => (
-                    <td key={source} className="px-3 py-2 text-right tabular-nums">
+                    <TableCell key={source} className="text-right text-muted-foreground tabular-nums">
                       {week.bySource[source] ?? 0}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }

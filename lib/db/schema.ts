@@ -111,6 +111,8 @@ export const products = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     slug: text("slug").notNull().unique(),
     name: text("name").notNull(),
+    // Marca del fabricante (Magister, Senzani…); el catálogo se puede filtrar por ella.
+    brand: text("brand"),
     categoryId: uuid("category_id")
       .notNull()
       .references(() => categories.id, { onDelete: "restrict" }),

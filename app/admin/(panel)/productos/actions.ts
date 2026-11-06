@@ -26,7 +26,7 @@ import { imageSchema, imageUpdateSchema, productSchema } from "@/lib/validation/
 
 const NEEDS_PHOTO = "Agrega al menos una foto antes de publicar el producto.";
 const idSchema = z.uuid();
-const FIELDS = ["name", "slug", "categoryId", "shortDescription", "description", "isFeatured", "isVisible"] as const;
+const FIELDS = ["name", "slug", "brand", "categoryId", "shortDescription", "description", "isFeatured", "isVisible"] as const;
 
 export async function saveProduct(_prev: ActionState, formData: FormData): Promise<ActionState> {
   await verifySession();

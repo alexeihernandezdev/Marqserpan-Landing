@@ -17,7 +17,14 @@ export function ProductDetail({ product, headingLevel = 1, headingId, priority =
     <div className="grid gap-8 lg:grid-cols-2">
       <ProductGallery images={product.images} priority={priority} />
       <div className="flex flex-col gap-4">
-        <p className="eyebrow text-verde-700">{product.category.name}</p>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="eyebrow text-verde-700">{product.category.name}</p>
+          {product.brand && (
+            <span className="rounded-full bg-hueso px-3 py-1 text-xs font-bold text-carbon ring-1 ring-black/10">
+              Marca: {product.brand.name}
+            </span>
+          )}
+        </div>
         <Heading id={headingId} className="text-3xl sm:text-4xl">
           {product.name}
         </Heading>

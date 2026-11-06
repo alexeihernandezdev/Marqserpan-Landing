@@ -33,6 +33,11 @@ export function ProductCard({ product, featured = false, compact = false }: Prop
             className={`${landscape ? "object-cover" : compact ? "object-contain p-4" : "object-contain p-6"} transition-transform duration-500 group-hover:scale-[1.04]`}
           />
         )}
+        {product.brand && (
+          <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-carbon ring-1 ring-black/10 backdrop-blur-sm">
+            {product.brand.name}
+          </span>
+        )}
         {featured && (
           <span className="absolute left-3 top-3 rounded-full bg-carbon px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
             Destacado

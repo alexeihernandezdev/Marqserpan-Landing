@@ -21,8 +21,8 @@ async function ResetContent({ searchParams }: Pick<PageProps<"/admin/restablecer
     return (
       <>
         <h1 className="text-2xl">Enlace no válido</h1>
-        <p className="mt-1 text-sm text-gris">El enlace venció (dura 1 hora) o ya se usó.</p>
-        <Link href="/admin/recuperar" className="mt-6 inline-block font-bold underline">
+        <p className="mt-1 text-sm text-muted-foreground">El enlace venció (dura 1 hora) o ya se usó.</p>
+        <Link href="/admin/recuperar" className="mt-6 inline-block text-sm font-medium text-primary underline-offset-4 hover:underline">
           Pedir un enlace nuevo
         </Link>
       </>
@@ -32,7 +32,7 @@ async function ResetContent({ searchParams }: Pick<PageProps<"/admin/restablecer
   return (
     <>
       <h1 className="text-2xl">Nueva contraseña</h1>
-      <p className="mt-1 text-sm text-gris">Al guardarla se cierran las sesiones abiertas.</p>
+      <p className="mt-1 text-sm text-muted-foreground">Al guardarla se cierran las sesiones abiertas.</p>
       <div className="mt-6">
         <ResetPasswordForm token={token} />
       </div>
@@ -43,7 +43,7 @@ async function ResetContent({ searchParams }: Pick<PageProps<"/admin/restablecer
 export default function ResetPasswordPage({ searchParams }: PageProps<"/admin/restablecer">) {
   return (
     <AuthCard>
-      <Suspense fallback={<p className="text-gris">Cargando…</p>}>
+      <Suspense fallback={<p className="text-muted-foreground">Cargando…</p>}>
         <ResetContent searchParams={searchParams} />
       </Suspense>
     </AuthCard>

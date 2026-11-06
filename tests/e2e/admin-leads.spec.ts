@@ -37,7 +37,8 @@ test("la lista muestra las solicitudes, las más recientes primero", async ({ pa
 
 test("filtra por estado nueva", async ({ page }) => {
   await page.goto("/admin/solicitudes");
-  await page.getByLabel("Estado").selectOption("nueva");
+  await page.getByLabel("Estado").click();
+  await page.getByRole("option", { name: "Nuevas" }).click();
   await expect(page).toHaveURL(/estado=nueva/);
   await expect(page.getByRole("table")).not.toContainText("Carla Atendida");
   await expect(page.getByRole("table")).toContainText("Bruno Reciente");

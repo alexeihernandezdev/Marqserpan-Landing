@@ -4,6 +4,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { db } from "@/lib/db/client";
 import { categories, productImages, products } from "@/lib/db/schema";
 import { TAGS } from "@/lib/tags";
+import { slugify } from "@/lib/validation/product";
 
 export type CatalogImage = { publicId: string; width: number; height: number; alt: string };
 
@@ -14,17 +15,23 @@ export type CatalogProduct = {
   shortDescription: string;
   description: string | null;
   isFeatured: boolean;
+  /** Marca del fabricante; slug para el filtro ?marca= del catálogo. */
+  brand: { name: string; slug: string } | null;
   category: { name: string; slug: string };
   images: CatalogImage[];
 };
 
 export type CatalogGroup = { name: string; slug: string; products: CatalogProduct[] };
 
+export type CatalogBrand = { name: string; slug: string; count: number };
+
 export type Catalog = {
   featured: CatalogProduct[];
   groups: CatalogGroup[];
   /** Todos los visibles, para preseleccionar en el formulario. */
   all: CatalogProduct[];
+  /** Marcas con al menos un producto visible, en orden alfabético. */
+  brands: CatalogBrand[];
 };
 
 async function loadVisibleProducts(slug?: string): Promise<CatalogProduct[]> {
@@ -36,6 +43,7 @@ async function loadVisibleProducts(slug?: string): Promise<CatalogProduct[]> {
       shortDescription: products.shortDescription,
       description: products.description,
       isFeatured: products.isFeatured,
+      brand: products.brand,
       categoryName: categories.name,
       categorySlug: categories.slug,
     })
@@ -65,6 +73,7 @@ async function loadVisibleProducts(slug?: string): Promise<CatalogProduct[]> {
       shortDescription: row.shortDescription,
       description: row.description,
       isFeatured: row.isFeatured,
+      brand: row.brand ? { name: row.brand, slug: slugify(row.brand) } : null,
       category: { name: row.categoryName, slug: row.categorySlug },
       images: images
         .filter((img) => img.productId === row.id)
@@ -90,7 +99,15 @@ export async function getCatalog(): Promise<Catalog> {
     }
     group.products.push(product);
   }
-  return { featured, groups, all };
+  const brands: CatalogBrand[] = [];
+  for (const product of all) {
+    if (!product.brand) continue;
+    const brand = brands.find((b) => b.slug === product.brand!.slug);
+    if (brand) brand.count++;
+    else brands.push({ ...product.brand, count: 1 });
+  }
+  brands.sort((a, b) => a.name.localeCompare(b.name, "es"));
+  return { featured, groups, all, brands };
 }
 
 export async function getProductBySlug(slug: string): Promise<CatalogProduct | null> {

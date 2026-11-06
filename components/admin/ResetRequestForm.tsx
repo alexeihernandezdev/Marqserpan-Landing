@@ -2,10 +2,10 @@
 
 import { useActionState } from "react";
 import { requestPasswordReset } from "@/app/admin/actions";
-import { Button } from "@/components/ui/Button";
-import { Field } from "@/components/ui/Field";
-import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
 import { idleState } from "@/lib/forms/action-state";
+import { FormField } from "./FormField";
 import { FormMessage } from "./FormMessage";
 
 export function ResetRequestForm() {
@@ -15,7 +15,7 @@ export function ResetRequestForm() {
   return (
     <form action={formAction} className="flex flex-col gap-5">
       <FormMessage state={state} />
-      <Field id="email" label="Correo" required>
+      <FormField id="email" label="Correo" required>
         {(describedBy) => (
           <Input
             id="email"
@@ -25,10 +25,11 @@ export function ResetRequestForm() {
             defaultValue={email}
             key={email}
             aria-describedby={describedBy}
+            className="h-10"
             required
           />
         )}
-      </Field>
+      </FormField>
       <Button type="submit" size="lg" disabled={pending}>
         {pending ? "Enviando…" : "Enviar enlace"}
       </Button>

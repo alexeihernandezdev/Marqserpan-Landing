@@ -13,7 +13,7 @@ export default function RecoverPage() {
     <AuthCard title="Recuperar contraseña" description="Te enviamos por correo un enlace para elegir una nueva.">
       <ResetRequestForm />
       <p className="mt-5 text-center text-sm">
-        <Link href="/admin/login" className="font-bold underline">
+        <Link href="/admin/login" className="font-medium text-primary underline-offset-4 hover:underline">
           Volver a entrar
         </Link>
       </p>

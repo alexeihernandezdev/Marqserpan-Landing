@@ -2,26 +2,21 @@
 
 import { startTransition, useActionState, useState, type FormEvent } from "react";
 import { saveSection } from "@/app/admin/(panel)/contenido/actions";
-import { Button } from "@/components/ui/Button";
-import { controlClasses } from "@/components/ui/Field";
+import { Plus, X } from "lucide-react";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
+import { Textarea } from "@/components/shadcn/textarea";
 import type { EditorField } from "@/lib/content/editor-fields";
 import { idleState } from "@/lib/forms/action-state";
 import { detectPriceOrDeadline } from "@/lib/validation/price-warning";
-import { FormMessage } from "./FormMessage";
+import { FormField } from "./FormField";
+import { FormMessage, Notice } from "./FormMessage";
+import { CharCount } from "./ProductForm";
 
 type Pair = { title: string; body: string };
 type Data = Record<string, string | string[] | Pair[]>;
 
 type Props = { sectionKey: string; fields: EditorField[]; initialData: Data };
-
-function Counter({ value, max }: { value: string; max: number }) {
-  const over = value.length > max;
-  return (
-    <span className={`text-xs ${over ? "font-bold text-red-700" : "text-gris"}`}>
-      {value.length}/{max}
-    </span>
-  );
-}
 
 function TextControl({
   id,
@@ -44,37 +39,20 @@ function TextControl({
   errors?: string[];
   onChange: (value: string) => void;
 }) {
-  const describedBy = [hint ? `${id}-hint` : null, errors ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
-  const props = {
-    id,
-    value,
-    onChange: (e: { target: { value: string } }) => onChange(e.target.value),
-    "aria-invalid": errors ? true : undefined,
-    "aria-describedby": describedBy,
-    required,
-    className: controlClasses,
-  };
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex items-baseline justify-between gap-2">
-        <label htmlFor={id} className="text-sm font-bold">
-          {label}
-          {!required && <span className="font-normal text-gris"> (opcional)</span>}
-        </label>
-        <Counter value={value} max={max} />
-      </div>
-      {hint && (
-        <p id={`${id}-hint`} className="text-xs text-gris">
-          {hint}
-        </p>
-      )}
-      {multiline ? <textarea rows={3} {...props} /> : <input {...props} />}
-      {errors && (
-        <p id={`${id}-error`} className="text-sm font-bold text-red-700">
-          {errors[0]}
-        </p>
-      )}
-    </div>
+    <FormField id={id} label={label} required={required} hint={hint} errors={errors} aside={<CharCount value={value} max={max} />}>
+      {(describedBy) => {
+        const props = {
+          id,
+          value,
+          onChange: (e: { target: { value: string } }) => onChange(e.target.value),
+          "aria-invalid": errors ? true : undefined,
+          "aria-describedby": describedBy,
+          required,
+        };
+        return multiline ? <Textarea rows={3} {...props} /> : <Input {...props} />;
+      }}
+    </FormField>
   );
 }
 
@@ -102,10 +80,12 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-6">
       <FormMessage state={state} />
       {warn && (
-        <p className="rounded-md border-2 border-amarillo bg-amarillo-50 px-4 py-3 text-sm">
-          <strong>Atención:</strong> parece que el texto incluye un precio o un plazo fijo. La landing no publica precios
-          ni plazos: cada pedido se cotiza. Puedes guardar igual si es correcto.
-        </p>
+        <Notice tone="warning">
+          <span>
+            <strong>Atención:</strong> parece que el texto incluye un precio o un plazo fijo. La landing no publica
+            precios ni plazos: cada pedido se cotiza. Puedes guardar igual si es correcto.
+          </span>
+        </Notice>
       )}
 
       {fields.map((field) => {
@@ -129,14 +109,14 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
         if (field.kind === "list") {
           const items = (data[field.name] as string[]) ?? [];
           return (
-            <fieldset key={field.name} className="flex flex-col gap-3 rounded-lg border border-neutral-200 p-4">
-              <legend className="px-1 text-sm font-bold">
+            <fieldset key={field.name} className="flex flex-col gap-4 rounded-lg border bg-muted/30 p-4">
+              <legend className="px-1 text-sm font-semibold">
                 {field.label}{" "}
-                <span className="font-normal text-gris">
+                <span className="font-normal text-muted-foreground">
                   ({field.minItems === field.maxItems ? field.maxItems : `${field.minItems}–${field.maxItems}`})
                 </span>
               </legend>
-              {errors[field.name] && <p className="text-sm font-bold text-red-700">{errors[field.name]?.[0]}</p>}
+              {errors[field.name] && <p className="text-sm font-medium text-destructive">{errors[field.name]?.[0]}</p>}
               {items.map((item, index) => (
                 <div key={index} className="flex items-end gap-2">
                   <div className="flex-1">
@@ -154,17 +134,19 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
                     <Button
                       type="button"
                       variant="ghost"
+                      size="icon"
                       onClick={() => setField(field.name, items.filter((_, i) => i !== index))}
                       aria-label={`Quitar ${field.itemLabel.toLowerCase()} ${index + 1}`}
+                      className="text-muted-foreground hover:text-destructive"
                     >
-                      Quitar
+                      <X />
                     </Button>
                   )}
                 </div>
               ))}
               {items.length < field.maxItems && (
-                <Button type="button" variant="secondary" className="self-start" onClick={() => setField(field.name, [...items, ""])}>
-                  Agregar {field.itemLabel.toLowerCase()}
+                <Button type="button" variant="outline" className="self-start" onClick={() => setField(field.name, [...items, ""])}>
+                  <Plus /> Agregar {field.itemLabel.toLowerCase()}
                 </Button>
               )}
             </fieldset>
@@ -175,11 +157,11 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
         const pf = field; // constante: conserva el tipo estrechado dentro de los closures
         const pairs = (data[pf.name] as Pair[]) ?? [];
         return (
-          <fieldset key={pf.name} className="flex flex-col gap-4 rounded-lg border border-neutral-200 p-4">
-            <legend className="px-1 text-sm font-bold">{pf.label}</legend>
-            {errors[pf.name] && <p className="text-sm font-bold text-red-700">{errors[pf.name]?.[0]}</p>}
+          <fieldset key={pf.name} className="flex flex-col gap-4 rounded-lg border bg-muted/30 p-4">
+            <legend className="px-1 text-sm font-semibold">{pf.label}</legend>
+            {errors[pf.name] && <p className="text-sm font-medium text-destructive">{errors[pf.name]?.[0]}</p>}
             {pairs.map((pair, index) => (
-              <div key={index} className="flex flex-col gap-3 border-l-4 border-amarillo pl-4">
+              <div key={index} className="flex flex-col gap-3 rounded-md border-l-4 border-amarillo bg-background p-4 shadow-xs">
                 <TextControl
                   id={`${pf.name}-${index}-title`}
                   label={`${pf.itemLabel} ${index + 1}: título`}
@@ -203,7 +185,8 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
                   <Button
                     type="button"
                     variant="ghost"
-                    className="self-start"
+                    size="sm"
+                    className="self-start text-muted-foreground hover:text-destructive"
                     onClick={() => setField(pf.name, pairs.filter((_, i) => i !== index))}
                   >
                     Quitar {pf.itemLabel.toLowerCase()} {index + 1}
@@ -214,11 +197,11 @@ export function SectionEditor({ sectionKey, fields, initialData }: Props) {
             {pairs.length < pf.maxItems && (
               <Button
                 type="button"
-                variant="secondary"
+                variant="outline"
                 className="self-start"
                 onClick={() => setField(pf.name, [...pairs, { title: "", body: "" }])}
               >
-                Agregar {pf.itemLabel.toLowerCase()}
+                <Plus /> Agregar {pf.itemLabel.toLowerCase()}
               </Button>
             )}
           </fieldset>

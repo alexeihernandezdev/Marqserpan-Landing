@@ -9,6 +9,8 @@ export type CatalogSeedCategory = { name: string; slug: string };
 export type CatalogSeedProduct = {
   slug: string;
   name: string;
+  /** Marca del fabricante; es la etiqueta y el filtro del catálogo. */
+  brand: string;
   categorySlug: string;
   shortDescription: string;
   description: string;
@@ -22,16 +24,22 @@ export const CATALOG_CATEGORIES: CatalogSeedCategory[] = [
   { name: "Equipos de panadería", slug: "equipos-de-panaderia" },
   { name: "Equipos de cafetería", slug: "equipos-de-cafeteria" },
   { name: "Envasado", slug: "envasado" },
+  { name: "Equipos de cocina", slug: "equipos-de-cocina" },
 ];
 
 const VOLTAJE =
   "Pregúntanos por el voltaje: confirmamos la versión adecuada para la instalación eléctrica de tu local.";
+
+// Equipos propios en el almacén de Maqserpan (publicación de Instagram "Maquinaria industrial disponible").
+const EN_ALMACEN =
+  "Equipo disponible en nuestro almacén para entrega inmediata, con garantía y el respaldo técnico de Maqserpan.";
 
 export const CATALOG_PRODUCTS: CatalogSeedProduct[] = [
   // ── Rebanadoras Swedlinghaus ────────────────────────────────────────────────
   {
     slug: "rebanadora-swedlinghaus-af250-egr",
     name: "Rebanadora Swedlinghaus AF250 EGR",
+    brand: "Swedlinghaus",
     categorySlug: "rebanadoras",
     isFeatured: true,
     shortDescription:
@@ -47,6 +55,7 @@ export const CATALOG_PRODUCTS: CatalogSeedProduct[] = [
   {
     slug: "rebanadora-swedlinghaus-af300-gr-pro",
     name: "Rebanadora Swedlinghaus AF300 GR Pro",
+    brand: "Swedlinghaus",
     categorySlug: "rebanadoras",
     isFeatured: true,
     shortDescription:
@@ -63,6 +72,7 @@ export const CATALOG_PRODUCTS: CatalogSeedProduct[] = [
   {
     slug: "rebanadora-swedlinghaus-af350-gr-pro",
     name: "Rebanadora Swedlinghaus AF350 GR Pro",
+    brand: "Swedlinghaus",
     categorySlug: "rebanadoras",
     isFeatured: true,
     shortDescription:
@@ -84,6 +94,7 @@ Opcionales: cuchilla dentada o teflonada, extractor de cuchilla, plano de apoyo 
   {
     slug: "rebanadora-swedlinghaus-af350-gr-top",
     name: "Rebanadora Swedlinghaus AF350 GR Top",
+    brand: "Swedlinghaus",
     categorySlug: "rebanadoras",
     isFeatured: true,
     shortDescription:
@@ -106,6 +117,7 @@ Accesorio opcional bajo pedido: superficie de apoyo más amplia.`,
   {
     slug: "envolvedora-swedlinghaus-disp45",
     name: "Envolvedora con film Swedlinghaus DISP45",
+    brand: "Swedlinghaus",
     categorySlug: "envasado",
     shortDescription:
       "Dispensadora termoselladora para envolver bandejas con film de forma rápida e higiénica en charcuterías y carnicerías.",
@@ -121,6 +133,7 @@ Accesorio opcional bajo pedido: superficie de apoyo más amplia.`,
   {
     slug: "cafetera-magister-delta-ms",
     name: "Máquina de café Magister Delta MS",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Máquina de espresso semiautomática italiana de 2 o 3 grupos, robusta y sencilla de usar para cafeterías con mucho movimiento.",
@@ -152,6 +165,7 @@ ${VOLTAJE}`,
   {
     slug: "cafetera-magister-delta-es",
     name: "Máquina de café Magister Delta ES (electrónica)",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Espresso automática de 2 o 3 grupos con dosis programables, pantalla OLED y control electrónico de temperatura.",
@@ -182,6 +196,7 @@ ${VOLTAJE}`,
   {
     slug: "cafetera-magister-k-xx",
     name: "Máquina de café Magister K-XX",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Espresso profesional de 2 o 3 grupos en acero inoxidable, con temporizador de extracción y preinfusión.",
@@ -210,6 +225,7 @@ ${VOLTAJE}`,
   {
     slug: "cafetera-magister-stilo-ms",
     name: "Máquina de café Magister Stilo MS",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Espresso semiautomática de 1 a 4 grupos para empezar o crecer: acero inoxidable o pintada en colores.",
@@ -239,6 +255,7 @@ ${VOLTAJE}`,
   {
     slug: "cafetera-magister-es40",
     name: "Máquina de café Magister ES40",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Espresso semiprofesional de 1 grupo, compacta y en colores: para panaderías, oficinas o cafeterías pequeñas.",
@@ -263,6 +280,7 @@ ${VOLTAJE}`,
   {
     slug: "cafetera-superautomatica-magister-relax-r50",
     name: "Cafetera superautomática Magister Relax R50",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Superautomática con pantalla táctil que muele y prepara cada bebida con un toque. Hasta 200 tazas al día.",
@@ -283,6 +301,7 @@ Opcional: módulo de leche fresca con refrigerador.`,
   {
     slug: "cafetera-superautomatica-magister-relax-r150",
     name: "Cafetera superautomática Magister Relax R150",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Superautomática para vasos altos, con salida de agua caliente y producción de 200 a 250 tazas diarias.",
@@ -303,6 +322,7 @@ Opcional: módulo de leche fresca con refrigerador.`,
   {
     slug: "cafetera-superautomatica-magister-relax-r200",
     name: "Cafetera superautomática Magister Relax R200",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Superautomática con sistema de leche fresca integrado para capuchinos y lattes con un solo toque.",
@@ -321,6 +341,7 @@ Opcional: módulo de leche fresca con refrigerador.`,
   {
     slug: "molinos-de-cafe-magister",
     name: "Molinos de café Magister",
+    brand: "Magister",
     categorySlug: "equipos-de-cafeteria",
     shortDescription:
       "Molinos profesionales con fresas de 50 a 83 mm: manuales, con temporizador, automáticos o electrónicos.",
@@ -342,6 +363,7 @@ Voltajes: 110 V o 230 V monofásico, y 400 V trifásico en los modelos más gran
   {
     slug: "horno-rotativo-fiorini-small",
     name: "Horno rotativo Fiorini Small",
+    brand: "Fiorini",
     categorySlug: "equipos-de-panaderia",
     shortDescription:
       "Horno rotativo italiano compacto para bandejas de 40 × 60 cm, a gas, gasoil, eléctrico o pellet.",
@@ -370,6 +392,7 @@ ${VOLTAJE}`,
   {
     slug: "horno-rotativo-fiorini-mini-rotor",
     name: "Horno rotativo Fiorini Mini Rotor",
+    brand: "Fiorini",
     categorySlug: "equipos-de-panaderia",
     shortDescription:
       "Horno rotativo para panaderías medianas: acepta bandejas de 40 × 60 hasta 50 × 70 cm, a gas, gasoil, eléctrico o pellet.",
@@ -398,6 +421,7 @@ ${VOLTAJE}`,
   {
     slug: "horno-rotativo-fiorini-rotor",
     name: "Horno rotativo Fiorini Rotor",
+    brand: "Fiorini",
     categorySlug: "equipos-de-panaderia",
     shortDescription:
       "Horno rotativo de alta producción para bandejas de 60 × 80 cm, a gas, gasoil, eléctrico o pellet.",
@@ -426,6 +450,7 @@ ${VOLTAJE}`,
   {
     slug: "horno-rotativo-fiorini-rotor-fr",
     name: "Horno rotativo Fiorini Rotor FR",
+    brand: "Fiorini",
     categorySlug: "equipos-de-panaderia",
     shortDescription:
       "Horno rotativo para bandejas de 60 × 80 cm con el quemador al frente: queda libre por 3 lados, ideal para espacios estrechos.",
@@ -451,5 +476,205 @@ Opcionales: panel computarizado "Easy Cooking" o "Easy Touch", variador de veloc
 
 ${VOLTAJE}`,
     photos: ["Horno rotativo Fiorini Rotor FR en acero inoxidable"],
+  },
+
+  // ── Equipos propios en almacén ──────────────────────────────────────────────
+  {
+    slug: "batidora-planetaria-20-litros",
+    name: "Batidora planetaria de 20 litros",
+    brand: "Maqserpan",
+    categorySlug: "equipos-de-panaderia",
+    shortDescription:
+      "Batidora de 20 L con parada de emergencia e implementos en acero inoxidable. Disponible para entrega inmediata.",
+    description: `Batidora planetaria para panaderías y pastelerías que necesitan un equipo confiable para el trabajo diario.
+
+• Capacidad del bol: 20 litros, en acero inoxidable
+• Implementos en acero inoxidable
+• Rejilla de protección sobre el bol
+• Botón de parada de emergencia
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: ["Batidora planetaria de 20 litros con bol y rejilla de acero inoxidable"],
+  },
+  {
+    slug: "picadora-de-masa-36-porciones",
+    name: "Picadora de masa (36 tacos)",
+    brand: "Maqserpan",
+    categorySlug: "equipos-de-panaderia",
+    shortDescription:
+      "Divisora manual que corta la masa en 36 tacos iguales de una sola vez. Disponible para entrega inmediata.",
+    description: `Divisora de masa manual: colocas la masa en la cuba, bajas la tapa y con la palanca la corta en 36 porciones del mismo peso. Ahorra tiempo de pesado y deja el pan parejo.
+
+• Divide en 36 tacos de masa por ciclo
+• Accionamiento manual por palanca, no necesita conexión eléctrica
+• Estructura pintada en blanco
+
+${EN_ALMACEN}`,
+    photos: [
+      "Picadora de masa de 36 tacos con palanca de accionamiento",
+      "Picadora de masa vista de tres cuartos",
+      "Picadora de masa con la tapa abierta mostrando la cuba",
+      "Picadora de masa vista de frente",
+    ],
+  },
+  {
+    slug: "laminadora-de-masa-tipo-gaviota",
+    name: "Laminadora de masa tipo gaviota",
+    brand: "Maqserpan",
+    categorySlug: "equipos-de-panaderia",
+    shortDescription:
+      "Laminadora de pie con mesas plegables, ideal para hojaldre y masas laminadas. Disponible para entrega inmediata.",
+    description: `Laminadora de masa de pie, tipo gaviota, para estirar masas de forma pareja y rápida. Ideal para hojaldre, croissant y masas laminadas.
+
+• Mesas laterales con banda transportadora que se pliegan para ahorrar espacio
+• Rodillos de grosor regulable
+• Base sobre ruedas
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Laminadora de masa tipo gaviota con las mesas extendidas",
+      "Laminadora de masa tipo gaviota vista lateral",
+    ],
+  },
+  {
+    slug: "rebanadora-de-pan-de-sandwich-42-cortes",
+    name: "Rebanadora de pan de sándwich (42 cortes)",
+    brand: "Maqserpan",
+    categorySlug: "equipos-de-panaderia",
+    shortDescription:
+      "Rebanadora de pan con 42 cuchillas: corta el pan de sándwich en rebanadas iguales. Disponible para entrega inmediata.",
+    description: `Rebanadora de pan de pie para panaderías que venden pan de sándwich rebanado.
+
+• 42 cortes por pasada, rebanadas del mismo grosor
+• Bandeja recogemigas con asa
+• Base sobre ruedas
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Rebanadora de pan de sándwich de 42 cortes vista de frente",
+      "Rebanadora de pan de sándwich de 42 cortes vista de tres cuartos",
+      "Rebanadora de pan de sándwich con base de ruedas",
+      "Rebanadora de pan de sándwich vista lateral",
+    ],
+  },
+  {
+    slug: "cafetera-magister-stilo-1-grupo",
+    name: "Máquina de café Magister Stilo 1 grupo",
+    brand: "Magister",
+    categorySlug: "equipos-de-cafeteria",
+    shortDescription:
+      "Espresso profesional italiana de 1 grupo, compacta para panaderías y cafeterías pequeñas. Disponible para entrega inmediata.",
+    description: `Máquina de espresso Magister de la línea Stilo, en versión de 1 grupo: ocupa poco espacio en la barra y rinde como una profesional.
+
+• 1 grupo de erogación
+• Lanza de vapor en acero inoxidable
+• Carrocería en acero inoxidable con laterales negros
+• Bomba volumétrica incorporada
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Máquina de café Magister Stilo de 1 grupo vista de frente",
+      "Máquina de café Magister Stilo de 1 grupo vista lateral",
+      "Máquina de café Magister Stilo de 1 grupo con lanza de vapor",
+    ],
+  },
+  {
+    slug: "plancha-vitroceramica-unox-spidocook",
+    name: "Plancha vitrocerámica Unox SpidoCook tipo budare",
+    brand: "Unox",
+    categorySlug: "equipos-de-cocina",
+    shortDescription:
+      "Plancha lisa de vitrocerámica tipo budare para arepas, cachapas y sándwiches. Disponible para entrega inmediata.",
+    description: `Plancha de superficie lisa en vitrocerámica de la línea SpidoCook de Unox. Funciona como un budare: calienta rápido, se limpia fácil y cocina parejo.
+
+• Superficie de cocción en vitrocerámica
+• Estructura en acero inoxidable con bordes protectores
+• Control de temperatura por perilla
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Plancha vitrocerámica Unox SpidoCook tipo budare",
+      "Plancha vitrocerámica SpidoCook vista de frente",
+      "Superficie de vitrocerámica de la plancha SpidoCook",
+      "Plancha vitrocerámica SpidoCook vista baja",
+    ],
+  },
+  {
+    slug: "plancha-de-contacto-vitroceramica-unox-spidocook",
+    name: "Plancha de contacto vitrocerámica Unox SpidoCook",
+    brand: "Unox",
+    categorySlug: "equipos-de-cocina",
+    shortDescription:
+      "Plancha con tapa estriada y base de vitrocerámica para paninis, sándwiches y arepas. Disponible para entrega inmediata.",
+    description: `Plancha de contacto de la línea SpidoCook de Unox: cocina por arriba y por abajo a la vez, ideal para sándwiches, paninis y arepas rellenas.
+
+• Placa inferior lisa en vitrocerámica
+• Tapa superior estriada que marca el pan
+• Asa para abrir y cerrar la tapa
+• Control de temperatura por perilla
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Plancha de contacto Unox SpidoCook con la tapa abierta",
+      "Plancha de contacto SpidoCook con placa estriada",
+      "Plancha de contacto SpidoCook vista de frente",
+    ],
+  },
+  {
+    slug: "rallador-de-queso-gimac",
+    name: "Rallador de queso Gimac",
+    brand: "Gimac",
+    categorySlug: "equipos-de-cocina",
+    shortDescription:
+      "Rallador eléctrico italiano para queso duro, con bol colector de acero inoxidable. Disponible para entrega inmediata.",
+    description: `Rallador de queso eléctrico de la marca italiana Gimac, para charcuterías, panaderías y cocinas que rallan queso a diario.
+
+• Cuerpo de aluminio y acero inoxidable
+• Tolva con empujador de palanca
+• Bol colector de acero inoxidable
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Rallador de queso eléctrico Gimac con bol de acero inoxidable",
+      "Rallador de queso Gimac con empujador de palanca",
+    ],
+  },
+  {
+    slug: "rebanadora-de-embutidos-senzani",
+    name: "Rebanadora de embutidos Senzani",
+    brand: "Senzani",
+    categorySlug: "rebanadoras",
+    shortDescription:
+      "Rebanadora italiana por gravedad para embutidos y quesos, en aluminio con grosor regulable. Disponible para entrega inmediata.",
+    description: `Rebanadora por gravedad de la marca italiana Senzani, para el corte diario de embutidos y quesos en charcuterías y supermercados.
+
+• Cuerpo en aleación de aluminio
+• Plato porta-producto inclinado con empujador
+• Perilla para regular el grosor de corte
+• Afilador incorporado
+
+${EN_ALMACEN}
+
+${VOLTAJE}`,
+    photos: [
+      "Rebanadora de embutidos Senzani vista lateral",
+      "Rebanadora Senzani con plato porta-producto",
+      "Rebanadora Senzani vista de la cuchilla",
+      "Rebanadora de embutidos Senzani vista de tres cuartos",
+    ],
   },
 ];

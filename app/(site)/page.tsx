@@ -5,6 +5,7 @@ import { QuoteSection, QuoteSectionFallback } from "@/components/site/QuoteSecti
 import { Brands } from "@/components/site/sections/Brands";
 import { Guide } from "@/components/site/sections/Guide";
 import { Problem } from "@/components/site/sections/Problem";
+import { Restorations } from "@/components/site/sections/Restorations";
 import { Services } from "@/components/site/sections/Services";
 import { Stakes } from "@/components/site/sections/Stakes";
 import { Success } from "@/components/site/sections/Success";
@@ -35,6 +36,7 @@ export default async function HomePage() {
       <Brands />
       <Services content={sections.services} ctaLabel={cta} />
       <FeaturedProducts catalog={catalog} featured={sections.featured} />
+      <Restorations ctaLabel={cta} />
       <Stakes content={sections.stakes} ctaLabel={cta} />
       <Success content={sections.success} ctaLabel={cta} />
       <Testimonials content={sections.testimonials} testimonials={testimonials} />

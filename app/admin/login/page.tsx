@@ -16,7 +16,7 @@ export default function LoginPage() {
         <LoginForm />
       </Suspense>
       <p className="mt-5 text-center text-sm">
-        <Link href="/admin/recuperar" className="font-bold underline">
+        <Link href="/admin/recuperar" className="font-medium text-primary underline-offset-4 hover:underline">
           ¿Olvidaste tu contraseña?
         </Link>
       </p>
