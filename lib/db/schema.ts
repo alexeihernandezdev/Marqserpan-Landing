@@ -200,6 +200,8 @@ export const testimonials = pgTable("testimonials", {
   authorName: text("author_name").notNull(),
   businessName: text("business_name"),
   city: text("city"),
+  /** Logo del negocio: ruta en /public (p. ej. /clientes/x.webp) o publicId de Cloudinary. */
+  logo: text("logo"),
   isVisible: boolean("is_visible").notNull().default(true),
   sortOrder: integer("sort_order").notNull().default(0),
   ...timestamps,

@@ -29,6 +29,13 @@
       "when": 1793975025470,
       "tag": "0003_product_brand",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794014364673,
+      "tag": "0004_testimonial_logo",
+      "breakpoints": true
     }
   ]
 }

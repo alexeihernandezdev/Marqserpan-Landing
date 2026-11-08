@@ -188,6 +188,11 @@
     background-image: linear-gradient(135deg, var(--color-verde-700), var(--color-azul-700));
   }
 
+  /* Degradado de marca que gira sobre sí mismo (tarjeta «Con Maqserpan»). */
+  .bg-brand-gradient-spin {
+    background-image: linear-gradient(var(--gradient-angle), var(--color-verde-700), var(--color-azul-700));
+  }
+
   /* Texto con el degradado de marca (sobre fondo oscuro: tonos 400, > 7:1). */
   .text-brand-gradient {
     background-image: linear-gradient(100deg, var(--color-verde-400), var(--color-azul-400));
@@ -214,6 +219,85 @@
     line-height: 1;
     color: transparent;
     -webkit-text-stroke: 1.5px currentColor;
+  }
+
+  /*
+   * Tarjeta cuyo borde (el ::before) lleva una luz con el degradado de marca en la posición del
+   * cursor; SpotlightList escribe --x/--y y, sin cursor, la mueve sola. Sin JS o con «reducir
+   * movimiento» la luz queda fija arriba al centro.
+   */
+  .spotlight-card {
+    --x: 50%;
+    --y: 0%;
+    isolation: isolate;
+  }
+
+  .spotlight-card::before,
+  .spotlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .spotlight-card::before {
+    z-index: -1;
+    padding: 1px;
+    background: radial-gradient(
+      16rem circle at var(--x) var(--y),
+      var(--color-verde-400),
+      var(--color-azul-400) 40%,
+      transparent 70%
+    ),
+    rgb(255 255 255 / 0.1);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+
+  .spotlight-card::after {
+    z-index: -2;
+    background: radial-gradient(22rem circle at var(--x) var(--y), rgb(63 207 106 / 0.14), transparent 60%);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
+
+  /* Ilustración de línea con el degradado de marca (ver <defs> en Services). */
+  .draw-icon :is(path, circle) {
+    stroke-dasharray: 120;
+  }
+}
+
+/*
+ * Las ilustraciones de Servicios se dibujan al entrar en pantalla (ligado al scroll) y se
+ * vuelven a dibujar al pasar el cursor. Sin soporte o con «reducir movimiento» quedan completas.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .draw-icon :is(path, circle) {
+      animation: draw-stroke linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 45%;
+    }
+  }
+
+  .spotlight-card:hover .draw-icon :is(path, circle) {
+    animation: draw-stroke 1.2s ease-out both;
+    animation-timeline: auto;
+  }
+}
+
+@keyframes draw-stroke {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
@@ -351,6 +435,53 @@
 }
 
 /*
+ * Destello que cruza el texto (cifra y titular de la Guía): una franja blanca recortada a las letras
+ * sobre su color base (--glint-base). --glint-delay encadena varios textos para que el brillo «viaje».
+ * Con «reducir movimiento» la franja queda fuera y el texto se ve con su color normal.
+ */
+.text-glint {
+  --glint-base: linear-gradient(135deg, var(--color-verde-700), var(--color-azul-700));
+  background-image:
+    linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 0.9) 50%, transparent 58%),
+    var(--glint-base);
+  background-size:
+    300% 100%,
+    100% 100%;
+  background-position:
+    100% 0,
+    0 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-glint-azul {
+  --glint-base: linear-gradient(var(--color-azul-700), var(--color-azul-700));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-glint {
+    animation: text-glint 5s ease-in-out infinite;
+    animation-delay: var(--glint-delay, 0s);
+  }
+}
+
+@keyframes text-glint {
+  0% {
+    background-position:
+      100% 0,
+      0 0;
+  }
+  28%,
+  100% {
+    background-position:
+      0% 0,
+      0 0;
+  }
+}
+
+/*
  * Sello de garantía del hero («22 años»): el anillo punteado gira, el escudo se dibuja, el check
  * aparece y un brillo recorre la píldora cada pocos segundos. Con «reducir movimiento» queda estático.
  */
@@ -430,5 +561,90 @@
   30%,
   100% {
     transform: translateX(420%) skewX(-18deg);
+  }
+}
+
+/*
+ * Ángulo animable del degradado de .bg-brand-gradient-spin: da una vuelta completa cada 4 s.
+ * Con «reducir movimiento» se queda en 135deg, igual que .bg-brand-gradient.
+ */
+@property --gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 135deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bg-brand-gradient-spin {
+    animation: gradient-spin 4s linear infinite;
+  }
+}
+
+@keyframes gradient-spin {
+  to {
+    --gradient-angle: 495deg;
+  }
+}
+
+/*
+ * Tachado que se dibuja de izquierda a derecha, se mantiene y se borra, en bucle (tarjeta «Antes»).
+ * Es una línea de fondo en el texto en línea, así que sigue cada renglón si el texto se parte.
+ * Con «reducir movimiento» queda tachado fijo.
+ */
+.strike-draw {
+  background-image: linear-gradient(
+    oklch(50.5% 0.213 27.518 / 0.55),
+    oklch(50.5% 0.213 27.518 / 0.55)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 58%;
+  background-size: 100% 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Flecha que empuja hacia abajo, del «Antes» al «Con Maqserpan». */
+.arrow-nudge-down {
+  display: flex;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .strike-draw {
+    animation: strike-draw 3.2s ease-in-out infinite;
+  }
+
+  .arrow-nudge-down {
+    animation: arrow-nudge-down 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes strike-draw {
+  0% {
+    background-size: 0% 2px;
+    background-position: 0 58%;
+  }
+  35%,
+  75% {
+    background-size: 100% 2px;
+    background-position: 0 58%;
+  }
+  75.01% {
+    background-position: 100% 58%;
+  }
+  100% {
+    background-size: 0% 2px;
+    background-position: 100% 58%;
+  }
+}
+
+@keyframes arrow-nudge-down {
+  0%,
+  100% {
+    transform: translateY(-3px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
   }
 }

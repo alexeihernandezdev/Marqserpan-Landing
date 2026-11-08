@@ -14,6 +14,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/seed.ts",
     "db:seed-products": "tsx scripts/seed-products.ts",
+    "db:seed-testimonials": "tsx scripts/seed-testimonials.ts",
     "admin:create": "tsx scripts/create-admin.ts",
     "admin:default": "tsx scripts/create-default-admin.ts",
     "brand:build": "tsx scripts/build-brand-assets.ts"

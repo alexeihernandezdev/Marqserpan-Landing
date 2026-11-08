@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { PublicTestimonial } from "@/lib/content/queries";
 import type { Sections } from "@/lib/validation/content";
 import { SectionHeading } from "./SectionHeading";
@@ -16,9 +17,20 @@ export function Testimonials({ content, testimonials }: Props) {
             <li key={t.id}>
               <figure className="flex h-full flex-col rounded-2xl bg-white p-7 shadow-[0_1px_2px_rgb(0_0_0/0.04)]">
                 <blockquote className="flex-1 whitespace-pre-line text-lg">«{t.quote}»</blockquote>
-                <figcaption className="mt-4 text-sm">
-                  <strong className="block text-carbon">{t.authorName}</strong>
-                  <span className="text-gris">{[t.businessName, t.city].filter(Boolean).join(" · ")}</span>
+                <figcaption className="mt-4 flex items-center gap-3 text-sm">
+                  {t.logo && (
+                    <Image
+                      src={t.logo}
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="size-12 shrink-0 rounded-full object-contain ring-1 ring-black/5"
+                    />
+                  )}
+                  <span>
+                    <strong className="block text-carbon">{t.authorName}</strong>
+                    <span className="text-gris">{[t.businessName, t.city].filter(Boolean).join(" · ")}</span>
+                  </span>
                 </figcaption>
               </figure>
             </li>

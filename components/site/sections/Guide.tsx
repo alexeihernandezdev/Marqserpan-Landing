@@ -36,11 +36,11 @@ export function Guide({ content, ctaLabel }: Props) {
         <div className="reveal rounded-[2rem] bg-white p-7 shadow-[0_24px_60px_-30px_rgb(0_0_0/0.25)] ring-1 ring-black/5 sm:p-10">
           <h2 id="guia-title" className="flex items-end gap-4">
             {figure && (
-              <span className="bg-brand-gradient bg-clip-text font-display text-7xl leading-[0.8] text-transparent sm:text-8xl">
-                {figure}
-              </span>
+              <span className="text-glint font-display text-7xl leading-[0.8] sm:text-8xl">{figure}</span>
             )}
-            <span className="pb-1 text-xl leading-tight text-azul-700 sm:text-2xl">{rest}</span>
+            <span className="text-glint text-glint-azul pb-1 text-xl leading-tight [--glint-delay:0.35s] sm:text-2xl">
+              {rest}
+            </span>
           </h2>
           {content.authorityPoints.length > 0 && (
             <ul className="mt-8 flex flex-col divide-y divide-neutral-200 border-t border-neutral-200">

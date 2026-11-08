@@ -40,17 +40,19 @@ export function Success({ content, ctaLabel }: Props) {
               <div className="flex flex-col gap-3">
                 <p className="rounded-3xl border border-dashed border-neutral-300 p-6 sm:p-8">
                   <span className="block text-xs font-bold uppercase tracking-wider text-gris">Antes</span>
-                  <span className="mt-2 block text-xl text-gris line-through decoration-red-700/40 decoration-2">
-                    {capitalize(identity.before)}
+                  <span className="mt-2 block text-xl text-gris">
+                    <del className="strike-draw no-underline">{capitalize(identity.before)}</del>
                   </span>
                 </p>
                 <span
                   aria-hidden="true"
-                  className="mx-auto flex size-11 rotate-90 items-center justify-center rounded-full bg-hueso text-carbon"
+                  className="mx-auto flex size-11 items-center justify-center rounded-full bg-hueso text-carbon"
                 >
-                  <ArrowRightIcon className="size-5" />
+                  <span className="arrow-nudge-down">
+                    <ArrowRightIcon className="size-5 rotate-90" />
+                  </span>
                 </span>
-                <p className="bg-brand-gradient rounded-3xl p-6 text-white shadow-[0_24px_48px_-24px_rgb(0_106_158/0.6)] sm:p-8">
+                <p className="bg-brand-gradient-spin rounded-3xl p-6 text-white shadow-[0_24px_48px_-24px_rgb(0_106_158/0.6)] sm:p-8">
                   <span className="block text-xs font-bold uppercase tracking-wider text-white">Con Maqserpan</span>
                   <span className="mt-2 block font-display text-2xl leading-tight sm:text-3xl">
                     {capitalize(identity.after)}

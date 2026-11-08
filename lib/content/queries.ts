@@ -75,6 +75,7 @@ export type PublicTestimonial = {
   authorName: string;
   businessName: string | null;
   city: string | null;
+  logo: string | null;
 };
 
 export async function getVisibleTestimonials(): Promise<PublicTestimonial[]> {
@@ -89,6 +90,7 @@ export async function getVisibleTestimonials(): Promise<PublicTestimonial[]> {
       authorName: testimonials.authorName,
       businessName: testimonials.businessName,
       city: testimonials.city,
+      logo: testimonials.logo,
     })
     .from(testimonials)
     .where(eq(testimonials.isVisible, true))
