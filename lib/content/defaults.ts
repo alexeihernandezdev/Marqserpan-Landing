@@ -105,6 +105,8 @@ export const DEFAULT_SECTIONS: Sections = {
   },
   testimonials: {
     title: "Lo que dicen nuestros clientes",
+    intro: "Panaderías y supermercados confían en nosotros para que sus equipos no se detengan.",
+    stats: [{ title: "22", body: "años en el mercado" }],
   },
   quote_form: {
     title: "Solicita tu cotización",

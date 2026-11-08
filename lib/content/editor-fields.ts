@@ -65,7 +65,20 @@ export const EDITOR_FIELDS: Record<SectionKey, EditorField[]> = {
     { kind: "list", name: "points", label: "Resultados", itemLabel: "Resultado", max: 100, minItems: 4, maxItems: 6 },
     { kind: "textarea", name: "identity", label: "Transformación (de… a…)", max: 140 },
   ],
-  testimonials: [title],
+  testimonials: [
+    title,
+    { kind: "textarea", name: "intro", label: "Introducción", max: 200 },
+    {
+      kind: "pairs",
+      name: "stats",
+      label: "Datos destacados",
+      itemLabel: "Dato (cifra y texto)",
+      titleMax: 12,
+      bodyMax: 40,
+      minItems: 0,
+      maxItems: 3,
+    },
+  ],
   quote_form: [
     title,
     { kind: "textarea", name: "intro", label: "Introducción", max: 200 },

@@ -75,6 +75,8 @@ export const successSchema = z.object({
 
 export const testimonialsSectionSchema = z.object({
   title: required(60, "Título"),
+  intro: text(200, "Introducción"),
+  stats: list(titleBody(12, 40), 0, 3, "Datos destacados"),
 });
 
 export const quoteFormSchema = z.object({

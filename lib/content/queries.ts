@@ -19,7 +19,7 @@ export async function getSections(): Promise<Sections> {
   const sections = { ...DEFAULT_SECTIONS } as Record<SectionKey, unknown>;
 
   for (const row of rows) {
-    const parsed = sectionSchemas[row.key].safeParse(row.data);
+    const parsed = sectionSchemas[row.key].safeParse({ ...(DEFAULT_SECTIONS[row.key] as object), ...(row.data as object) });
     if (parsed.success) {
       sections[row.key] = parsed.data;
     } else {

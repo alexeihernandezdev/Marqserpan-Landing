@@ -19,7 +19,8 @@ export async function listSectionsForAdmin() {
 export async function getSectionForAdmin<K extends SectionKey>(key: K): Promise<Sections[K]> {
   await verifySession();
   const [row] = await db.select().from(contentSections).where(eq(contentSections.key, key));
-  const parsed = row ? sectionSchemas[key].safeParse(row.data) : null;
+  // Los campos que el registro guardado no tiene (añadidos después) toman el texto inicial.
+  const parsed = row ? sectionSchemas[key].safeParse({ ...(DEFAULT_SECTIONS[key] as object), ...(row.data as object) }) : null;
   return (parsed?.success ? parsed.data : DEFAULT_SECTIONS[key]) as Sections[K];
 }
 

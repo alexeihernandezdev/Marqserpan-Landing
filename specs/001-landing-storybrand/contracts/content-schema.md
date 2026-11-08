@@ -17,7 +17,7 @@ primera pantalla quepa en 360 × 640 px.
 | `featured` | `title`, `body` | ≤ 60 / ≤ 200 | Rebanadoras de charcutería (los productos salen del catálogo marcados como destacados) |
 | `stakes` | `title`, `points[]` (≤ 3) | punto ≤ 100 | Las 3 consecuencias del guion |
 | `success` | `title`, `points[]` (4–6), `identity` | punto ≤ 100, identidad ≤ 140 | Resultados del guion + transformación «de… a…» |
-| `testimonials` | `title` | ≤ 60 | «Lo que dicen nuestros clientes» (la sección se oculta sin testimonios) |
+| `testimonials` | `title`, `intro`, `stats[]` (0–3) de `{ title, body }` | ≤ 60 / ≤ 200 / cifra ≤ 12, texto ≤ 40 | «Lo que dicen nuestros clientes» (la sección se oculta sin testimonios) |
 | `quote_form` | `title`, `intro`, `successTitle`, `successBody` | ≤ 60 / ≤ 200 / ≤ 60 / ≤ 240 | «Solicita tu cotización» · «Cuéntanos qué necesitas y te respondemos con precio y plazo» · confirmación con invitación a WhatsApp si es urgente |
 | `contact` | `title`, `body` | ≤ 60 / ≤ 200 | Datos de contacto (los valores vienen de `business_settings`) |
 
