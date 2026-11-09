@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Montserrat, Righteous } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -10,15 +11,18 @@ const archivoBlack = localFont({
   adjustFontFallback: "Arial",
 });
 
-const helvetica = localFont({
-  src: [
-    { path: "./fonts/Helvetica.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/Helvetica-Oblique.woff2", weight: "400", style: "italic" },
-    { path: "./fonts/Helvetica-Bold.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-helvetica",
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-montserrat",
   display: "swap",
-  adjustFontFallback: "Arial",
+});
+
+const righteous = Righteous({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-righteous",
+  display: "swap",
 });
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
@@ -47,7 +51,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${archivoBlack.variable} ${helvetica.variable} antialiased`}>
+    <html lang="es" className={`${archivoBlack.variable} ${montserrat.variable} ${righteous.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">{children}</body>
     </html>
   );

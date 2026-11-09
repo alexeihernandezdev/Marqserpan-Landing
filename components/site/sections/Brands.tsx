@@ -21,7 +21,7 @@ export function Brands() {
               <Image src="/brand/engranajes.webp" alt="" width={48} height={48} className="size-12 shrink-0" />
               <span className="flex flex-col leading-none">
                 <span className="text-[0.7rem] font-bold uppercase tracking-wider text-verde-400">Distribuidora</span>
-                <span className="font-display text-2xl">MAQSERPAN</span>
+                <span className="font-eyebrow text-3xl">MAQSERPAN</span>
               </span>
             </div>
             <p className="mt-5 text-neutral-300">

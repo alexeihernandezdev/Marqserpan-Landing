@@ -53,7 +53,7 @@ export function Success({ content, ctaLabel }: Props) {
                   </span>
                 </span>
                 <p className="bg-brand-gradient-spin rounded-3xl p-6 text-white shadow-[0_24px_48px_-24px_rgb(0_106_158/0.6)] sm:p-8">
-                  <span className="block text-xs font-bold uppercase tracking-wider text-white">Con Maqserpan</span>
+                  <span className="block text-xs font-bold uppercase tracking-wider text-white">Con <span className="font-eyebrow font-normal">Maqserpan</span></span>
                   <span className="mt-2 block font-display text-2xl leading-tight sm:text-3xl">
                     {capitalize(identity.after)}
                   </span>

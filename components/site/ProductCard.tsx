@@ -45,7 +45,7 @@ export function ProductCard({ product, featured = false, compact = false }: Prop
         )}
       </div>
       <div className={`flex flex-1 flex-col gap-2 ${compact ? "px-4 pb-4 pt-2" : "px-5 pb-5 pt-3 sm:px-6 sm:pb-6"}`}>
-        <p className="text-xs font-bold uppercase tracking-wider text-verde-700">{product.category.name}</p>
+        <p className="font-eyebrow text-xs uppercase tracking-wider text-verde-700">{product.category.name}</p>
         <h3 className={featured ? "text-2xl" : compact ? "text-lg leading-snug" : "text-xl"}>
           {/* El enlace cubre toda la tarjeta. */}
           <Link href={`/productos/${product.slug}`} scroll={false} className="after:absolute after:inset-0">

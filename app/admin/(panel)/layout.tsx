@@ -48,7 +48,7 @@ export default function PanelLayout({ children }: { children: ReactNode }) {
           <Image src="/brand/engranajes.webp" alt="" width={32} height={32} className="size-8" />
           <span className="flex flex-col leading-tight">
             <span className="font-display text-lg">Panel</span>
-            <span className="text-xs text-neutral-400">Maqserpan</span>
+            <span className="font-eyebrow text-sm text-neutral-400">Maqserpan</span>
           </span>
         </Link>
         <Suspense fallback={<AdminNavLinks pathname={null} />}>

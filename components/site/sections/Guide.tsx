@@ -54,6 +54,9 @@ export function Guide({ content, ctaLabel }: Props) {
               ))}
             </ul>
           )}
+          <p className="mt-2 border-t border-neutral-200 pt-6 text-center font-display text-xl text-verde-700 sm:text-2xl">
+            Todo en un solo lugar
+          </p>
         </div>
         <div className="lg:hidden">
           <SectionCta label={ctaLabel} className="mt-0!" />

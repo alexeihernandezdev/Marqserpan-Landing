@@ -27,7 +27,8 @@
   --color-hueso: #f3f5f4;
 
   --font-display: var(--font-archivo-black), "Arial Black", Arial, sans-serif;
-  --font-body: var(--font-helvetica), Helvetica, Arial, sans-serif;
+  --font-body: var(--font-montserrat), Arial, sans-serif;
+  --font-eyebrow: var(--font-righteous), var(--font-body);
   --font-sans: var(--font-body);
 }
 
@@ -153,8 +154,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-body);
-    font-weight: 700;
+    font-family: var(--font-eyebrow);
+    font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;

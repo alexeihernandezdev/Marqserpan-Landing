@@ -184,7 +184,15 @@ export function Footer({ contact, settings }: FooterProps) {
       </div>
       <div className="border-t border-white/10">
         <p className="container-page py-5 text-xs text-neutral-400">
-          © {settings.legalName || "Distribuidora Maqserpan"}
+          © {(settings.legalName || "Distribuidora Maqserpan").split(/(maqserpan)/i).map((part, i) =>
+            i % 2 ? (
+              <span key={i} className="font-eyebrow">
+                {part}
+              </span>
+            ) : (
+              part
+            ),
+          )}
           {settings.rif && ` · RIF ${settings.rif}`}
         </p>
       </div>
