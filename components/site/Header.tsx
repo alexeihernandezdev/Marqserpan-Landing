@@ -23,8 +23,8 @@ export function Header({ ctaLabel, catalogLabel }: HeaderProps) {
             className="size-10 shrink-0"
           />
           <span aria-hidden="true" className="hidden min-w-0 flex-col leading-none min-[400px]:flex">
-            <span className="text-[0.7rem] font-bold uppercase tracking-wider text-verde-700">Distribuidora</span>
-            <span className="font-eyebrow text-xl text-azul-700">MAQSERPAN</span>
+            <span className="text-xs font-bold text-verde-700">Distribuidora</span>
+            <span className="font-brand text-xl text-azul-700">MAQSERPAN</span>
           </span>
         </Link>
         <nav aria-label="Principal" className="flex shrink-0 items-center gap-1 sm:gap-3">

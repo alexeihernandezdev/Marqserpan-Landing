@@ -91,7 +91,7 @@ function Photo({
         className="object-cover"
       />
       <figcaption
-        className={`absolute inset-x-0 bottom-0 bg-carbon/85 py-1 text-center text-[0.65rem] font-bold uppercase tracking-wider text-white transition-opacity duration-300 ${large ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-x-0 bottom-0 bg-carbon/85 py-1 text-center text-xs font-bold text-white transition-opacity duration-300 ${large ? "opacity-0" : "opacity-100"}`}
       >
         {LABEL[stage]}
       </figcaption>
@@ -117,7 +117,7 @@ function Card({ item, index, showBefore, big = false, wide = false }: { item: Re
               key={stage}
               aria-hidden={stage !== largeStage}
               style={{ transitionDelay: `${delay + MOVE_MS / 2}ms` }}
-              className={`col-start-1 row-start-1 w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition-[opacity,translate] duration-300 ${stage === "antes" ? "bg-carbon ring-1 ring-white/30" : "bg-brand-gradient"} ${stage === largeStage ? "opacity-100" : "translate-y-1.5 opacity-0"}`}
+              className={`col-start-1 row-start-1 w-fit rounded-full px-3 py-1 text-sm font-bold text-white transition-[opacity,translate] duration-300 ${stage === "antes" ? "bg-carbon ring-1 ring-white/30" : "bg-brand-gradient"} ${stage === largeStage ? "opacity-100" : "translate-y-1.5 opacity-0"}`}
             >
               {LABEL[stage]}
             </span>

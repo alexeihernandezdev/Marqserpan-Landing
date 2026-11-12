@@ -33,7 +33,7 @@ export function CatalogResults({ catalog, brand }: Props & { brand: CatalogBrand
       <div className="mt-8 flex flex-col gap-4">
         {catalog.brands.length > 1 && (
           <nav aria-label="Filtrar por marca" className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <p className="text-xs font-bold uppercase tracking-wider text-gris">Marca</p>
+            <p className="text-sm font-bold text-gris">Marca</p>
             <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
               <li className="shrink-0">
                 <Link
@@ -73,7 +73,7 @@ export function CatalogResults({ catalog, brand }: Props & { brand: CatalogBrand
 
         {groups.length > 1 && (
           <nav aria-label="Categorías del catálogo" className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <p className="text-xs font-bold uppercase tracking-wider text-gris">Categoría</p>
+            <p className="text-sm font-bold text-gris">Categoría</p>
             <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
               {groups.map((group) => (
                 <li key={group.slug} className="shrink-0">
@@ -112,7 +112,7 @@ export function CatalogResults({ catalog, brand }: Props & { brand: CatalogBrand
       {groups.map((group) => (
         <div key={group.slug} id={`cat-${group.slug}`} className="mt-16 scroll-mt-24">
           <div className="flex items-center gap-4">
-            <h2 className="font-body text-sm font-bold uppercase tracking-wider text-carbon">{group.name}</h2>
+            <h2 className="font-body text-base font-bold text-carbon">{group.name}</h2>
             <span aria-hidden="true" className="h-px flex-1 bg-black/10" />
           </div>
           <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

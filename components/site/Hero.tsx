@@ -44,7 +44,7 @@ export function Hero({ content, showCatalogCta, guarantees }: HeroProps) {
           <p className="trust-seal mb-5 flex w-fit items-center gap-3 rounded-full border border-amarillo/40 bg-verde-700 py-1.5 pl-1.5 pr-4 shadow-lg shadow-black/30">
             <GuaranteeSeal />
             <span className="flex flex-col leading-tight">
-              <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-amarillo">
+              <span className="text-xs font-semibold text-amarillo">
                 Respaldo garantizado
               </span>
               <span className="text-sm font-bold">{content.trustLine}</span>

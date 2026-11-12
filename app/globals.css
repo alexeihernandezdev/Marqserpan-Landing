@@ -28,7 +28,7 @@
 
   --font-display: var(--font-archivo-black), "Arial Black", Arial, sans-serif;
   --font-body: var(--font-montserrat), Arial, sans-serif;
-  --font-eyebrow: var(--font-righteous), var(--font-body);
+  --font-brand: var(--font-righteous), var(--font-body);
   --font-sans: var(--font-body);
 }
 
@@ -154,11 +154,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-eyebrow);
-    font-weight: 400;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
   }
 
   .eyebrow::before {
@@ -167,6 +165,11 @@
     height: 2px;
     border-radius: 1px;
     background: currentColor;
+  }
+
+  /* Righteous solo tiene peso 400: un contorno del mismo color la engrosa sin la negrita sintética del navegador. */
+  .font-brand {
+    -webkit-text-stroke: 0.03em currentColor;
   }
 
   /* Fondo oscuro con brillos de los colores de marca y retícula técnica. */

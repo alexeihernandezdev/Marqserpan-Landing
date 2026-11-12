@@ -186,7 +186,7 @@ export function Footer({ contact, settings }: FooterProps) {
         <p className="container-page py-5 text-xs text-neutral-400">
           © {(settings.legalName || "Distribuidora Maqserpan").split(/(maqserpan)/i).map((part, i) =>
             i % 2 ? (
-              <span key={i} className="font-eyebrow">
+              <span key={i} className="font-brand">
                 {part}
               </span>
             ) : (

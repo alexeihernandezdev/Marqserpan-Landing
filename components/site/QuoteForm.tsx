@@ -202,7 +202,7 @@ function QuoteFormInner({ content, whatsapp, product, onClearProduct, onReset }:
             <span key={n} className={`h-1.5 flex-1 rounded-full ${n <= step ? "bg-verde-700" : "bg-neutral-200"}`} />
           ))}
         </div>
-        <p className="mt-3 text-xs font-bold uppercase tracking-wide text-gris">Paso {step} de 2</p>
+        <p className="mt-3 text-sm font-bold text-gris">Paso {step} de 2</p>
         <h3 ref={stepHeading} tabIndex={-1} className="mt-1 text-xl text-carbon outline-none">
           {step === 1 ? "¿Cómo te contactamos?" : "¿Qué necesitas?"}
         </h3>
