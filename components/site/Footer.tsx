@@ -45,9 +45,8 @@ const paymentIcon = (method: string) => {
   return WalletIcon;
 };
 
-/** Pin exacto de la distribuidora (Los Pinos, Puerto Ordaz). */
-const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=8.275408%2C-62.790604";
+/** Ficha de la distribuidora en Google Maps (Los Pinos, Puerto Ordaz). */
+const MAPS_URL = "https://maps.google.com/?cid=4821364709261007671";
 
 const headingClass =
   "flex items-center gap-2 text-lg text-white";
