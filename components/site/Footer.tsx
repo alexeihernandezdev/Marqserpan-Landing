@@ -45,6 +45,10 @@ const paymentIcon = (method: string) => {
   return WalletIcon;
 };
 
+/** Pin exacto de la distribuidora (Los Pinos, Puerto Ordaz). */
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=8.275408%2C-62.790604";
+
 const headingClass =
   "flex items-center gap-2 text-lg text-white";
 
@@ -69,7 +73,20 @@ export function Footer({ contact, settings }: FooterProps) {
             {contact.title}
           </h2>
           {contact.body && (
-            <p className="mt-2 max-w-xs whitespace-pre-line">{contact.body}</p>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-2 flex max-w-xs gap-2.5 transition-colors hover:text-verde-400"
+            >
+              <MapPinIcon className="mt-0.5 size-4 shrink-0 text-verde-400" />
+              <span>
+                <span className="whitespace-pre-line">{contact.body}</span>
+                <span className="mt-1 block text-xs font-semibold text-verde-400 underline-offset-4 group-hover:underline">
+                  Ver en Google Maps
+                </span>
+              </span>
+            </a>
           )}
         </div>
 
